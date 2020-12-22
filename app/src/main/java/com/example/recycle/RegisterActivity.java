@@ -34,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(RegisterActivity.this, MainActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }

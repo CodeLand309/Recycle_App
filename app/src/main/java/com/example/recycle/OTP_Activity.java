@@ -35,22 +35,21 @@ public class OTP_Activity extends AppCompatActivity {
 
     EditText e1, e2, e3, e4, e5, e6;
     Button verify, resend;
-    String  phone, otp, timeLeftFormatted, c1,c2,c3,c4,c5,c6;
+    String  phone, otp, c1,c2,c3,c4,c5,c6;
     private static long mTimeLeftInMillis = 120000;
     TextView countTime,wait;
-    int minutes, seconds;
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        outState.putString("phone", phone);
-        outState.putString("verificationCode", verificationCode);
-        outState.putString("otp", otp);
-        outState.putLong("TimeLeft", mTimeLeftInMillis);
-        outState.putInt("minutes", minutes);
-        outState.putInt("seconds", seconds);
-        outState.putString("timeLeftFormatted", timeLeftFormatted);
-    }
+//    @Override
+//    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+//        super.onSaveInstanceState(outState, outPersistentState);
+//        outState.putString("phone", phone);
+//        outState.putString("verificationCode", verificationCode);
+//        outState.putString("otp", otp);
+//        outState.putLong("TimeLeft", mTimeLeftInMillis);
+//        outState.putInt("minutes", minutes);
+//        outState.putInt("seconds", seconds);
+//        outState.putString("timeLeftFormatted", timeLeftFormatted);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,36 +66,23 @@ public class OTP_Activity extends AppCompatActivity {
         e5 = findViewById(R.id.text5);
         e6 = findViewById(R.id.text6);
 
-        if(savedInstanceState!=null) {
-            savedInstanceState.getString("phone");
-            savedInstanceState.getString("verificationCode");
-            savedInstanceState.getString("otp");
-            savedInstanceState.getString("timeLeftFormatted");
-            savedInstanceState.getLong("TimeLeft");
-            savedInstanceState.getInt("minutes");
-            savedInstanceState.getInt("seconds");
-            String temp = savedInstanceState.getString("timeLeftFormatted");
-            wait.setVisibility(View.VISIBLE);
-            countTime.setVisibility(View.VISIBLE);
-            countTime.setText(temp);
-        }
+//        if(savedInstanceState!=null) {
+//            savedInstanceState.getString("phone");
+//            savedInstanceState.getString("verificationCode");
+//            savedInstanceState.getString("otp");
+//            savedInstanceState.getString("timeLeftFormatted");
+//            savedInstanceState.getLong("TimeLeft");
+//            savedInstanceState.getInt("minutes");
+//            savedInstanceState.getInt("seconds");
+//            String temp = savedInstanceState.getString("timeLeftFormatted");
+//            wait.setVisibility(View.VISIBLE);
+//            countTime.setVisibility(View.VISIBLE);
+//            countTime.setText(temp);
+//        }
         Intent otp_intent = getIntent();
         phone = otp_intent.getStringExtra("Phone Number");
         StartFirebaseLogin();
         verifyPhone(phone);
-//        wait.setVisibility(View.VISIBLE);
-//        countTime.setVisibility(View.VISIBLE);
-//        new CountDownTimer(mTimeLeftInMillis,1000) {
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//                mTimeLeftInMillis = millisUntilFinished;
-//                updateCountDownText();
-//            }
-//            @Override
-//            public void onFinish() {
-//                countTime.setText("TimeOut");
-//            }
-//        }.start();
         resend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -209,9 +195,9 @@ public class OTP_Activity extends AppCompatActivity {
         };
     }
     public void updateCountDownText(){
-        minutes = (int) (mTimeLeftInMillis / 1000) / 60;
-        seconds = (int) (mTimeLeftInMillis / 1000) % 60;
-        timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
         countTime.setText(timeLeftFormatted);
     }
 
