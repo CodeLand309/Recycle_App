@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#0055FF"
+    tools:context=".SignUPActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="clip_vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@+id/later"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="130dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center_horizontal"
+            android:text="By providing my phone number, I hereby agree and accept the Terms of Service and Privacy Policy in use of the Recycle App"
+            android:textAlignment="center"
+            android:textColor="#CCCCCC"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/later"
+            app:layout_constraintWidth_percent="0.75" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"
+            app:layout_constraintBottom_toTopOf="@+id/phone"
+            app:layout_constraintEnd_toEndOf="@+id/phone"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toStartOf="@+id/phone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.4"
+            app:srcCompat="@mipmap/ic_launcher_foreground"
+            tools:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/verify"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintWidth_percent="0.75"
+            android:layout_below="@+id/phone"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="8dp"
+            android:autoSizeTextType="uniform"
+            android:background="#FFAAAA"
+            android:paddingVertical="10dp"
+            android:text="Send OTP"
+            app:layout_constraintBottom_toTopOf="@+id/later"
+            app:layout_constraintEnd_toEndOf="@+id/later"
+            app:layout_constraintStart_toStartOf="@+id/later"
+            app:layout_constraintTop_toBottomOf="@+id/phone" />
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintWidth_percent="0.75"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="8dp"
+            android:autoSizeTextType="uniform"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:hint="Enter Phone Number"
+            android:inputType="phone"
+            android:paddingVertical="10dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/verify"
+            app:layout_constraintEnd_toEndOf="@+id/verify"
+            app:layout_constraintStart_toStartOf="@+id/verify"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            tools:ignore="RtlCompat" />
+
+        <Button
+            android:id="@+id/later"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.04"
+            app:layout_constraintWidth_percent="0.3"
+            android:layout_below="@+id/verify"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="9dp"
+            android:autoSizeTextType="uniform"
+            android:background="#0055FF"
+            android:outlineSpotShadowColor="#0055FF"
+            android:text="Sign in Later"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/verify" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
