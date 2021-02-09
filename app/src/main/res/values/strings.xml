@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">Recycle</string>
+
+    <!-- Sign UP Screen Start-->
+    <string name="PhoneNumberEditText">Enter Phone Number</string>
+    <string name="SendOTPButton">Send OTP</string>
+    <string name="SignInButton">Sign in Later</string>
+    <string name="TermsAndConditions">"By providing my phone number, I hereby agree and accept the Terms of Service and Privacy Policy in use of the Recycle App"</string>
+    <string name="ImageDescription">App Logo</string>
+    <!-- Sign UP Screen End -->
+
+    <!-- OTP Screen Start -->
+    <string name="WaitingTextView">Waiting for OTP</string>
+    <string name="VerifyButton">Verify</string>
+    <string name="ResendButton">Resend OTP</string>
+    <!-- OTP Screen End -->
+
+    <!-- Register Screen Start -->
+    <string name="ProfileDescription">Profile Logo</string>
+    <string name="EnterNameEditText">Enter Name</string>
+    <string name="EnterAgeEditText">Enter Age</string>
+    <string name="EnterAddressEditText">Enter Address</string>
+    <string-array name="Gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+    <string name="SaveButton">Save</string>
+    <!-- Register Screen End -->
+    
+
 </resources>

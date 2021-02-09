@@ -6,10 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainUI.MainActivity">
 
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar" />
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
         android:layout_above="@+id/bottom_navigation"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

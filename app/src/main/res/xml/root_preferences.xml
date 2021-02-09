@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Profile">
+        <Preference
+            android:key="change_pro_key"
+            android:summary="Change Profile"
+            android:title="Dhanshyam Kamath">
+            <intent
+                android:id="@+id/profile"
+                android:targetClass="com.example.recycle.SubActivity.ChangeProfile"
+                android:targetPackage="com.example.recycle" />
+        </Preference>
+    </PreferenceCategory>
+
+    <Preference
+        android:id="@+id/history"
+        android:icon="@drawable/ic_round_history_24"
+        android:key="history_key"
+        android:title="History">
+        <intent
+            android:id="@+id/help"
+            android:targetClass="com.example.recycle.SubActivity.History"
+            android:targetPackage="com.example.recycle" />
+    </Preference>
+    <Preference
+        android:id="@+id/report"
+        android:icon="@drawable/ic_round_contact_support_24"
+        android:key="help_key"
+        android:title="Help and Support">
+        <intent
+            android:id="@+id/about"
+            android:action="android.intent.action.VIEW"
+            android:data="https://www.google.com/" />
+    </Preference>
+    <Preference
+        android:id="@+id/share"
+        android:icon="@drawable/ic_round_report_problem_24"
+        android:key="report_key"
+        android:title="Report Issue" />
+<!--    <Preference>-->
+    <EditTextPreference
+        android:defaultValue="Default value"
+        android:key="about_key"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="About"
+        android:icon="@drawable/ic_round_info_24"/>
+<!--    </Preference>-->
+<!--    <Preference>-->
+    <EditTextPreference
+        android:defaultValue="Default value"
+        android:key="share_key"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Share App"
+        android:icon="@drawable/ic_round_share_24"/>
+<!--    </Preference>-->
+<!--    <Preference>-->
+    <EditTextPreference
+        android:defaultValue="Default value"
+        android:key="delete_key"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Delete Account"
+        android:icon="@drawable/ic_round_delete_forever_24"/>
+<!--    </Preference>-->
+    <Preference
+        android:title="Log Out"
+        android:key="log_out_key"
+        android:icon="@drawable/ic_round_exit_to_app_24">
+        <intent
+            android:targetClass="com.example.recycle.SignUPActivity"
+            android:targetPackage="com.example.recycle"/>
+    </Preference>
+</PreferenceScreen>

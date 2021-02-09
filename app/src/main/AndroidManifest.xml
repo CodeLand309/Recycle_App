@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainUI.MainActivity"/>
+        <activity android:name=".SubActivity.ChangeProfile"/>
+        <activity android:name=".SubActivity.History" />
+        <activity android:name=".MainUI.MainActivity" />
         <activity
             android:name=".RegisterActivity"
             android:screenOrientation="portrait" />

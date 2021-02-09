@@ -21,12 +21,12 @@ public class SignUPActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         Phone=findViewById(R.id.phone);
         OTP=findViewById(R.id.verify);
-        later=findViewById(R.id.later);
+        later=findViewById(R.id.sign_in_later);
         OTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 phone_no = Phone.getText().toString();
-                if(phone_no.length()==10 && !phone_no.isEmpty()) {
+                if(phone_no.length() == 10) {
                     Intent otp_intent = new Intent(SignUPActivity.this, OTP_Activity.class);
                     otp_intent.putExtra("Phone Number", phone_no);
                     startActivity(otp_intent);
