@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
         exampleList.add(new ExampleItem(R.drawable.ic_round_home_24, "Line 1", "Line 2"));
         exampleList.add(new ExampleItem(R.drawable.ic_round_chat_24, "Line 3", "Line 4"));
         exampleList.add(new ExampleItem(R.drawable.ic_round_add_circle_24, "Line 5", "Line 6"));
-        exampleList.add(new ExampleItem(R.drawable.ic_round_dispose_24, "Line 7", "Line 8"));
+        exampleList.add(new ExampleItem(R.drawable.ic_round_dispose_24, "Line 7", "Line 8")); 
         exampleList.add(new ExampleItem(R.drawable.ic_round_settings_24, "Line 9", "Line 10"));
         exampleList.add(new ExampleItem(R.drawable.ic_round_home_24, "Line 11", "Line 12"));
         exampleList.add(new ExampleItem(R.drawable.ic_round_chat_24, "Line 13", "Line 14"));
