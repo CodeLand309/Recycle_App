@@ -12,9 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SubActivity.UploadProduct"></activity>
-        <activity android:name=".SubActivity.CentreList" />
-        <activity android:name=".SubActivity.DisposeCenterDetails" />
+        <activity android:name=".SubActivity.DisposeCenterDetails"></activity>
         <activity android:name=".SubActivity.ChangeProfile" />
         <activity android:name=".SubActivity.History" />
         <activity android:name=".MainUI.MainActivity" />

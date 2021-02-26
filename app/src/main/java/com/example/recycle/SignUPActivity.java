@@ -9,10 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.recycle.MainUI.HomeFragment;
 import com.example.recycle.MainUI.MainActivity;
-import com.example.recycle.SubActivity.CentreList;
-import com.example.recycle.SubActivity.UploadProduct;
 
 public class SignUPActivity extends AppCompatActivity {
     EditText Phone;
@@ -42,7 +39,7 @@ public class SignUPActivity extends AppCompatActivity {
         later.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent later_intent = new Intent(SignUPActivity.this, UploadProduct.class);
+                Intent later_intent = new Intent(SignUPActivity.this, MainActivity.class);
                 startActivity(later_intent);
             }
         });
