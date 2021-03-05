@@ -29,57 +29,57 @@
     <!-- Register Screen End -->
 
 
-<!--    <string name="app_name">listview</string>-->
-<!--    <string-array name="listviewitems">-->
-<!--        <item>Mattanchery Plastic Recycling center</item>-->
-<!--        <item>Palarivattam Plastic Recycling Unit</item>-->
-<!--        <item>Palluruthy Scrap item collection unit</item>-->
-<!--        <item>Aluva E-waste collection Centre</item>-->
-<!--        <item>Aroor E-waste Recycling Centre</item>-->
+    <!--    <string name="app_name">listview</string>-->
+    <!--    <string-array name="listviewitems">-->
+    <!--        <item>Mattanchery Plastic Recycling center</item>-->
+    <!--        <item>Palarivattam Plastic Recycling Unit</item>-->
+    <!--        <item>Palluruthy Scrap item collection unit</item>-->
+    <!--        <item>Aluva E-waste collection Centre</item>-->
+    <!--        <item>Aroor E-waste Recycling Centre</item>-->
 
-<!--        <item>Biju's plastic Recycling unit</item>-->
-<!--        <item>Thevara wasete Management centre </item>-->
-<!--        <item>Edapally Scrap item collection unit</item>-->
-<!--    </string-array>-->
+    <!--        <item>Biju's plastic Recycling unit</item>-->
+    <!--        <item>Thevara wasete Management centre </item>-->
+    <!--        <item>Edapally Scrap item collection unit</item>-->
+    <!--    </string-array>-->
 
-<!--    <string-array name="Mattanchery Plastic Recycling center">-->
-<!--        <item>C</item>-->
-<!--        <item>Linux</item>-->
-<!--    </string-array>-->
+    <!--    <string-array name="Mattanchery Plastic Recycling center">-->
+    <!--        <item>C</item>-->
+    <!--        <item>Linux</item>-->
+    <!--    </string-array>-->
 
-<!--    <string-array name="Palarivattam Plastic Recycling Unit">-->
-<!--        <item>DS</item>-->
-<!--        <item>Cplusplus</item>-->
-<!--    </string-array>-->
+    <!--    <string-array name="Palarivattam Plastic Recycling Unit">-->
+    <!--        <item>DS</item>-->
+    <!--        <item>Cplusplus</item>-->
+    <!--    </string-array>-->
 
-<!--    <string-array name="Palluruthy Scrap item collection unit">-->
-<!--        <item>Java</item>-->
-<!--        <item>RDBMS</item>-->
-<!--    </string-array>-->
+    <!--    <string-array name="Palluruthy Scrap item collection unit">-->
+    <!--        <item>Java</item>-->
+    <!--        <item>RDBMS</item>-->
+    <!--    </string-array>-->
 
-<!--    <string-array name="Aluva E-waste collection Centre">-->
-<!--        <item>Basic Android</item>-->
-<!--        <item>Cloud</item>-->
-<!--    </string-array>-->
+    <!--    <string-array name="Aluva E-waste collection Centre">-->
+    <!--        <item>Basic Android</item>-->
+    <!--        <item>Cloud</item>-->
+    <!--    </string-array>-->
 
-<!--    <string-array name="Aroor E-waste Recycling Centre">-->
-<!--        <item>Advanced Android</item>-->
-<!--        <item>SOS</item>-->
-<!--    </string-array>-->
+    <!--    <string-array name="Aroor E-waste Recycling Centre">-->
+    <!--        <item>Advanced Android</item>-->
+    <!--        <item>SOS</item>-->
+    <!--    </string-array>-->
 
-<!--    <string-array name="Biju's plastic Recycling unit">-->
-<!--        <item>UI</item>-->
-<!--        <item>Testing</item>-->
-<!--    </string-array>-->
-<!--    <string-array name="Thevara wasete Management centre">-->
-<!--        <item>UI</item>-->
-<!--        <item>Testing</item>-->
-<!--    </string-array>-->
+    <!--    <string-array name="Biju's plastic Recycling unit">-->
+    <!--        <item>UI</item>-->
+    <!--        <item>Testing</item>-->
+    <!--    </string-array>-->
+    <!--    <string-array name="Thevara wasete Management centre">-->
+    <!--        <item>UI</item>-->
+    <!--        <item>Testing</item>-->
+    <!--    </string-array>-->
 
-<!--    <string-array name="Edapally Scrap item collection unit">-->
-<!--        <item>UI</item>-->
-<!--        <item>Testing</item>-->
-<!--    </string-array>-->
+    <!--    <string-array name="Edapally Scrap item collection unit">-->
+    <!--        <item>UI</item>-->
+    <!--        <item>Testing</item>-->
+    <!--    </string-array>-->
 
 
 </resources>
