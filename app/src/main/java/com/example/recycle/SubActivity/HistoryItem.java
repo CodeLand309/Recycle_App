@@ -4,6 +4,7 @@ public class HistoryItem {
     private int mImageResource;
     private String mText1;
     private String mText2;
+
     public HistoryItem(int imageResource, String text1, String text2) {
         mImageResource = imageResource;
         mText1 = text1;

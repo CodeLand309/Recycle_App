@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
@@ -207,8 +208,11 @@ public class OTP_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            startActivity(new Intent(OTP_Activity.this, RegisterActivity.class));
-                            //FirebaseUser user = task.getResult().getUser();
+                            Intent register = new Intent(OTP_Activity.this, RegisterActivity.class);
+                            FirebaseUser user = task.getResult().getUser();
+                            register.putExtra("FirebaseUser", user);
+                            register.putExtra("Phone Number", phone);
+                            startActivity(register);
                             finish();
                         } else {
                             Toast.makeText(OTP_Activity.this,"Incorrect OTP",Toast.LENGTH_SHORT).show();

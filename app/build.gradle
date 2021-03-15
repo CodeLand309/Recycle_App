@@ -15,6 +15,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -23,6 +28,7 @@ android {
     }
 }
 
+
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.1.1')
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -30,6 +36,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     //implementation 'com.google.firebase:firebase-auth:19.4.0'

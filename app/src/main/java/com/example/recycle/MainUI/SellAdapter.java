@@ -25,9 +25,6 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.SellViewHolder
             mTextView1 = itemView.findViewById(R.id.textView);
             mTextView2 = itemView.findViewById(R.id.textView2);
         }
-
-
-
     }
     public SellAdapter  (ArrayList<SellItem> sellList) {
         mSellList = sellList;
@@ -35,7 +32,7 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.SellViewHolder
     }
     @Override
     public SellViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
         SellViewHolder eivh = new SellViewHolder(v);
         return eivh;
     }

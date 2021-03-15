@@ -1,162 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0055FF"
+    android:fillViewport="true"
     tools:context=".RegisterActivity">
-
-    <Button
-        android:id="@+id/btn_sign_out"
-        android:layout_width="344dp"
-        android:layout_height="61dp"
-        android:layout_above="@+id/main"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="44dp"
-        android:text="Sign Out"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="141dp"
-        android:layout_marginBottom="25dp"
-        android:src="@drawable/profile"
-        app:civ_border_color="#000000"
-        app:civ_border_width="2dp"
-        app:civ_circle_background_color="#B5AFAF"
-        app:layout_constraintBottom_toTopOf="@+id/name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/main"
-        android:layout_width="88dp"
-        android:layout_height="0dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/btn_sign_out"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:autoSizeTextType="uniform"
-        android:background="#FFFFFF"
-        android:gravity="center_vertical"
-        android:hint="@string/EnterNameEditText"
-        android:inputType="textPersonName"
-        android:paddingVertical="10dp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.75"
-        tools:ignore="RtlCompat" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginEnd="51dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/address"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.75">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="clip_vertical">
+
+        <Button
+            android:id="@+id/btn_sign_out"
+            android:layout_width="344dp"
+            android:layout_height="61dp"
+            android:layout_below="@+id/constraintLayout2"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="101dp"
+            android:text="Sign Out"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginBottom="70dp"
+            android:src="@drawable/profile"
+            app:civ_border_color="#000000"
+            app:civ_border_width="2dp"
+            app:civ_circle_background_color="#B5AFAF"
+            app:layout_constraintBottom_toTopOf="@+id/name"
+            app:layout_constraintEnd_toEndOf="@+id/name"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="@+id/name"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/age"
+            android:id="@+id/address"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
             android:autoSizeTextType="uniform"
             android:background="#FFFFFF"
             android:gravity="center_vertical"
-            android:hint="@string/EnterAgeEditText"
-            android:inputType="number"
+            android:hint="@string/EnterAddressEditText"
             android:paddingVertical="10dp"
             android:textAlignment="center"
-            app:layout_constraintEnd_toStartOf="@+id/spinner"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent="0.43"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+            app:layout_constraintWidth_percent="0.75"
             tools:ignore="RtlCompat" />
 
-        <Spinner
-            android:id="@+id/spinner"
+        <EditText
+            android:id="@+id/name"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:autoSizeTextType="uniform"
             android:background="#FFFFFF"
-            android:spinnerMode="dropdown"
-            android:entries="@array/Gender"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.51" />
+            android:gravity="center_vertical"
+            android:hint="@string/EnterNameEditText"
+            android:inputType="textPersonName"
+            android:paddingVertical="5dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintWidth_percent="0.75"
+            tools:ignore="RtlCompat" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/btn_sign_out"
+            app:layout_constraintEnd_toEndOf="@+id/btn_sign_out"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="@+id/btn_sign_out"
+            app:layout_constraintWidth_percent="0.75">
+
+            <Button
+                android:id="@+id/upload"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingVertical="5dp"
+                android:text="@string/UploadButton"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/register"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.57"
+                tools:ignore="RtlCompat" />
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingVertical="5dp"
+                android:text="@string/RegisterButton"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/upload"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.40"
+                tools:ignore="RtlCompat" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/address"
+            app:layout_constraintEnd_toEndOf="@+id/address"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="@+id/address"
+            app:layout_constraintWidth_percent="0.75">
+
+            <EditText
+                android:id="@+id/age"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:autoSizeTextType="uniform"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                android:hint="@string/EnterAgeEditText"
+                android:inputType="number"
+                android:paddingVertical="5dp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@+id/spinner"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent="0.43"
+                tools:ignore="RtlCompat" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.51" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <EditText
-        android:id="@+id/address"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:autoSizeTextType="uniform"
-        android:background="#FFFFFF"
-        android:gravity="center_vertical"
-        android:hint="@string/EnterAddressEditText"
-        android:inputType="number"
-        android:paddingVertical="10dp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.75"
-        tools:ignore="RtlCompat" />
-
-    <Button
-        android:id="@+id/save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="153dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginBottom="20dp"
-        android:autoSizeTextType="uniform"
-        android:gravity="center_vertical"
-        android:inputType="textPersonName"
-        android:paddingVertical="10dp"
-        android:text="@string/SaveButton"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/main"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="RtlCompat" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -30,6 +30,7 @@ public class SignUPActivity extends AppCompatActivity {
                     Intent otp_intent = new Intent(SignUPActivity.this, OTP_Activity.class);
                     otp_intent.putExtra("Phone Number", phone_no);
                     startActivity(otp_intent);
+                    finish();
                 }
                 else{
                     Toast.makeText(SignUPActivity.this, "Enter Valid Phone Number", Toast.LENGTH_SHORT).show();
@@ -41,6 +42,7 @@ public class SignUPActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent later_intent = new Intent(SignUPActivity.this, MainActivity.class);
                 startActivity(later_intent);
+                finish();
             }
         });
     }

@@ -6,6 +6,9 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +29,17 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        if(!isNetworkAvailable()){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment()).commit();
+        }
+        else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        }
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override
@@ -68,19 +81,34 @@ public class MainActivity extends AppCompatActivity {
 
                     switch (item.getItemId()) {
                         case R.id.nav_home:
-                            selectedFragment = new HomeFragment();
+                            if(!isNetworkAvailable())
+                                selectedFragment = new ConnectionFragment();
+                            else
+                                selectedFragment = new HomeFragment();
                             break;
                         case R.id.nav_chat:
-                            selectedFragment = new ChatFragment();
+                            if(!isNetworkAvailable())
+                                selectedFragment = new ConnectionFragment();
+                            else
+                                selectedFragment = new ChatFragment();
                             break;
                         case R.id.nav_sell:
-                            selectedFragment = new SellFragment();
+                            if(!isNetworkAvailable())
+                                selectedFragment = new ConnectionFragment();
+                            else
+                                selectedFragment = new SellFragment();
                             break;
                         case R.id.nav_dispose:
-                            selectedFragment = new DisposeFragment();
+                            if(!isNetworkAvailable())
+                                selectedFragment = new ConnectionFragment();
+                            else
+                                selectedFragment = new DisposeFragment();
                             break;
                         case R.id.nav_settings:
-                            selectedFragment = new SettingsFragment();
+//                            if(!isNetworkAvailable())
+//                                selectedFragment = new ConnectionFragment();
+//                            else
+                                selectedFragment = new SettingsFragment();
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();

@@ -20,12 +20,13 @@
     <string name="EnterNameEditText">Enter Name</string>
     <string name="EnterAgeEditText">Enter Age</string>
     <string name="EnterAddressEditText">Enter Address</string>
-    <string-array name="Gender">
-        <item>Male</item>
-        <item>Female</item>
-        <item>Other</item>
-    </string-array>
-    <string name="SaveButton">Save</string>
+    <!--    <string-array name="Gender">-->
+    <!--        <item>Female</item>-->
+    <!--        <item>Male</item>-->
+    <!--        <item>Other</item>-->
+    <!--    </string-array>-->
+    <string name="UploadButton">Upload Image</string>
+    <string name="RegisterButton">Register</string>
     <!-- Register Screen End -->
 
 

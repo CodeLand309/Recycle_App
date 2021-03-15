@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.recycle.R;
 
-public class CentreList extends AppCompatActivity {
+public class PurchaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dispose_centre_details);
+        setContentView(R.layout.activity_purchase);
     }
 }

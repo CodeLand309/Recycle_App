@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00B6FF"
+    android:fillViewport="true"
+    tools:context=".SubActivity.ContactActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="clip_vertical">
+
+        <TextView
+            android:id="@+id/useraddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="59dp"
+            android:layout_marginBottom="41dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/call_user"
+            app:layout_constraintEnd_toEndOf="@+id/userphone"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/userphone"
+            app:layout_constraintTop_toBottomOf="@+id/userphone"
+            app:layout_constraintWidth_percent="0.7" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="121dp"
+            android:layout_marginTop="96dp"
+            android:layout_marginEnd="121dp"
+            android:layout_marginBottom="62dp"
+            android:src="@drawable/profile"
+            app:civ_border_color="#000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintHeight_percent="0.2"
+            app:civ_circle_background_color="#B5AFAF"
+            app:layout_constraintBottom_toTopOf="@+id/username"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="59dp"
+            android:layout_marginBottom="45dp"
+            android:autoSizeMaxTextSize="25sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/userphone"
+            app:layout_constraintEnd_toEndOf="@+id/profile_image"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintHorizontal_bias="0.336"
+            app:layout_constraintStart_toStartOf="@+id/profile_image"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image"
+            app:layout_constraintWidth_percent="0.7" />
+
+        <TextView
+            android:id="@+id/userphone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="59dp"
+            android:layout_marginBottom="43dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/useraddress"
+            app:layout_constraintEnd_toEndOf="@+id/username"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/username"
+            app:layout_constraintTop_toBottomOf="@+id/username"
+            app:layout_constraintWidth_percent="0.7" />
+
+        <Button
+            android:id="@+id/call_user"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="117dp"
+            android:autoSizeTextType="uniform"
+            android:background="#FFF000"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp"
+            android:text="Call"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/useraddress"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="@+id/useraddress"
+            app:layout_constraintTop_toBottomOf="@+id/useraddress"
+            app:layout_constraintWidth_percent="0.3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
