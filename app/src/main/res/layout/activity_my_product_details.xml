@@ -7,7 +7,7 @@
     android:background="#00B6FF"
     android:fillViewport="true"
     android:orientation="vertical"
-    tools:context=".SubActivity.ProductDetails">
+    tools:context=".SubActivity.MyProductDetails">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout"
@@ -22,9 +22,9 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="46dp"
+            android:layout_marginBottom="30dp"
             android:background="#00B6FF"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,11 +38,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:src="@drawable/ic_round_image_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/ic_round_image_24"/>
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TableLayout
@@ -50,8 +50,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="48dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/table_row"
             android:outlineProvider="none"
             app:layout_constraintBottom_toTopOf="@+id/description"
@@ -186,38 +187,6 @@
                     android:textSize="20sp" />
             </TableRow>
 
-            <TableRow
-                android:id="@+id/seller_row"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_row">
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:autoSizeTextType="uniform"
-                    android:gravity="center"
-                    android:text="Seller"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp" />
-
-                <View
-                    android:id="@+id/divider4"
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:background="#FFFFFF" />
-
-                <TextView
-                    android:id="@+id/seller"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autoSizeTextType="uniform"
-                    android:gravity="center"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp" />
-            </TableRow>
-
         </TableLayout>
 
 
@@ -225,52 +194,51 @@
             android:id="@+id/constraintLayout3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="59dp"
-            android:layout_marginEnd="59dp"
-            android:layout_marginBottom="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toTopOf="@+id/tableLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.06"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_container"
-            app:layout_constraintWidth_percent="0.7">
+            app:layout_constraintWidth_percent="0.9">
 
             <Button
-                android:id="@+id/buy"
+                android:id="@+id/mark_sold"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="#0910A1"
-                android:text="Buy"
+                android:text="Mark As Sold"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/space"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.4" />
 
             <Space
                 android:id="@+id/space"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="1dp"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/contact"
-                app:layout_constraintStart_toEndOf="@+id/buy"
+                app:layout_constraintEnd_toStartOf="@+id/mark_received"
+                app:layout_constraintStart_toEndOf="@+id/mark_sold"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintWidth_percent="0.08" />
+                app:layout_constraintWidth_percent="0.1" />
 
             <Button
-                android:id="@+id/contact"
+                android:id="@+id/mark_received"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="#0910A1"
-                android:text="Contact Seller"
+                android:text="Mark As Received"
                 android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.937"
-                app:layout_constraintStart_toEndOf="@+id/space"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.55" />
+                app:layout_constraintWidth_percent="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -278,8 +246,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="67dp"
+            android:layout_marginBottom="70dp"
             android:background="#FFFFFF"
             android:gravity="center"
             android:paddingVertical="3dp"

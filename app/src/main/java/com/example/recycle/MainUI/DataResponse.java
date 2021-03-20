@@ -51,7 +51,10 @@ class ProductsItem {
     @SerializedName("Years")
     private int mYears;
 
-    public ProductsItem(String image, int productID, String product, String user,  String description, int userID, int price, int years, int status) {
+    @SerializedName("Date")
+    private String mDate;
+
+    public ProductsItem(String image, int productID, String product, String user,  String description, int userID, int price, int years, int status, String date) {
         mProductImage = image;
         mProductName = product;
         mDescription = description;
@@ -61,6 +64,7 @@ class ProductsItem {
         mPrice = price;
         mYears = years;
         mStatus = status;
+        mDate = date;
     }
 
     public String getImage() {
@@ -88,6 +92,9 @@ class ProductsItem {
         return mYears;
     }
     public int getStatus(){return mStatus;}
+    public String getDate() {
+        return mDate;
+    }
 }
 
 

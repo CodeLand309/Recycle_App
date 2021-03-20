@@ -13,7 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recycle.LaunchActivity;
 import com.example.recycle.R;
+import com.example.recycle.RetrofitFolder.RestClient;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -22,7 +24,7 @@ import org.json.JSONObject;
 public class DisposeCenterDetails extends AppCompatActivity {
 
 
-    private String Centre, centre_name, centre_address, image, phone, url = "http://192.168.29.202:5000/dispose_image/";
+    private String Centre, centre_name, centre_address, image, phone, url = RestClient.BASE_URL + "dispose_image/";
     Button Call;
     TextView CentreAddress, CentreName, Phone;
     ImageView CentreImage;
@@ -59,8 +61,8 @@ public class DisposeCenterDetails extends AppCompatActivity {
 
             url = url + image;
             Log.d("Image URL", url);
-            Picasso.get().load(url).fit().placeholder(R.drawable.profile).into(CentreImage);
-            url = "http://192.168.29.202:5000/dispose_image/";
+            Picasso.get().load(url).fit().centerInside().placeholder(R.drawable.ic_round_image_24).into(CentreImage);
+            url = RestClient.BASE_URL + "dispose_image/";
         } catch (JSONException e) {
             e.printStackTrace();
         }

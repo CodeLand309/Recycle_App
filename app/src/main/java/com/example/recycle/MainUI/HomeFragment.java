@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
     private ProgressBar progressBar;
     private ArrayList<ProductsItem> products;
 
-    private String user_name, product_name, description, image;
+    private String user_name, product_name, description, image, date;
     private int page_number = 1, user_id, product_id, price, year;
     private int item_count = 6;
 
@@ -159,6 +159,7 @@ public class HomeFragment extends Fragment {
         description = products.get(position).getDescription();
         price = products.get(position).getPrice();
         year = products.get(position).getYears();
+        date = products.get(position).getDate();
         Log.d("Item", "changeActivity: ");
         JSONObject jsonData = new JSONObject();
         try {
@@ -170,6 +171,7 @@ public class HomeFragment extends Fragment {
             jsonData.put("Price", price);
             jsonData.put("Years", year);
             jsonData.put("Image", image);
+            jsonData.put("Date", date);
         } catch (JSONException e) {
             e.printStackTrace();
         }

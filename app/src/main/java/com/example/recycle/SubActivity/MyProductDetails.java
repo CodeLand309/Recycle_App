@@ -2,7 +2,6 @@ package com.example.recycle.SubActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,21 +16,20 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ProductDetails extends AppCompatActivity {
+public class MyProductDetails extends AppCompatActivity {
 
-
-    private String Product, user_id, product_id, user_name, product_name, description, image, price, year, date, url = RestClient.BASE_URL + "product_image/";
-    Button Contact, Buy;
+    private String Product, user_id, product_id, product_name, description, image, price, year, date, url = RestClient.BASE_URL + "product_image/";
+    Button Mark_Received, Mark_Sold;
     TextView Description, ProductName, Price, Year, Seller, Date;
     ImageView ProductImage;
     private JSONObject data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_details);
+        setContentView(R.layout.activity_my_product_details);
         ProductImage = findViewById(R.id.product_image);
-        Contact = findViewById(R.id.contact);
-        Buy = findViewById(R.id.buy);
+        Mark_Received = findViewById(R.id.mark_received);
+        Mark_Sold = findViewById(R.id.mark_sold);
         ProductName = findViewById(R.id.product_name);
         Price = findViewById(R.id.price);
         Year = findViewById(R.id.years);
@@ -43,7 +41,6 @@ public class ProductDetails extends AppCompatActivity {
             data = new JSONObject(Product);
             user_id = data.get("User ID").toString();
             product_id = data.get("Product ID").toString();
-            user_name = data.get("Name").toString();
             description = data.get("Description").toString();
             product_name = data.get("Product Name").toString();
             price = data.get("Price").toString();
@@ -52,11 +49,9 @@ public class ProductDetails extends AppCompatActivity {
             date = data.get("Date").toString();
             Log.d("Image", image);
 
-            price = "₹" + price;
             ProductName.setText(product_name);
             Price.setText(price);
             Year.setText(year);
-            Seller.setText(user_name);
             Date.setText(date);
             Description.setText(description);
 
@@ -67,22 +62,21 @@ public class ProductDetails extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Buy.setOnClickListener(new View.OnClickListener() {
+        Mark_Sold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent purchase = new Intent(ProductDetails.this, PurchaseActivity.class);
-                purchase.putExtra("Product ID", product_id);
-                startActivity(purchase);
+//                Intent purchase = new Intent(ProductDetails.this, PurchaseActivity.class);
+//                purchase.putExtra("Product ID", product_id);
+//                startActivity(purchase);
             }
         });
-        Contact.setOnClickListener(new View.OnClickListener() {
+        Mark_Received.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent contact = new Intent(ProductDetails.this, ContactActivity.class);
-                contact.putExtra("User ID", user_id);
-                startActivity(contact);
+//                Intent contact = new Intent(ProductDetails.this, ContactActivity.class);
+//                contact.putExtra("User ID", user_id);
+//                startActivity(contact);
             }
         });
-
     }
 }

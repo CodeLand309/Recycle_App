@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recycle.R;
+import com.example.recycle.RetrofitFolder.RestClient;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     private ArrayList<ProductsItem> mProductList;
     private Context mContext;
     public OnItemClickListener mListener;
-    String url="http://192.168.29.202:5000/product_image/";
+    String url = RestClient.BASE_URL + "product_image/";
 //    private ArrayList<ExampleItem> exampleListFull;
 
 //    @Override
@@ -104,8 +105,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         holder.mTextView1.setText(currentItem.getProductName());
         holder.mTextView2.setText("₹" + Integer.toString(currentItem.getPrice()));
         url = url + currentItem.getImage();
-        Picasso.get().load(url).fit().into(holder.mImageView);
-        url = "http://192.168.29.202:5000/product_image/";
+        Picasso.get().load(url).fit().centerInside().placeholder(R.drawable.ic_round_image_24).into(holder.mImageView);
+        url = RestClient.BASE_URL + "product_image/";
     }
     @Override
     public int getItemCount() {

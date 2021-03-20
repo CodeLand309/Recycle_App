@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recycle.LaunchActivity;
 import com.example.recycle.MainUI.User;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
@@ -32,7 +33,7 @@ public class ContactActivity extends AppCompatActivity {
     private User user;
     private TextView Name, Phone, Address;
     private Button Call;
-    String url = "http://192.168.29.202:5000/user_image/";
+    String url = RestClient.BASE_URL + "user_image/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class ContactActivity extends AppCompatActivity {
                 Name.setText(name);
                 Phone.setText(phone);
                 Address.setText(address);
-                url = url + name;
+                url = url + phone + "/" + name;
                 Picasso.get().load(url).fit().into(Image);
 
             }
