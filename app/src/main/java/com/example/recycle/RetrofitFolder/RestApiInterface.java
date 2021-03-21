@@ -3,6 +3,7 @@ package com.example.recycle.RetrofitFolder;
 import com.example.recycle.MainUI.CentreListResponse;
 import com.example.recycle.MainUI.DataResponse;
 import com.example.recycle.MainUI.User;
+import com.example.recycle.SubActivity.HistoryResponse;
 import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
@@ -24,6 +25,9 @@ public interface RestApiInterface {
 
     @GET("/getCentreData")
     Call<ArrayList<CentreListResponse>> getCentreData(@Query("page_number") int page, @Query("item_count") int items);
+
+    @GET("/getHistory")
+    Call<ArrayList<HistoryResponse>> getHistory(@Query("page_number") int page, @Query("item_count") int items, @Query("id") int id);
 
     @GET("/getUserData")
     Call<User> getUserData(@Query("id") int id);
