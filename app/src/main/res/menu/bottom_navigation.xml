@@ -3,28 +3,28 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_round_home_24"
-        android:title="Home"
+        android:title="@string/HomeOption"
         android:visible="true"/>
 
     <item
         android:id="@+id/nav_chat"
         android:icon="@drawable/ic_round_chat_24"
-        android:title="Chat"
+        android:title="@string/ChatOption"
         android:visible="true"/>
 
     <item
         android:id="@+id/nav_sell"
         android:icon="@drawable/ic_round_add_circle_24"
-        android:title="Sell"
+        android:title="@string/SellOption"
         android:visible="true"/>
     <item
         android:id="@+id/nav_dispose"
         android:icon="@drawable/ic_round_dispose_24"
-        android:title="Dispose"
+        android:title="@string/DisposeOption"
         android:visible="true"/>
     <item
         android:id="@+id/nav_settings"
         android:icon="@drawable/ic_round_settings_24"
-        android:title="Setttings"
+        android:title="@string/SettingsOption"
         android:visible="true"/>
 </menu>

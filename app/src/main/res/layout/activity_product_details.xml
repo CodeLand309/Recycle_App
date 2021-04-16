@@ -37,6 +37,7 @@
                 android:id="@+id/product_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/ProductImageDescription"
                 android:layout_gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
-                    android:text="Product"
+                    android:text="@string/ProductNameLabel"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
@@ -86,6 +87,7 @@
                     android:id="@+id/product_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:text="@string/ProductNameValue"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:textColor="#FFFFFF"
@@ -103,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
-                    android:text="Price"
+                    android:text="@string/PriceLabel"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
@@ -118,6 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
+                    android:text="@string/ProductNameValue"
                     android:gravity="center"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
@@ -135,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
-                    android:text="Upload Date"
+                    android:text="@string/UploadDateLabel"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
@@ -151,6 +154,7 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
+                    android:text="@string/UploadDateValue"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
             </TableRow>
@@ -166,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
-                    android:text="   Years of Usage   "
+                    android:text="@string/YearsOfUsageLabel"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
@@ -181,6 +185,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
+                    android:text="@string/YearsOfUsageValue"
                     android:gravity="center"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
@@ -198,7 +203,7 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
-                    android:text="Seller"
+                    android:text="@string/SellerLabel"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
@@ -214,6 +219,7 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
+                    android:text="@string/SellerValue"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
             </TableRow>
@@ -240,7 +246,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="#0910A1"
-                android:text="Buy"
+                android:text="@string/BuyButton"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/space"
@@ -264,7 +270,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="#0910A1"
-                android:text="Contact Seller"
+                android:text="@string/ContactButton"
                 android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.937"
@@ -284,6 +290,7 @@
             android:gravity="center"
             android:paddingVertical="3dp"
             android:textColor="#000000"
+            android:text="@string/ProductDescriptionValue"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

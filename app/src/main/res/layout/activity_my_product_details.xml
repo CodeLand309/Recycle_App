@@ -38,6 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:contentDescription="@string/ProductImageDescription"
                 android:src="@drawable/ic_round_image_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
-                    android:text="Product"
+                    android:text="@string/MyProductNameLabel"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
@@ -88,6 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:autoSizeTextType="uniform"
+                    android:text="@string/MyProductNameValue"
                     android:gravity="center"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
@@ -104,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
-                    android:text="Price"
+                    android:text="@string/MyPriceLabel"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
@@ -119,6 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
+                    android:text="@string/MyPriceValue"
                     android:gravity="center"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
@@ -136,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
-                    android:text="Upload Date"
+                    android:text="@string/UploadDateLabel"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
@@ -151,6 +154,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
+                    android:text="@string/UploadDateValue"
                     android:gravity="center"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
@@ -167,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
-                    android:text="   Years of Usage   "
+                    android:text="@string/MyYearsOfUsageLabel"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
@@ -183,6 +187,7 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
+                    android:text="@string/MyYearsOfUsageValue"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
             </TableRow>
@@ -210,7 +215,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="#0910A1"
-                android:text="Mark As Sold"
+                android:text="@string/MarkAsSoldButton"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/space"
@@ -233,7 +238,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="#0910A1"
-                android:text="Mark As Received"
+                android:text="@string/MarkAsReceivedButton"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -250,6 +255,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="70dp"
             android:background="#FFFFFF"
+            android:text="@string/MyProductDescriptionValue"
             android:gravity="center"
             android:paddingVertical="3dp"
             android:textColor="#000000"

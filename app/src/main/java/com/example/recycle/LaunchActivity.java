@@ -20,17 +20,29 @@ public class LaunchActivity extends AppCompatActivity {
         sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sp.edit();
 //        editor.putString("Image", "Image");
-//        editor.commit();
+//        editor.putInt("User ID", 1);
+//        editor.putInt("Log in Status", 0);
+//        editor.apply();
         String image = sp.getString("Image", "");
+        String name = sp.getString("Name","");
         Log.d("IMAGE: ", image);
-        if(sp.contains("Name") && sp.contains("Phone Number") && sp.contains("User ID")){
+        Log.d("Name: ", name);
+        if(sp.getInt("Log in Status", 0)==2)
+        {
             Intent check = new Intent(LaunchActivity.this, MainActivity.class);
             startActivity(check);
             finish();
         }
+        else if(!sp.contains("Phone Number")){
+            Intent register = new Intent(LaunchActivity.this, SignUPActivity.class);
+            startActivity(register);
+            finish();
+        }
         else{
-            Intent check = new Intent(LaunchActivity.this, SignUPActivity.class);
-            startActivity(check);
+            String phone = sp.getString("Phone Number","");
+            Intent register = new Intent(LaunchActivity.this, RegisterActivity.class);
+            register.putExtra("Phone Number", phone);
+            startActivity(register);
             finish();
         }
     }

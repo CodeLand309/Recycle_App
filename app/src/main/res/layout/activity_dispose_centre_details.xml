@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="clip_vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,6 +31,7 @@
 
             <ImageView
                 android:id="@+id/centre_image"
+                android:contentDescription="@string/DisposeCentreImageDescription"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -52,7 +53,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:text=""
+            android:text="@string/DisposeCentreName"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/centre_phone"
@@ -72,7 +73,7 @@
             android:gravity="center"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
-            android:text="Call"
+            android:text="@string/DisposeCentreCallButton"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="#000000"
@@ -91,7 +92,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="163dp"
-            android:text=""
+            android:text="@string/DisposeCentreAddressValue"
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
@@ -111,7 +112,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="17dp"
             android:gravity="center"
-            android:text=""
+            android:text="@string/DisposeCentrePhoneValue"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/location"

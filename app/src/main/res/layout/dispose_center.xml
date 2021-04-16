@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginVertical="7dp"
+            android:text="@string/DisposeCentreName"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold" />

@@ -113,9 +113,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(key!=0) {
-//                    Phone = getIntent().getStringExtra("Phone Number");
-                    Phone = "9895054781";
-//                user = getIntent()
+                    Phone = getIntent().getStringExtra("Phone Number");
+//                    Phone = "9895054781";
                     Name = name.getText().toString();
                     Address = address.getText().toString();
                     Age = Integer.parseInt(age.getText().toString());
@@ -144,6 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 editor.putString("Phone Number", user.getPhone());
                                 editor.putString("Image", user.getImage());
                                 editor.putInt("Age", user.getAge());
+                                editor.putInt("Log in Status", 2);
                                 editor.apply();
                                 Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(RegisterActivity.this, MainActivity.class);

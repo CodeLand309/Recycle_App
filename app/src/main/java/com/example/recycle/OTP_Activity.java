@@ -3,7 +3,9 @@ package com.example.recycle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.PersistableBundle;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recycle.MainUI.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -208,12 +211,28 @@ public class OTP_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent register = new Intent(OTP_Activity.this, RegisterActivity.class);
-                            FirebaseUser user = task.getResult().getUser();
-                            register.putExtra("FirebaseUser", user);
-                            register.putExtra("Phone Number", phone);
-                            startActivity(register);
-                            finish();
+                            SharedPreferences sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
+                            if(sp.contains("User ID")){
+                                Intent register = new Intent(OTP_Activity.this, MainActivity.class);
+                                FirebaseUser user = task.getResult().getUser();
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putString("Phone Number", phone);
+                                editor.putInt("Log in Status", 2);
+                                editor.apply();
+                                startActivity(register);
+                                finish();
+                            }
+                            else {
+                                Intent register = new Intent(OTP_Activity.this, RegisterActivity.class);
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putString("Phone Number", phone);
+                                editor.putInt("Log in Status", 1);
+                                editor.apply();
+                                FirebaseUser user = task.getResult().getUser();
+                                register.putExtra("Phone Number", phone);
+                                startActivity(register);
+                                finish();
+                            }
                         } else {
                             Toast.makeText(OTP_Activity.this,"Incorrect OTP",Toast.LENGTH_SHORT).show();
                         }

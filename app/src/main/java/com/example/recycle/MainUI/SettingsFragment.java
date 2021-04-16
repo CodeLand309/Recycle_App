@@ -1,6 +1,7 @@
 package com.example.recycle.MainUI;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,12 +10,26 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
+import com.example.recycle.RetrofitFolder.RestClient;
 import com.example.recycle.SignUPActivity;
+import com.example.recycle.SubActivity.EditProduct;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthProvider;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
@@ -26,18 +41,22 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private Preference report, profile, delete, logout;
     private RestApiInterface restApiInterface;
-    private String name;
+    private String name, phone, product_id, Result;
     private int id;
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
-        report = (Preference) findPreference("report_key");
+        report = findPreference("report_key");
         profile = findPreference("change_pro_key");
         delete = findPreference("delete_key");
         logout = findPreference("log_out_key");
         SharedPreferences sp = getContext().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
         id=sp.getInt("User ID", 0);
         name=sp.getString("Name", "");
+        phone=sp.getString("Phone Number", "");
+        SharedPreferences.Editor editor = sp.edit();
+//        editor.putString("Name", "Kanna");
+//        editor.commit();
         profile.setTitle(name);
         report.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
@@ -60,33 +79,134 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         delete.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent intent = new Intent(getContext(), SignUPActivity.class);
-                startActivity(intent);
-//                Call<void> call = restApiInterface.deleteUser(id);
-//                call.enqueue(new Callback<void>() {
-//                    @Override
-//                    public void onResponse(@NonNull Call<void> call, @NonNull Response<void> response) {
-//                        ArrayList<ProductsItem> products = response.body().get(1).getItems();
-//                        mAdapter = new ProductsAdapter(products, getContext());
-//                        Log.d("TAG", "Reached Here3");
-//                        mRecyclerView.setAdapter(mAdapter);
-//                        Log.d("Tag", String.valueOf(response.body()));
-//                        Toast.makeText(getContext(), "First Page Loading", Toast.LENGTH_SHORT).show();
-//                        progressBar.setVisibility(View.GONE);
-//                    }
-//                    @Override
-//                    public void onFailure(Call<void> call, Throwable t) {
-//                        Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Delete");
+                builder.setMessage("Are You Sure to Delete Account?");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+        //                Intent intent = new Intent(getContext(), SignUPActivity.class);
+        //                startActivity(intent);
+        //                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //                firebase.auth().currentUser.unlink(firebase.auth.PhoneAuthProvider.PROVIDER_ID);
+
+        //                if (user != null) {
+        //                    user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+        //                        @Override
+        //                        public void onComplete(@NonNull Task<Void> task) {
+        //                            user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+        //                                @Override
+        //                                public void onComplete(@NonNull Task<Void> task) {
+        //                                    if (task.isSuccessful()) {
+                        FirebaseAuth.getInstance().getCurrentUser().unlink(PhoneAuthProvider.PROVIDER_ID);
+                        restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
+
+                        Call<JsonElement> call = restApiInterface.deleteUser(id, phone);
+                        call.enqueue(new Callback<JsonElement>() {
+                            @Override
+                            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                                if (!response.isSuccessful()) {
+                                    Result = "Code: " + response.code();
+                                    Toast.makeText(getContext(), Result, Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                JsonObject jsonObject = response.body().getAsJsonObject();
+                                String content = jsonObject.get("status").getAsString();
+                                Toast.makeText(getContext(), content, Toast.LENGTH_SHORT).show();
+                                editor.remove("Name");
+                                editor.remove("User ID");
+                                editor.remove("Address");
+                                editor.remove("Phone Number");
+                                editor.remove("Gender");
+                                editor.remove("Age");
+                                editor.remove("Image");
+                                editor.putInt("Log in Status", 0);
+                                editor.apply();
+
+                                Intent i = new Intent(getContext(), SignUPActivity.class);
+                                startActivity(i);
+                                getActivity().finish();
+                                //                                    }
+        //                                }
+        //                            });
+        //                        }
+        //                    });
+        //                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<JsonElement> call, Throwable t) {
+                                Result = t.getMessage();
+                                Toast.makeText(getContext(), Result, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+
                 return false;
+                    // Prompt the user to re-provide their sign-in credentials
+//                if (user != null) {
+//                    user.reauthenticate(credential)
+//                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    user.delete()
+//                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                @Override
+//                                                public void onComplete(@NonNull Task<Void> task) {
+//                                                    if (task.isSuccessful()) {
+//                                                        Log.d("TAG", "User account deleted.");
+//                                                        startActivity(new Intent(DeleteUser.this, StartActivity.class));
+//                                                        Toast.makeText(DeleteUser.this, "Deleted User Successfully,", Toast.LENGTH_LONG).show();
+//                                                    }
+//                                                }
+//                                            });
+//                                }
+//                            });
+//                }
             }
         });
         logout.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent intent = new Intent(getContext(), SignUPActivity.class);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Log Out");
+                builder.setMessage("Are you Sure to Log Out?");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FirebaseAuth.getInstance().signOut();
+        //                editor.putString("Name", "");
+        //                editor.putInt("User ID", 0);
+        //                editor.putString("Address", "");
+        //                editor.putString("Gender", "");
+        //                editor.putInt("Age", 0);
+        //                editor.putString("Image", "");
+                        editor.remove("Phone Number");
+                        editor.putInt("Log in Status", 1);
+                        editor.apply();
+                        Intent intent = new Intent(getContext(), SignUPActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+
                 return false;
             }
         });

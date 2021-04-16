@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="291dp"
             android:autoSizeTextType="uniform"
-            android:text="No internet Connection"
+            android:text="@string/NoInternetConnection"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,6 +33,7 @@
 
         <ImageView
             android:id="@+id/imageView4"
+            android:contentDescription="@string/NoInternetImageDescription"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="118dp"

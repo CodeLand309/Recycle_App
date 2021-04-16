@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="Profile">
+    <PreferenceCategory android:title="@string/PreferenceCategory">
         <Preference
             android:key="change_pro_key"
-            android:summary="Change Profile"
+            android:summary="@string/ChangeProfilePreference"
             android:icon="@drawable/profile">
             <intent
                 android:id="@+id/change_profile_intent"
@@ -16,7 +16,7 @@
     <Preference
         android:icon="@drawable/ic_round_history_24"
         android:key="history_key"
-        android:title="History">
+        android:title="@string/HistoryPreference">
         <intent
             android:id="@+id/history_intent"
             android:targetClass="com.example.recycle.SubActivity.History"
@@ -25,7 +25,7 @@
     <Preference
         android:icon="@drawable/ic_round_contact_support_24"
         android:key="help_key"
-        android:title="Help and Support">
+        android:title="@string/HelpAndSupportPreference">
         <intent
             android:id="@+id/help_intent"
             android:action="android.intent.action.VIEW"
@@ -34,14 +34,14 @@
     <Preference
         android:icon="@drawable/ic_round_report_problem_24"
         android:key="report_key"
-        android:title="Report Issue" />
+        android:title="@string/ReportIssuePreference" />
     <!--    <Preference>-->
     <Preference
         android:icon="@drawable/ic_round_info_24"
         android:key="about_key"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="About" />
+        android:title="@string/AboutPreference" />
     <!--    </Preference>-->
     <!--    <Preference>-->
     <EditTextPreference
@@ -50,7 +50,7 @@
         android:key="share_key"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Share App" />
+        android:title="@string/ShareAppPreference" />
     <!--    </Preference>-->
     <!--    <Preference>-->
     <Preference
@@ -58,9 +58,9 @@
         android:key="delete_key"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Delete Account"/>
+        android:title="@string/DeleteAccountPreference"/>
     <Preference
         android:icon="@drawable/ic_round_exit_to_app_24"
         android:key="log_out_key"
-        android:title="Log Out"/>
+        android:title="@string/LogOutPreference"/>
 </PreferenceScreen>

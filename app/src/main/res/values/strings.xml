@@ -2,85 +2,173 @@
     <string name="app_name">Recycle</string>
 
     <!-- Sign UP Screen Start-->
-    <string name="PhoneNumberEditText">Enter Phone Number</string>
-    <string name="SendOTPButton">Send OTP</string>
-    <string name="SignInButton">Sign in Later</string>
-    <string name="TermsAndConditions">"By providing my phone number, I hereby agree and accept the Terms of Service and Privacy Policy in use of the Recycle App"</string>
-    <string name="ImageDescription">App Logo</string>
+        <string name="PhoneNumberEditText">Enter Phone Number</string>
+        <string name="SendOTPButton">Send OTP</string>
+        <string name="SignInButton">Sign in Later</string>
+        <string name="TermsAndConditions">"By providing my phone number, I hereby agree and accept the Terms of Service and Privacy Policy in use of the Recycle App"</string>
+        <string name="ImageDescription">App Logo</string>
     <!-- Sign UP Screen End -->
 
     <!-- OTP Screen Start -->
-    <string name="WaitingTextView">Waiting for OTP</string>
-    <string name="VerifyButton">Verify</string>
-    <string name="ResendButton">Resend OTP</string>
+        <string name="WaitingTextView">Waiting for OTP</string>
+        <string name="VerifyButton">Verify</string>
+        <string name="ResendButton">Resend OTP</string>
     <!-- OTP Screen End -->
 
     <!-- Register Screen Start -->
-    <string name="ProfileDescription">Profile Logo</string>
-    <string name="EnterNameEditText">Enter Name</string>
-    <string name="EnterAgeEditText">Enter Age</string>
-    <string name="EnterAddressEditText">Enter Address</string>
-    <!--    <string-array name="Gender">-->
-    <!--        <item>Female</item>-->
-    <!--        <item>Male</item>-->
-    <!--        <item>Other</item>-->
-    <!--    </string-array>-->
-    <string name="UploadButton">Upload Image</string>
-    <string name="RegisterButton">Register</string>
+        <string name="ProfileDescription">Profile Logo</string>
+        <string name="EnterNameEditText">Enter Name</string>
+        <string name="EnterAgeEditText">Enter Age</string>
+        <string name="EnterAddressEditText">Enter Address</string>
+        <!--    <string-array name="Gender">-->
+        <!--        <item>Female</item>-->
+        <!--        <item>Male</item>-->
+        <!--        <item>Other</item>-->
+        <!--    </string-array>-->
+        <string name="UploadButton">Upload Image</string>
+        <string name="RegisterButton">Register</string>
     <!-- Register Screen End -->
 
+    <!-- Home Fragment Start -->
+        <!-- Product Item Card View -->
+        <string name="ProductName">Product Name</string>
+        <string name="Price">Price</string>
+        <string name="ProductImageDescription">Image Description</string>
+    <!-- Home Fragment End -->
 
-    <!--    <string name="app_name">listview</string>-->
-    <!--    <string-array name="listviewitems">-->
-    <!--        <item>Mattanchery Plastic Recycling center</item>-->
-    <!--        <item>Palarivattam Plastic Recycling Unit</item>-->
-    <!--        <item>Palluruthy Scrap item collection unit</item>-->
-    <!--        <item>Aluva E-waste collection Centre</item>-->
-    <!--        <item>Aroor E-waste Recycling Centre</item>-->
 
-    <!--        <item>Biju's plastic Recycling unit</item>-->
-    <!--        <item>Thevara wasete Management centre </item>-->
-    <!--        <item>Edapally Scrap item collection unit</item>-->
-    <!--    </string-array>-->
+    <!-- Chat Fragment Start -->
 
-    <!--    <string-array name="Mattanchery Plastic Recycling center">-->
-    <!--        <item>C</item>-->
-    <!--        <item>Linux</item>-->
-    <!--    </string-array>-->
+    <!-- Chat Fragment End -->
 
-    <!--    <string-array name="Palarivattam Plastic Recycling Unit">-->
-    <!--        <item>DS</item>-->
-    <!--        <item>Cplusplus</item>-->
-    <!--    </string-array>-->
+    <!-- Sell Fragment Start -->
+        <!-- Sell Item Card View -->
+        <string name="SellProductName">Product Name</string>
+        <string name="MyProductImageDescription">Image Description</string>
 
-    <!--    <string-array name="Palluruthy Scrap item collection unit">-->
-    <!--        <item>Java</item>-->
-    <!--        <item>RDBMS</item>-->
-    <!--    </string-array>-->
+        <string name="AddButtonDescription">Add</string>
+    <!-- Sell Fragment End -->
 
-    <!--    <string-array name="Aluva E-waste collection Centre">-->
-    <!--        <item>Basic Android</item>-->
-    <!--        <item>Cloud</item>-->
-    <!--    </string-array>-->
+    <!-- Dispose Fragment Start -->
+        <!-- Dispose Center Card View -->
+        <string name="DisposeCentreName">Dispose Centre Name</string>
+    <!-- Dispose Fragment End -->
 
-    <!--    <string-array name="Aroor E-waste Recycling Centre">-->
-    <!--        <item>Advanced Android</item>-->
-    <!--        <item>SOS</item>-->
-    <!--    </string-array>-->
+    <!-- Settings Preference Fragment Start -->
+        <string name="PreferenceCategory">Profile</string>
+        <string name="ChangeProfilePreference">Change Profile</string>
+        <string name="HistoryPreference">History</string>
+        <string name="HelpAndSupportPreference">Help and Support</string>
+        <string name="ReportIssuePreference">Report Issue</string>
+        <string name="AboutPreference">About</string>
+        <string name="ShareAppPreference">Share App</string>
+        <string name="DeleteAccountPreference">Delete Account</string>
+        <string name="LogOutPreference">Log Out</string>
+    <!-- Settings Preference Fragment End -->
 
-    <!--    <string-array name="Biju's plastic Recycling unit">-->
-    <!--        <item>UI</item>-->
-    <!--        <item>Testing</item>-->
-    <!--    </string-array>-->
-    <!--    <string-array name="Thevara wasete Management centre">-->
-    <!--        <item>UI</item>-->
-    <!--        <item>Testing</item>-->
-    <!--    </string-array>-->
+    <!-- Connection Fragment Start -->
+        <string name="NoInternetConnection">No Internet Connection</string>
+    <string name="NoInternetImageDescription">No Internet Image</string>
+    <!-- Connection Fragment End -->
 
-    <!--    <string-array name="Edapally Scrap item collection unit">-->
-    <!--        <item>UI</item>-->
-    <!--        <item>Testing</item>-->
-    <!--    </string-array>-->
+    <!-- Product Details Activity Start -->
+        <string name="BuyButton">Buy</string>
+        <string name="ContactButton">Contact Seller</string>
+
+        <string name="ProductNameLabel">Product</string>
+        <string name="PriceLabel">Price</string>
+        <string name="UploadDateLabel">Upload Date</string>
+        <string name="YearsOfUsageLabel">   Years of Usage   </string>
+        <string name="SellerLabel">Seller</string>
+
+        <string name="ProductNameValue">Product Name</string>
+        <string name="PriceValue">Product Price</string>
+        <string name="UploadDateValue">Product Upload Date</string>
+        <string name="YearsOfUsageValue">Product Used in Years</string>
+        <string name="SellerValue">Seller Name</string>
+        <string name="ProductDescriptionValue">Product Description</string>
+
+    <!-- Product Details Activity End -->
+
+    <!-- Purchase Activity Start -->
+
+    <!-- Purchase Activity End -->
+
+    <!-- Contact Activity Start -->
+        <string name="SellerProfileDescription">Seller Profile</string>
+        <string name="SellerNameValue">Seller Name</string>
+        <string name="SellerPhoneValue">Seller Phone</string>
+        <string name="SellerAddressValue">Seller Address</string>
+        <string name="SellerCallButton">Call</string>
+    <!-- Contact Activity End -->
+
+    <!-- My Product Details Activity Start -->
+        <string name="MarkAsSoldButton">Mark As Sold</string>
+        <string name="MarkAsReceivedButton">Mark As Received</string>
+
+        <string name="MyProductNameLabel">Product</string>
+        <string name="MyPriceLabel">Price</string>
+        <string name="MyUploadDateLabel">Upload Date</string>
+        <string name="MyYearsOfUsageLabel">   Years of Usage   </string>
+
+        <string name="MyProductNameValue">Product Name</string>
+        <string name="MyPriceValue">Product Price</string>
+        <string name="MyUploadDateValue">Product Upload Date</string>
+        <string name="MyYearsOfUsageValue">Product Used in Years</string>
+        <string name="MyProductDescriptionValue">Product Description</string>
+    <!-- My Product Details Activity End -->
+
+    <!-- Upload Product Activity Start -->
+        <string name="UploadImageButton">Upload Image</string>
+        <string name="SaveButton">Save</string>
+        <string name="CancelButton">Cancel</string>
+
+        <string name="EnterProductNameHint">Enter Product Name</string>
+        <string name="EnterPriceHint">Enter Price</string>
+        <string name="EnterDescriptionHint">Provide a description of Production</string>
+        <string name="EnterYearsOfUsageHint">Years Of Usage</string>
+    <!-- Upload Product Activity End -->
+
+    <!-- Dispose Centre Details Activity Start -->
+        <string name="DisposeCentreCallButton">Call</string>
+
+        <string name="DisposeCentreNameValue">Dispose Centre Name</string>
+        <string name="DisposeCentrePhoneValue">Phone Number</string>
+        <string name="DisposeCentreImageDescription">Dispose Centre Image</string>
+        <string name="DisposeCentreAddressValue">Dispose Centre Address</string>
+    <!-- Dispose Centre Details Activity End -->
+
+    <!-- History Activity Start -->
+        <!-- History Item Card View -->
+        <string name="MyProductName">Product Name</string>
+        <string name="ProductDate">Date</string>
+        <!-- History Item Card View -->
+    <!-- History Activity End -->
+
+    <!-- Change Profile Activity -->
+        <string name="UploadNewProfileButton">Upload Image</string>
+        <string name="SaveNewProfileButton">Save</string>
+        <string name="CancelProfileButton">Cancel</string>
+
+
+        <string name="OldNameValue">My Name</string>
+        <string name="OldPhoneValue">My Phone Number</string>
+        <string name="EnterNewAddressHint">Enter New Address</string>
+        <string name="EnterNewAgeHint">Enter Age</string>
+    <!-- Change Profile Activity -->
+
+    <!-- Bottom Navigation Bar Menu Start -->
+        <string name="HomeOption">Home</string>
+        <string name="ChatOption">Chat</string>
+        <string name="SellOption">Sell</string>
+        <string name="DisposeOption">Dispose</string>
+        <string name="SettingsOption">Settings</string>
+    <!-- Bottom Navigation Bar Menu End -->
+
+    <!-- Options Menu Start -->
+        <string name="EditOption">Edit</string>
+        <string name="DeleteOption">Delete</string>
+    <!-- Options Menu End -->
 
 
 </resources>

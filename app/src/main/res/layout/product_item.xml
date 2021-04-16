@@ -15,6 +15,7 @@
 
         <ImageView
             android:id="@+id/imageView"
+            android:contentDescription="@string/ProductImageDescription"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
@@ -32,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Line 1"
+                android:text="@string/ProductName"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -43,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="4dp"
-                android:text="Line 2"
+                android:text="@string/Price"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp" />
         </LinearLayout>

@@ -51,6 +51,9 @@ public interface RestApiInterface {
     @PATCH("/editUser")
     Call<JsonElement> editUser(@Field("name") String name, @Field("user_id") int user_id, @Field("age") int age, @Field("address") String address, @Field("phone") String phone, @Field("image") String image, @Field("flag") int flag);
 
+    @DELETE("/deleteUser")
+    Call<JsonElement> deleteUser(@Query("user_id") int user_id, @Query("phone") String phone);
+
     @DELETE("/deleteProduct")
     Call<JsonElement> deleteProduct(@Query("product_id") int id, @Query("name") String name);
 //    @FormUrlEncoded

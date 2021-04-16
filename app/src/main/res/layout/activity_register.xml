@@ -45,9 +45,11 @@
 
         <EditText
             android:id="@+id/address"
+            android:importantForAutofill="no"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_centerHorizontal="true"
+            android:inputType="text"
             android:layout_marginBottom="20dp"
             android:autoSizeTextType="uniform"
             android:background="#FFFFFF"
@@ -71,6 +73,7 @@
             android:autoSizeTextType="uniform"
             android:background="#FFFFFF"
             android:gravity="center_vertical"
+            android:importantForAutofill="no"
             android:hint="@string/EnterNameEditText"
             android:inputType="textPersonName"
             android:paddingVertical="5dp"
@@ -145,6 +148,7 @@
                 android:background="#FFFFFF"
                 android:gravity="center_vertical"
                 android:hint="@string/EnterAgeEditText"
+                android:importantForAutofill="no"
                 android:inputType="number"
                 android:paddingVertical="5dp"
                 android:textAlignment="center"

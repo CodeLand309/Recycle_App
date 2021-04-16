@@ -46,4 +46,10 @@ public class SignUPActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Toast.makeText(this, "This Operation not Supported", Toast.LENGTH_SHORT).show();
+    }
 }
