@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,10 +69,19 @@ public class SellFragment extends Fragment {
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total=0;
     private int view_threshold= 10;
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_sell, container, false);
+
+        setHasOptionsMenu(true);
+
         progressBar = view.findViewById(R.id.progressBar);
         mRecyclerView = view.findViewById(R.id.recyclerView);
         AddButton = view.findViewById(R.id.addButton);

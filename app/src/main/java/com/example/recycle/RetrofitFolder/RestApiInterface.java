@@ -35,6 +35,12 @@ public interface RestApiInterface {
     @GET("/getUserProduct")
     Call<ArrayList<DataResponse>> getUserProducts(@Query("page_number") int page, @Query("item_count") int items, @Query("id") int id);
 
+    @GET("/searchProductName")
+    Call<ArrayList<DataResponse>> searchProductName(@Query("page_number") int page, @Query("item_count") int items, @Query("id") int id, @Query("search_word") String name);
+
+    @GET("/searchCentreName")
+    Call<ArrayList<CentreListResponse>> searchCentreName(@Query("page_number") int page, @Query("item_count") int items, @Query("search_word") String name);
+
     @FormUrlEncoded
     @POST("/registerUser")
     Call<User> registerUser(@Field("name") String name, @Field("gender") String gender, @Field("address") String address, @Field("image") String image, @Field("phone") String phone, @Field("age") int age);
@@ -47,6 +53,12 @@ public interface RestApiInterface {
     @PATCH("/editProduct")
     Call<JsonElement> editProduct(@Field("product") String product, @Field("description") String description, @Field("year") int year, @Field("price") int price, @Field("image") String image, @Field("product_id") int product_id, @Field("user_id") int user_id, @Field("flag") int flag);
 
+    @PATCH("/markSold")
+    Call<JsonElement> markSold(@Query("product_id") int product_id, @Query("user_id") int user_id);
+
+    @PATCH("/markReceived")
+    Call<JsonElement> markReceived(@Query("product_id") int product_id, @Query("user_id") int user_id);
+
     @FormUrlEncoded
     @PATCH("/editUser")
     Call<JsonElement> editUser(@Field("name") String name, @Field("user_id") int user_id, @Field("age") int age, @Field("address") String address, @Field("phone") String phone, @Field("image") String image, @Field("flag") int flag);
@@ -56,6 +68,9 @@ public interface RestApiInterface {
 
     @DELETE("/deleteProduct")
     Call<JsonElement> deleteProduct(@Query("product_id") int id, @Query("name") String name);
+
+
+
 //    @FormUrlEncoded
 //    @POST("/post")
 //    Call<Student> postData(@Field("roll") int roll, @Field("name") String name, @Field("image") String image);

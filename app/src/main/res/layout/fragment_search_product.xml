@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_product"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/sell"
-    android:background="#00B6FF"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainUI.SellFragment">
+    tools:context=".MainUI.SearchFragment_Product">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,6 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#00B6FF"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/progressBar"
             android:padding="5dp"
             android:scrollbars="vertical">
 
@@ -26,22 +26,10 @@
             android:id="@+id/progressBar"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="bottom|center"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:visibility="gone" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:clickable="true"
-            android:contentDescription="@string/AddButtonDescription"
-            app:srcCompat="@drawable/ic_round_add_circle_24" />
-
-    </FrameLayout>
-
-
+    </RelativeLayout>
 
 </RelativeLayout>

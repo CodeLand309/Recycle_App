@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -62,6 +65,30 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if(!isNetworkAvailable()){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment()).commit();
+                }
+                else {
+                    Fragment currentFragment = (Fragment)getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                    String fragment_name = String.valueOf(currentFragment);
+                    Log.d("Hello", String.valueOf(currentFragment));
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    if(fragment_name.startsWith("HomeFragment")) {
+                        SearchFragment_Product searchFragmentProduct = SearchFragment_Product.newInstance();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Search Word", query);
+                        searchFragmentProduct.setArguments(bundle);
+                        fragmentTransaction.add(R.id.fragment_container, searchFragmentProduct).commit();
+                    }
+                    else{
+                        SearchFragment_DisposeCentre searchFragment_disposeCentre = SearchFragment_DisposeCentre.newInstance();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Search Word", query);
+                        searchFragment_disposeCentre.setArguments(bundle);
+                        fragmentTransaction.add(R.id.fragment_container, searchFragment_disposeCentre).commit();
+                    }
+                }
                 return false;
             }
 

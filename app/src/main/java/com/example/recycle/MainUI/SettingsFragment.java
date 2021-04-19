@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -43,9 +45,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private RestApiInterface restApiInterface;
     private String name, phone, product_id, Result;
     private int id;
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
+
+        setHasOptionsMenu(true);
         report = findPreference("report_key");
         profile = findPreference("change_pro_key");
         delete = findPreference("delete_key");
@@ -210,7 +221,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return false;
             }
         });
-
 
 //    private ImageView Profile;
 //    Button button;

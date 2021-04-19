@@ -6,5 +6,5 @@
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
     android:background="#0055FF"
     android:id="@+id/toolbar"
-    app:title="Hello"
+    app:title="Recycle"
     app:titleMarginStart="20dp" />

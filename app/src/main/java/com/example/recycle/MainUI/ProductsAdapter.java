@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,23 +23,23 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     private Context mContext;
     public OnItemClickListener mListener;
     String url = RestClient.BASE_URL + "product_image/";
-//    private ArrayList<ExampleItem> exampleListFull;
-
+//    private ArrayList<ProductsItem> productListFull;
+//
 //    @Override
 //    public Filter getFilter() {
-//        return null;
+//        return productFilter;
 //    }
 //
-//    private Filter exampleFilter = new Filter() {
+//    private Filter productFilter = new Filter() {
 //        @Override
 //        protected FilterResults performFiltering(CharSequence charSequence) {
-//            ArrayList<ExampleItem> filteredList = new ArrayList<>();
+//            ArrayList<ProductsItem> filteredList = new ArrayList<>();
 //            if (charSequence == null || charSequence.length() == 0) {
-//                filteredList.addAll(exampleListFull);
+//                filteredList.addAll(productListFull);
 //            } else {
 //                String filterPattern = charSequence.toString().toLowerCase().trim();
-//                for (ExampleItem item : exampleListFull) {
-//                    if (item.getText2().toLowerCase().contains(filterPattern)) {
+//                for (ProductsItem item : productListFull) {
+//                    if (item.getProductName().toLowerCase().contains(filterPattern)) {
 //                        filteredList.add(item);
 //                    }
 //                }
@@ -49,8 +51,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 //
 //        @Override
 //        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-//            mExampleList.clear();
-//            mExampleList.addAll((ArrayList) filterResults.values);
+//            mProductList.clear();
+//            mProductList.addAll((ArrayList) filterResults.values);
 //            notifyDataSetChanged();
 //        }
 //    };
@@ -90,7 +92,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public ProductsAdapter(ArrayList<ProductsItem> exampleList, Context context) {
         mProductList = exampleList;
         mContext = context;
-//        exampleListFull = new ArrayList<>(exampleList);
+//        productListFull = new ArrayList<>(exampleList);
     }
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -8,17 +8,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.recycle.MainUI.MainActivity;
 import com.example.recycle.R;
+import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MyProductDetails extends AppCompatActivity {
 
-    private String Product, user_id, product_id, product_name, description, image, price, year, date, url = RestClient.BASE_URL + "product_image/";
+    private String Product, Result, user_id, product_id, product_name, description, image, price, year, date, url = RestClient.BASE_URL + "product_image/";
+    private RestApiInterface restApiInterface;
     Button Mark_Received, Mark_Sold;
     TextView Description, ProductName, Price, Year, Seller, Date;
     ImageView ProductImage;
@@ -68,6 +78,30 @@ public class MyProductDetails extends AppCompatActivity {
 //                Intent purchase = new Intent(ProductDetails.this, PurchaseActivity.class);
 //                purchase.putExtra("Product ID", product_id);
 //                startActivity(purchase);
+
+                restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
+
+                Call<JsonElement> call = restApiInterface.markSold(Integer.parseInt(product_id), Integer.parseInt(user_id));
+                call.enqueue(new Callback<JsonElement>() {
+                    @Override
+                    public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                        if (!response.isSuccessful()) {
+                            Result = "Code: " + response.code();
+                            Toast.makeText(MyProductDetails.this, Result, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        JsonObject jsonObject = response.body().getAsJsonObject();
+                        String content = jsonObject.get("Status").getAsString();
+                        Toast.makeText(MyProductDetails.this, content, Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonElement> call, Throwable t) {
+                        Result = t.getMessage();
+                        Toast.makeText(MyProductDetails.this, Result, Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
         Mark_Received.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +110,29 @@ public class MyProductDetails extends AppCompatActivity {
 //                Intent contact = new Intent(ProductDetails.this, ContactActivity.class);
 //                contact.putExtra("User ID", user_id);
 //                startActivity(contact);
+
+                restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
+
+                Call<JsonElement> call = restApiInterface.markReceived(Integer.parseInt(product_id), Integer.parseInt(user_id));
+                call.enqueue(new Callback<JsonElement>() {
+                    @Override
+                    public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                        if (!response.isSuccessful()) {
+                            Result = "Code: " + response.code();
+                            Toast.makeText(MyProductDetails.this, Result, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        JsonObject jsonObject = response.body().getAsJsonObject();
+                        String content = jsonObject.get("Status").getAsString();
+                        Toast.makeText(MyProductDetails.this, content, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonElement> call, Throwable t) {
+                        Result = t.getMessage();
+                        Toast.makeText(MyProductDetails.this, Result, Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
