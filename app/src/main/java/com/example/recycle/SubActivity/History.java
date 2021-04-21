@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recycle.MainUI.ConnectionFragment;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
@@ -40,7 +41,7 @@ public class History extends AppCompatActivity {
     private ArrayList<HistoryItem> products;
 
     private String user_name, product_name, description, image, date;
-    private int page_number = 1, user_id, product_id, price, year;
+    private int page_number = 1, user_id, product_id, price, year, status;
     private int item_count = 6;
 
     private SharedPreferences sp;
@@ -131,6 +132,7 @@ public class History extends AppCompatActivity {
         price = products.get(position).getPrice();
         year = products.get(position).getYears();
         date = products.get(position).getDate();
+        status = products.get(position).getStatus();
         Log.d("Item", "changeActivity: ");
         JSONObject jsonData = new JSONObject();
         try {
@@ -143,6 +145,7 @@ public class History extends AppCompatActivity {
             jsonData.put("Years", year);
             jsonData.put("Image", image);
             jsonData.put("Date", date);
+            jsonData.put("Status", status);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -19,14 +19,14 @@ public class LaunchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_launch);
         sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sp.edit();
-//        editor.putString("Image", "Image");
+////        editor.putString("Image", "Image");
 //        editor.putInt("User ID", 1);
-//        editor.putInt("Log in Status", 0);
-//        editor.apply();
-        String image = sp.getString("Image", "");
-        String name = sp.getString("Name","");
-        Log.d("IMAGE: ", image);
-        Log.d("Name: ", name);
+//        editor.putInt("Log in Status", 1);
+//        editor.commit();
+//        String image = sp.getString("Image", "");
+//        String name = sp.getString("Name","");
+//        Log.d("IMAGE: ", image);
+//        Log.d("Name: ", name);
         if(sp.getInt("Log in Status", 0)==2)
         {
             Intent check = new Intent(LaunchActivity.this, MainActivity.class);

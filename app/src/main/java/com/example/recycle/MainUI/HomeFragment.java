@@ -59,6 +59,12 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Current Fragment", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Name", "HomeFragment");
+        editor.commit();
+
         progressBar = view.findViewById(R.id.progressBar);
         mRecyclerView = view.findViewById(R.id.recyclerView);
         Log.d("TAG", "Reached Here1");
@@ -85,7 +91,6 @@ public class HomeFragment extends Fragment {
                 Log.d("TAG", "Reached Here3");
                 mRecyclerView.setAdapter(mAdapter);
                 Log.d("Tag", String.valueOf(response.body()));
-                Toast.makeText(getContext(), "First Page Loading", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 mAdapter.setOnItemClickListener(new ProductsAdapter.OnItemClickListener() {
                     @Override
@@ -97,6 +102,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<ArrayList<DataResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
             }
         });
 

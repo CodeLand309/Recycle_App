@@ -3,6 +3,7 @@ package com.example.recycle.SubActivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -69,7 +70,9 @@ public class DisposeCenterDetails extends AppCompatActivity {
         Call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(DisposeCenterDetails.this, "clicked", Toast.LENGTH_SHORT).show();
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL);
+                dialIntent.setData(Uri.parse("tel:" + phone));
+                startActivity(dialIntent);
             }
         });
     }

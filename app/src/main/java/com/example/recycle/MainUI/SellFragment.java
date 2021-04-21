@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,7 +62,7 @@ public class SellFragment extends Fragment {
     private Button Options;
 
     private String user_name, product_name, description, image, Result, date;
-    private int page_number = 1, user_id, product_id, price, year;
+    private int page_number = 1, user_id, product_id, price, year, status;
     private int item_count = 6;
 
     private SharedPreferences sp;
@@ -133,12 +135,15 @@ public class SellFragment extends Fragment {
                 Log.d("TAG", "Reached Here3");
                 mRecyclerView.setAdapter(mAdapter);
                 Log.d("Tag", String.valueOf(response.body()));
-                Toast.makeText(getContext(), "First Page Loading", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 mAdapter.setOnItemClickListener(new SellAdapter.OnItemClickListener() {
                     @Override
                     public void onItemCLick(int position) {
-                        changeActivity(position, products);
+                        if(isNetworkAvailable()) {
+                            changeActivity(position, products);
+                        }else{
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
+                        }
                     }
 
                     @Override
@@ -160,9 +165,11 @@ public class SellFragment extends Fragment {
                                         description = products.get(position).getDescription();
                                         price = products.get(position).getPrice();
                                         year = products.get(position).getYears();
-
-                                        Toast.makeText(getContext(), product_name, Toast.LENGTH_SHORT).show();
-                                        EditData(product_id, product_name, image, user_id, description, price, year);
+                                        if(isNetworkAvailable()) {
+                                            EditData(product_id, product_name, image, user_id, description, price, year);
+                                        }else{
+                                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
+                                        }
                                         return true;
                                     case R.id.delete_item:
                                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -176,7 +183,11 @@ public class SellFragment extends Fragment {
                                                 Log.d("Product ID", product_id+"");
                                                 Log.d("Product Name", product_name);
                                                 Toast.makeText(getContext(), product_name, Toast.LENGTH_SHORT).show();
-                                                DeleteData(product_id, product_name);
+                                                if(isNetworkAvailable()) {
+                                                    DeleteData(product_id, product_name);
+                                                }else{
+                                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
+                                                }
                                             }
                                         });
                                         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -200,6 +211,7 @@ public class SellFragment extends Fragment {
             @Override
             public void onFailure(Call<ArrayList<DataResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
             }
         });
 
@@ -276,18 +288,25 @@ public class SellFragment extends Fragment {
                 JsonObject jsonObject = response.body().getAsJsonObject();
                 String content = jsonObject.get("status").getAsString();
                 Toast.makeText(getContext(), content, Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SellFragment()).commit();
             }
 
             @Override
             public void onFailure(Call<JsonElement> call, Throwable t) {
                 Result = t.getMessage();
                 Toast.makeText(getContext(), Result, Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
             }
         });
     }
 
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     private void changeActivity(int position, ArrayList<ProductsItem> products) {
-        Toast.makeText(getContext(), "Clicked on a Item", Toast.LENGTH_SHORT).show();
         image = products.get(position).getImage();
         product_name = products.get(position).getProductName();
         product_id = products.get(position).getProductID();
@@ -297,6 +316,7 @@ public class SellFragment extends Fragment {
         price = products.get(position).getPrice();
         year = products.get(position).getYears();
         date = products.get(position).getDate();
+        status = products.get(position).getStatus();
 
         Log.d("image", image);
         Log.d("Product", product_name);
@@ -321,6 +341,7 @@ public class SellFragment extends Fragment {
             jsonData.put("Years", year);
             jsonData.put("Image", image);
             jsonData.put("Date", date);
+            jsonData.put("Status", status);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -405,6 +426,7 @@ public class SellFragment extends Fragment {
             @Override
             public void onFailure(Call<ArrayList<DataResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
             }
         });
     }

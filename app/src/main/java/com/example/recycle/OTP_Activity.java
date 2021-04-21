@@ -168,7 +168,6 @@ public class OTP_Activity extends AppCompatActivity {
                         countTime.setText("TimeOut");
                     }
                 }.start();
-                SigninWithPhone(phoneAuthCredential);
             }
 
             @Override
@@ -218,7 +217,7 @@ public class OTP_Activity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = sp.edit();
                                 editor.putString("Phone Number", phone);
                                 editor.putInt("Log in Status", 2);
-                                editor.apply();
+                                editor.commit();
                                 startActivity(register);
                                 finish();
                             }

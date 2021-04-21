@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recycle.MainUI.MainActivity;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
@@ -136,7 +137,9 @@ public class ChangeProfile extends AppCompatActivity {
         Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ChangeProfile.this, "Clicked on Cancel Button", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(ChangeProfile.this, MainActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }

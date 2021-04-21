@@ -12,20 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="clip_vertical">
 
-        <Button
-            android:id="@+id/btn_sign_out"
-            android:layout_width="344dp"
-            android:layout_height="61dp"
-            android:layout_below="@+id/constraintLayout2"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="101dp"
-            android:text="Sign Out"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.489"
-            app:layout_constraintStart_toStartOf="parent" />
-
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
@@ -89,24 +75,27 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="42dp"
+            android:layout_marginBottom="175dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/btn_sign_out"
-            app:layout_constraintEnd_toEndOf="@+id/btn_sign_out"
-            app:layout_constraintHeight_percent="0.06"
-            app:layout_constraintStart_toStartOf="@+id/btn_sign_out"
-            app:layout_constraintWidth_percent="0.75">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.075"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.79">
 
             <Button
                 android:id="@+id/upload"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:gravity="center_vertical"
                 android:paddingVertical="5dp"
                 android:text="@string/UploadButton"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/register"
+                app:layout_constraintHeight_percent="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.57"
@@ -115,13 +104,14 @@
             <Button
                 android:id="@+id/register"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:gravity="center_vertical"
                 android:paddingVertical="5dp"
                 android:text="@string/RegisterButton"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="1"
                 app:layout_constraintStart_toEndOf="@+id/upload"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.40"

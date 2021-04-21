@@ -53,6 +53,9 @@ public interface RestApiInterface {
     @PATCH("/editProduct")
     Call<JsonElement> editProduct(@Field("product") String product, @Field("description") String description, @Field("year") int year, @Field("price") int price, @Field("image") String image, @Field("product_id") int product_id, @Field("user_id") int user_id, @Field("flag") int flag);
 
+    @PATCH("/editPhone")
+    Call<JsonElement> editPhone(@Query("phone") String phone, @Query("user_id") int user_id);
+
     @PATCH("/markSold")
     Call<JsonElement> markSold(@Query("product_id") int product_id, @Query("user_id") int user_id);
 

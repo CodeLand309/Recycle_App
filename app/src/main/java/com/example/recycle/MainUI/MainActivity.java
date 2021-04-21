@@ -9,12 +9,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.recycle.R;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         if(!isNetworkAvailable()){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
         }
         else {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
@@ -49,9 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.search)
-            Toast.makeText(this, "Clicked on search", Toast.LENGTH_SHORT).show();
-        else if (id == R.id.notification)
+        if (id == R.id.notification)
             Toast.makeText(this, "Clicked on Notification", Toast.LENGTH_SHORT).show();
         return true;
     }
@@ -65,30 +65,7 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(!isNetworkAvailable()){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment()).commit();
-                }
-                else {
-                    Fragment currentFragment = (Fragment)getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-                    String fragment_name = String.valueOf(currentFragment);
-                    Log.d("Hello", String.valueOf(currentFragment));
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    if(fragment_name.startsWith("HomeFragment")) {
-                        SearchFragment_Product searchFragmentProduct = SearchFragment_Product.newInstance();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("Search Word", query);
-                        searchFragmentProduct.setArguments(bundle);
-                        fragmentTransaction.add(R.id.fragment_container, searchFragmentProduct).commit();
-                    }
-                    else{
-                        SearchFragment_DisposeCentre searchFragment_disposeCentre = SearchFragment_DisposeCentre.newInstance();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("Search Word", query);
-                        searchFragment_disposeCentre.setArguments(bundle);
-                        fragmentTransaction.add(R.id.fragment_container, searchFragment_disposeCentre).commit();
-                    }
-                }
+                performSearch(query);
                 return false;
             }
 
@@ -97,7 +74,49 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                SharedPreferences sp = getSharedPreferences("Current Fragment", Context.MODE_PRIVATE);
+                String prev_frag = sp.getString("Name", "");
+                if(prev_frag.equals("HomeFragment"))
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+                else if(prev_frag.equals("DisposeFragment"))
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DisposeFragment()).commit();
+                return false;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void performSearch(String query) {
+        if(!isNetworkAvailable()){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
+        }
+        else {
+//                    Fragment currentFragment = (Fragment)getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+//                    String fragment_name = String.valueOf(currentFragment);
+            SharedPreferences sp = getSharedPreferences("Current Fragment", Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sp.edit();
+            String prev_frag = sp.getString("Name", "");
+//                    Log.d("Hello", String.valueOf(currentFragment));
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            if(prev_frag.equals("HomeFragment")) {
+                SearchFragment_Product searchFragmentProduct = SearchFragment_Product.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putString("Search Word", query);
+                searchFragmentProduct.setArguments(bundle);
+                fragmentTransaction.add(R.id.fragment_container, searchFragmentProduct).commit();
+            }
+            else if(prev_frag.equals("DisposeFragment")){
+                SearchFragment_DisposeCentre searchFragment_disposeCentre = SearchFragment_DisposeCentre.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putString("Search Word", query);
+                searchFragment_disposeCentre.setArguments(bundle);
+                fragmentTransaction.add(R.id.fragment_container, searchFragment_disposeCentre).commit();
+            }
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -109,25 +128,25 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.nav_home:
                             if(!isNetworkAvailable())
-                                selectedFragment = new ConnectionFragment();
+                                selectedFragment = new ConnectionFragment(0);
                             else
                                 selectedFragment = new HomeFragment();
                             break;
                         case R.id.nav_chat:
                             if(!isNetworkAvailable())
-                                selectedFragment = new ConnectionFragment();
+                                selectedFragment = new ConnectionFragment(0);
                             else
                                 selectedFragment = new ChatFragment();
                             break;
                         case R.id.nav_sell:
                             if(!isNetworkAvailable())
-                                selectedFragment = new ConnectionFragment();
+                                selectedFragment = new ConnectionFragment(0);
                             else
                                 selectedFragment = new SellFragment();
                             break;
                         case R.id.nav_dispose:
                             if(!isNetworkAvailable())
-                                selectedFragment = new ConnectionFragment();
+                                selectedFragment = new ConnectionFragment(0);
                             else
                                 selectedFragment = new DisposeFragment();
                             break;

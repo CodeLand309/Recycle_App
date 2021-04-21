@@ -97,6 +97,8 @@ public class UploadProduct extends AppCompatActivity {
                             JsonObject jsonObject = response.body().getAsJsonObject();
                             String content = jsonObject.get("status").getAsString();
                             Toast.makeText(UploadProduct.this, content, Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(UploadProduct.this, MainActivity.class);
+                            startActivity(i);
                         }
 
                         @Override
@@ -125,7 +127,9 @@ public class UploadProduct extends AppCompatActivity {
         Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(UploadProduct.this, "Clicked on Cancel Button", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(UploadProduct.this, MainActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }

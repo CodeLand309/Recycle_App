@@ -27,10 +27,10 @@ import retrofit2.Response;
 
 public class MyProductDetails extends AppCompatActivity {
 
-    private String Product, Result, user_id, product_id, product_name, description, image, price, year, date, url = RestClient.BASE_URL + "product_image/";
+    private String Product, Result, user_id, product_id, product_name, description, image, price, year, date, status, url = RestClient.BASE_URL + "product_image/";
     private RestApiInterface restApiInterface;
     Button Mark_Received, Mark_Sold;
-    TextView Description, ProductName, Price, Year, Seller, Date;
+    TextView Description, ProductName, Price, Year, Seller, Date, Status;
     ImageView ProductImage;
     private JSONObject data;
     @Override
@@ -46,6 +46,8 @@ public class MyProductDetails extends AppCompatActivity {
         Seller = findViewById(R.id.seller);
         Description = findViewById(R.id.description);
         Date = findViewById(R.id.date);
+        Status = findViewById(R.id.status);
+
         Product = getIntent().getStringExtra("Product");
         try {
             data = new JSONObject(Product);
@@ -57,6 +59,7 @@ public class MyProductDetails extends AppCompatActivity {
             year = data.get("Years").toString();
             image = data.get("Image").toString();
             date = data.get("Date").toString();
+            status = data.get("Status").toString();
             Log.d("Image", image);
 
             ProductName.setText(product_name);
@@ -65,6 +68,10 @@ public class MyProductDetails extends AppCompatActivity {
             Date.setText(date);
             Description.setText(description);
 
+            if(status.equals("1"))
+                Status.setText("In Transaction");
+            else if(status.equals("0"))
+                Status.setText("Unsold");
             url = url + image;
             Log.d("Image URL", url);
             Picasso.get().load(url).fit().centerInside().placeholder(R.drawable.ic_round_image_24).into(ProductImage);
@@ -92,8 +99,12 @@ public class MyProductDetails extends AppCompatActivity {
                         }
                         JsonObject jsonObject = response.body().getAsJsonObject();
                         String content = jsonObject.get("Status").getAsString();
+                        String status = jsonObject.get("Product Status").getAsString();
                         Toast.makeText(MyProductDetails.this, content, Toast.LENGTH_SHORT).show();
-
+                        if(status.equals("In Transaction"))
+                            Status.setText("In Transaction");
+                        else if(status.equals("Unsold"))
+                            Status.setText("Unsold");
                     }
 
                     @Override

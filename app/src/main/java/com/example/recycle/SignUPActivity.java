@@ -19,8 +19,10 @@ public class SignUPActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+
         Phone=findViewById(R.id.phone);
-        OTP=findViewById(R.id.verify);
+        OTP=findViewById(R.id.send_otp);
         later=findViewById(R.id.sign_in_later);
         OTP.setOnClickListener(new View.OnClickListener() {
             @Override

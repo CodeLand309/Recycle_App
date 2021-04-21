@@ -133,6 +133,12 @@ public class DisposeFragment extends Fragment {
 //        disposeList.add(new DisposeCenter("Biju's plastic Recycling unit"));
 //        disposeList.add(new DisposeCenter("Thevara wasete Management centre"));
 //        disposeList.add(new DisposeCenter("Edapally Scrap item collection unit"));
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Current Fragment", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Name", "DisposeFragment");
+        editor.commit();
+
         progressBar = view.findViewById(R.id.progressBar);
         mRecyclerView = view.findViewById(R.id.recyclerView);
         Log.d("TAG", "Reached Here1");
@@ -154,7 +160,6 @@ public class DisposeFragment extends Fragment {
                 Log.d("TAG", "Reached Here3");
                 mRecyclerView.setAdapter(mAdapter);
                 Log.d("Tag", String.valueOf(response.body()));
-                Toast.makeText(getContext(), "First Page Loading", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 mAdapter.setOnItemClickListener(new DisposeAdapter.OnCentreClickListener() {
                     @Override
@@ -166,6 +171,7 @@ public class DisposeFragment extends Fragment {
             @Override
             public void onFailure(Call<ArrayList<CentreListResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
             }
         });
 
@@ -253,6 +259,7 @@ public class DisposeFragment extends Fragment {
             @Override
             public void onFailure(Call<ArrayList<CentreListResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
             }
         });
     }

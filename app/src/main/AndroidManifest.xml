@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SubActivity.MyProductDetails"></activity>
+        <activity android:name=".SubActivity.ChangePhoneActivity"></activity>
+        <activity android:name=".SubActivity.MyProductDetails" />
         <activity android:name=".SubActivity.ContactActivity" />
         <activity android:name=".SubActivity.PurchaseActivity" />
         <activity android:name=".SubActivity.ProductDetails" />

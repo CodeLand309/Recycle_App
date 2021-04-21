@@ -55,8 +55,10 @@
     <!-- Dispose Fragment End -->
 
     <!-- Settings Preference Fragment Start -->
-    <string name="PreferenceCategory">Profile</string>
+    <string name="PreferenceCategory1">Profile</string>
+    <string name="PreferenceCategory2">Other Settings</string>
     <string name="ChangeProfilePreference">Change Profile</string>
+    <string name="ChangePhonePreference">Change Phone Number</string>
     <string name="HistoryPreference">History</string>
     <string name="HelpAndSupportPreference">Help and Support</string>
     <string name="ReportIssuePreference">Report Issue</string>
@@ -103,18 +105,20 @@
     <!-- Contact Activity End -->
 
     <!-- My Product Details Activity Start -->
-    <string name="MarkAsSoldButton">Mark As Sold</string>
+    <string name="MarkAsSoldButton">Mark Sold/Unsold</string>
     <string name="MarkAsReceivedButton">Mark As Received</string>
 
     <string name="MyProductNameLabel">Product</string>
     <string name="MyPriceLabel">Price</string>
     <string name="MyUploadDateLabel">Upload Date</string>
     <string name="MyYearsOfUsageLabel">   Years of Usage   </string>
+    <string name="MyStatus">Product Status</string>
 
     <string name="MyProductNameValue">Product Name</string>
     <string name="MyPriceValue">Product Price</string>
     <string name="MyUploadDateValue">Product Upload Date</string>
     <string name="MyYearsOfUsageValue">Product Used in Years</string>
+    <string name="MyStatusValue">Product Status</string>
     <string name="MyProductDescriptionValue">Product Description</string>
     <!-- My Product Details Activity End -->
 
@@ -156,6 +160,15 @@
     <string name="EnterNewAddressHint">Enter New Address</string>
     <string name="EnterNewAgeHint">Enter Age</string>
     <!-- Change Profile Activity -->
+
+    <!-- Change Phone Screen Start-->
+    <string name="NewPhoneNumberEditText">Enter New Phone Number</string>
+    <string name="NewOTPButton">Send OTP</string>
+
+    <string name="WaitingAgainTextView">Waiting for OTP</string>
+    <string name="VerifyAgainButton">Verify</string>
+    <string name="ResendAgainButton">Resend OTP</string>
+    <!-- Change Phone Screen End -->
 
     <!-- Bottom Navigation Bar Menu Start -->
     <string name="HomeOption">Home</string>

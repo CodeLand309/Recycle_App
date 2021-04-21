@@ -93,7 +93,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="30dp"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:autoSizeTextType="uniform"
         android:background="#FFFFFF"
         android:gravity="start|top"

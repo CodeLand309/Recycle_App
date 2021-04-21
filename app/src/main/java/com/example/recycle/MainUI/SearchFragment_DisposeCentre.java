@@ -19,6 +19,7 @@ import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
 import com.example.recycle.SubActivity.DisposeCenterDetails;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,14 +46,14 @@ public class SearchFragment_DisposeCentre extends Fragment {
     private ArrayList<DisposeCentre> centres;
 
     private int page_number = 1;
-    private int item_count = 7;
+    private int item_count = 8;
 
     //Variables for Pagination
     private boolean isLoading = true;
     private String image, centre_name, address, phone;
     private int centre_id;
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total=0;
-    private int view_threshold= 7;
+    private int view_threshold= 10;
 
 //    // TODO: Rename parameter arguments, choose names that match
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -119,7 +120,6 @@ public class SearchFragment_DisposeCentre extends Fragment {
                 Log.d("TAG", "Reached Here3");
                 mRecyclerView.setAdapter(mAdapter);
                 Log.d("Tag", String.valueOf(response.body()));
-                Toast.makeText(getContext(), "First Page Loading", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 mAdapter.setOnItemClickListener(new DisposeAdapter.OnCentreClickListener() {
                     @Override
@@ -131,32 +131,33 @@ public class SearchFragment_DisposeCentre extends Fragment {
             @Override
             public void onFailure(Call<ArrayList<CentreListResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
             }
         });
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                visibleItemCount = mLayoutManager.getChildCount();
-                totalItemCount = mLayoutManager.getItemCount();
-                pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
-
-                if(dy>0){
-                    if(isLoading){
-                        if(totalItemCount>previous_total){
-                            isLoading = false;
-                            previous_total = totalItemCount;
-                        }
-                    }
-                    if(!isLoading && (totalItemCount-visibleItemCount) <= (pastVisibleItems + view_threshold)){
-                        page_number++;
-                        performPagination(search_word);
-                        isLoading = true;
-                    }
-                }
-            }
-        });
+//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                visibleItemCount = mLayoutManager.getChildCount();
+//                totalItemCount = mLayoutManager.getItemCount();
+//                pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
+//
+//                if(dy>0){
+//                    if(isLoading){
+//                        if(totalItemCount>previous_total){
+//                            isLoading = false;
+//                            previous_total = totalItemCount;
+//                        }
+//                    }
+//                    if(!isLoading && (totalItemCount-visibleItemCount) <= (pastVisibleItems + view_threshold)){
+//                        page_number++;
+//                        performPagination(search_word);
+//                        isLoading = true;
+//                    }
+//                }
+//            }
+//        });
 
         return view;
     }
@@ -184,32 +185,33 @@ public class SearchFragment_DisposeCentre extends Fragment {
         startActivity(i);
     }
 
-    private void performPagination(String search_word){
-        progressBar.setVisibility(View.VISIBLE);
-        Call<ArrayList<CentreListResponse>> call = restApiInterface.searchCentreName(page_number, item_count, search_word);
-        call.enqueue(new Callback<ArrayList<CentreListResponse>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<CentreListResponse>> call, @NonNull Response<ArrayList<CentreListResponse>> response) {
-
-                if(response.body().get(0).getStatus().equals("ok")){
-                    centres = response.body().get(1).getCentres();
-                    mAdapter.addCentre(centres);
-                    mAdapter.setOnItemClickListener(new DisposeAdapter.OnCentreClickListener() {
-                        @Override
-                        public void onCentreCLick(int position) {
-                            changeActivity(position, centres);
-                        }
-                    });
-                }
-                else{
-                    //Toast.makeText(ReadActivity.this, "No more Data", Toast.LENGTH_SHORT).show();
-                }
-                progressBar.setVisibility(View.GONE);
-            }
-            @Override
-            public void onFailure(Call<ArrayList<CentreListResponse>> call, Throwable t) {
-                Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void performPagination(String search_word){
+//        progressBar.setVisibility(View.VISIBLE);
+//        Call<ArrayList<CentreListResponse>> call = restApiInterface.searchCentreName(page_number, item_count, search_word);
+//        call.enqueue(new Callback<ArrayList<CentreListResponse>>() {
+//            @Override
+//            public void onResponse(@NonNull Call<ArrayList<CentreListResponse>> call, @NonNull Response<ArrayList<CentreListResponse>> response) {
+//
+//                if(response.body().get(0).getStatus().equals("ok")){
+//                    centres = response.body().get(1).getCentres();
+//                    mAdapter.addCentre(centres);
+//                    mAdapter.setOnItemClickListener(new DisposeAdapter.OnCentreClickListener() {
+//                        @Override
+//                        public void onCentreCLick(int position) {
+//                            changeActivity(position, centres);
+//                        }
+//                    });
+//                }
+//                else{
+//                    //Toast.makeText(ReadActivity.this, "No more Data", Toast.LENGTH_SHORT).show();
+//                }
+//                progressBar.setVisibility(View.GONE);
+//            }
+//            @Override
+//            public void onFailure(Call<ArrayList<CentreListResponse>> call, Throwable t) {
+//                Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
+//            }
+//        });
+//    }
 }

@@ -19,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recycle.LaunchActivity;
+import com.example.recycle.MainUI.MainActivity;
+import com.example.recycle.MainUI.SellFragment;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
@@ -119,6 +121,8 @@ public class EditProduct extends AppCompatActivity {
                             JsonObject jsonObject = response.body().getAsJsonObject();
                             String content = jsonObject.get("status").getAsString();
                             Toast.makeText(EditProduct.this, content, Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(EditProduct.this, MainActivity.class);
+                            startActivity(i);
                         }
 
                         @Override
@@ -147,7 +151,9 @@ public class EditProduct extends AppCompatActivity {
         Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(EditProduct.this, "Clicked on Cancel Button", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(EditProduct.this, MainActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }

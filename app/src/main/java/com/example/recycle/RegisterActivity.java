@@ -38,7 +38,7 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    Button btnSignOut, Register, Upload;
+    Button Register, Upload;
     EditText name, age, address;
     Spinner gender;
     private CircleImageView profile;
@@ -57,7 +57,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        btnSignOut=findViewById(R.id.btn_sign_out);
         Register=findViewById(R.id.register);
         Upload = findViewById(R.id.upload);
         profile = (CircleImageView) findViewById(R.id.profile_image);
@@ -176,15 +175,6 @@ public class RegisterActivity extends AppCompatActivity {
                 gallery.setType("image/*");
                 gallery.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(gallery, PICK_IMAGE);
-            }
-        });
-
-        btnSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(RegisterActivity.this, SignUPActivity.class));
-                finish();
             }
         });
     }

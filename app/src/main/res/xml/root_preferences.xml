@@ -1,66 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="@string/PreferenceCategory">
+    <PreferenceCategory
+        android:title="@string/PreferenceCategory1">
         <Preference
+            android:icon="@drawable/ic_round_person_24"
             android:key="change_pro_key"
-            android:summary="@string/ChangeProfilePreference"
-            android:icon="@drawable/profile">
-            <intent
-                android:id="@+id/change_profile_intent"
-                android:targetClass="com.example.recycle.SubActivity.ChangeProfile"
-                android:targetPackage="com.example.recycle" />
+            android:title="@string/ChangeProfilePreference">
         </Preference>
+
+        <Preference
+            android:icon="@drawable/ic_round_settings_phone_24"
+            android:key="change_phone_key"
+            android:title="@string/ChangePhonePreference">
+        </Preference>
+
     </PreferenceCategory>
 
-    <Preference
-        android:icon="@drawable/ic_round_history_24"
-        android:key="history_key"
-        android:title="@string/HistoryPreference">
-        <intent
-            android:id="@+id/history_intent"
-            android:targetClass="com.example.recycle.SubActivity.History"
-            android:targetPackage="com.example.recycle" />
-    </Preference>
-    <Preference
-        android:icon="@drawable/ic_round_contact_support_24"
-        android:key="help_key"
-        android:title="@string/HelpAndSupportPreference">
-        <intent
-            android:id="@+id/help_intent"
-            android:action="android.intent.action.VIEW"
-            android:data="https://www.google.com/" />
-    </Preference>
-    <Preference
-        android:icon="@drawable/ic_round_report_problem_24"
-        android:key="report_key"
-        android:title="@string/ReportIssuePreference" />
-    <!--    <Preference>-->
-    <Preference
-        android:icon="@drawable/ic_round_info_24"
-        android:key="about_key"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/AboutPreference" />
-    <!--    </Preference>-->
-    <!--    <Preference>-->
-    <EditTextPreference
-        android:defaultValue="Default value"
-        android:icon="@drawable/ic_round_share_24"
-        android:key="share_key"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/ShareAppPreference" />
-    <!--    </Preference>-->
-    <!--    <Preference>-->
-    <Preference
-        android:icon="@drawable/ic_round_delete_forever_24"
-        android:key="delete_key"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/DeleteAccountPreference"/>
-    <Preference
-        android:icon="@drawable/ic_round_exit_to_app_24"
-        android:key="log_out_key"
-        android:title="@string/LogOutPreference"/>
+    <PreferenceCategory
+        android:title="@string/PreferenceCategory2">
+        <Preference
+            android:icon="@drawable/ic_round_history_24"
+            android:key="history_key"
+            android:title="@string/HistoryPreference">
+        </Preference>
+        <Preference
+            android:icon="@drawable/ic_round_contact_support_24"
+            android:key="help_key"
+            android:title="@string/HelpAndSupportPreference">
+            <intent
+                android:id="@+id/help_intent"
+                android:action="android.intent.action.VIEW"
+                android:data="https://www.google.com/" />
+        </Preference>
+        <Preference
+            android:icon="@drawable/ic_round_report_problem_24"
+            android:key="report_key"
+            android:title="@string/ReportIssuePreference" />
+        <!--    <Preference>-->
+        <Preference
+            android:icon="@drawable/ic_round_info_24"
+            android:key="about_key"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/AboutPreference" />
+        <!--    </Preference>-->
+        <Preference
+            android:icon="@drawable/ic_round_delete_forever_24"
+            android:key="delete_key"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/DeleteAccountPreference"/>
+        <Preference
+            android:icon="@drawable/ic_round_exit_to_app_24"
+            android:key="log_out_key"
+            android:title="@string/LogOutPreference"/>
+    </PreferenceCategory>
 </PreferenceScreen>

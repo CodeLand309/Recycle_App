@@ -89,8 +89,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:autoSizeTextType="uniform"
-                    android:text="@string/MyProductNameValue"
                     android:gravity="center"
+                    android:text="@string/MyProductNameValue"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
             </TableRow>
@@ -121,14 +121,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
-                    android:text="@string/MyPriceValue"
                     android:gravity="center"
+                    android:text="@string/MyPriceValue"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
             </TableRow>
 
             <TableRow
-                android:id="@+id/description_row"
+                android:id="@+id/upload_date_row"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/table_row">
@@ -154,8 +154,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
-                    android:text="@string/UploadDateValue"
                     android:gravity="center"
+                    android:text="@string/UploadDateValue"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
             </TableRow>
@@ -192,6 +192,39 @@
                     android:textSize="20sp" />
             </TableRow>
 
+            <TableRow
+                android:id="@+id/status_row"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/table_row">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center"
+                    android:text="@string/MyStatus"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+                <View
+                    android:id="@+id/divider6"
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center"
+                    android:text="@string/MyStatusValue"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </TableRow>
+
         </TableLayout>
 
 
@@ -221,7 +254,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/space"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.4" />
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintWidth_percent="0.47" />
 
             <Space
                 android:id="@+id/space"
@@ -231,7 +265,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/mark_received"
                 app:layout_constraintStart_toEndOf="@+id/mark_sold"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.1" />
+                app:layout_constraintWidth_percent="0.05" />
 
             <Button
                 android:id="@+id/mark_received"
@@ -243,7 +277,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.5" />
+                app:layout_constraintWidth_percent="0.48" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView

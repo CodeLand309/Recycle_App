@@ -124,7 +124,6 @@ public class SearchFragment_Product extends Fragment {
                 Log.d("TAG", "Reached Here3");
                 mRecyclerView.setAdapter(mAdapter);
                 Log.d("Tag", String.valueOf(response.body()));
-                Toast.makeText(getContext(), "First Page Loading", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 mAdapter.setOnItemClickListener(new ProductsAdapter.OnItemClickListener() {
                     @Override
@@ -136,32 +135,33 @@ public class SearchFragment_Product extends Fragment {
             @Override
             public void onFailure(Call<ArrayList<DataResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
             }
         });
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                visibleItemCount = mLayoutManager.getChildCount();
-                totalItemCount = mLayoutManager.getItemCount();
-                pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
-
-                if(dy>0){
-                    if(isLoading){
-                        if(totalItemCount>previous_total){
-                            isLoading = false;
-                            previous_total = totalItemCount;
-                        }
-                    }
-                    if(!isLoading && (totalItemCount-visibleItemCount) <= (pastVisibleItems + view_threshold)){
-                        page_number++;
-                        performPagination(search_word);
-                        isLoading = true;
-                    }
-                }
-            }
-        });
+//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                visibleItemCount = mLayoutManager.getChildCount();
+//                totalItemCount = mLayoutManager.getItemCount();
+//                pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
+//
+//                if(dy>0){
+//                    if(isLoading){
+//                        if(totalItemCount>previous_total){
+//                            isLoading = false;
+//                            previous_total = totalItemCount;
+//                        }
+//                    }
+//                    if(!isLoading && (totalItemCount-visibleItemCount) <= (pastVisibleItems + view_threshold)){
+//                        page_number++;
+//                        performPagination(search_word);
+//                        isLoading = true;
+//                    }
+//                }
+//            }
+//        });
         return view;
     }
 
@@ -196,32 +196,33 @@ public class SearchFragment_Product extends Fragment {
         startActivity(i);
     }
 
-    private void performPagination(String search_word){
-        progressBar.setVisibility(View.VISIBLE);
-        Call<ArrayList<DataResponse>> call = restApiInterface.searchProductName(page_number, item_count, user_id, search_word);
-        call.enqueue(new Callback<ArrayList<DataResponse>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<DataResponse>> call, @NonNull Response<ArrayList<DataResponse>> response) {
-
-                if(response.body().get(0).getStatus().equals("ok")){
-                    products = response.body().get(1).getItems();
-                    mAdapter.addProduct(products);
-                    mAdapter.setOnItemClickListener(new ProductsAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemCLick(int position) {
-                            changeActivity(position, products);
-                        }
-                    });
-                }
-                else{
-                    //Toast.makeText(ReadActivity.this, "No more Data", Toast.LENGTH_SHORT).show();
-                }
-                progressBar.setVisibility(View.GONE);
-            }
-            @Override
-            public void onFailure(Call<ArrayList<DataResponse>> call, Throwable t) {
-                Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void performPagination(String search_word){
+//        progressBar.setVisibility(View.VISIBLE);
+//        Call<ArrayList<DataResponse>> call = restApiInterface.searchProductName(page_number, item_count, user_id, search_word);
+//        call.enqueue(new Callback<ArrayList<DataResponse>>() {
+//            @Override
+//            public void onResponse(@NonNull Call<ArrayList<DataResponse>> call, @NonNull Response<ArrayList<DataResponse>> response) {
+//
+//                if(response.body().get(0).getStatus().equals("ok")){
+//                    products = response.body().get(1).getItems();
+//                    mAdapter.addProduct(products);
+//                    mAdapter.setOnItemClickListener(new ProductsAdapter.OnItemClickListener() {
+//                        @Override
+//                        public void onItemCLick(int position) {
+//                            changeActivity(position, products);
+//                        }
+//                    });
+//                }
+//                else{
+//                    //Toast.makeText(ReadActivity.this, "No more Data", Toast.LENGTH_SHORT).show();
+//                }
+//                progressBar.setVisibility(View.GONE);
+//            }
+//            @Override
+//            public void onFailure(Call<ArrayList<DataResponse>> call, Throwable t) {
+//                Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
+//            }
+//        });
+//    }
 }
