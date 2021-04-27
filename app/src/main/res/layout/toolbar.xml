@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
-    android:background="#0055FF"
+    android:background="@color/customBlue"
     android:id="@+id/toolbar"
     app:title="Recycle"
     app:titleMarginStart="20dp" />

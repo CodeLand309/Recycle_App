@@ -115,20 +115,20 @@ public class EditProduct extends AppCompatActivity {
                         public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                             if (!response.isSuccessful()) {
                                 Result = "Code: " + response.code();
-                                Toast.makeText(EditProduct.this, Result, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProduct.this, "There was some Error", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             JsonObject jsonObject = response.body().getAsJsonObject();
                             String content = jsonObject.get("status").getAsString();
-                            Toast.makeText(EditProduct.this, content, Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(EditProduct.this, MainActivity.class);
                             startActivity(i);
+                            finish();
                         }
 
                         @Override
                         public void onFailure(Call<JsonElement> call, Throwable t) {
                             Result = t.getMessage();
-                            Toast.makeText(EditProduct.this, Result, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditProduct.this, "Could Not Update Details", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -175,10 +175,6 @@ public class EditProduct extends AppCompatActivity {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,100, byteArrayOutputStream);
         byte[] imgByte = byteArrayOutputStream.toByteArray();
-
-//                byte[] imageInByte = stream.toByteArray();
-//                long lengthbmp = imageInByte.length;
-
         return Base64.encodeToString(imgByte, Base64.DEFAULT);
     }
 }

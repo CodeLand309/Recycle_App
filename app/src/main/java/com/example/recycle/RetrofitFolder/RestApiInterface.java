@@ -23,11 +23,14 @@ public interface RestApiInterface {
     @GET("/getProductData")
     Call<ArrayList<DataResponse>> getProductData(@Query("page_number") int page, @Query("item_count") int items, @Query("id") int id);
 
+    @GET("/getProductDataNoID")
+    Call<ArrayList<DataResponse>> getProductDataNoID(@Query("page_number") int page, @Query("item_count") int items);
+
     @GET("/getCentreData")
     Call<ArrayList<CentreListResponse>> getCentreData(@Query("page_number") int page, @Query("item_count") int items);
 
     @GET("/getHistory")
-    Call<ArrayList<HistoryResponse>> getHistory(@Query("page_number") int page, @Query("item_count") int items, @Query("id") int id);
+    Call<ArrayList<HistoryResponse>> getHistory(@Query("id") int id);
 
     @GET("/getUserData")
     Call<User> getUserData(@Query("id") int id);
@@ -36,10 +39,10 @@ public interface RestApiInterface {
     Call<ArrayList<DataResponse>> getUserProducts(@Query("page_number") int page, @Query("item_count") int items, @Query("id") int id);
 
     @GET("/searchProductName")
-    Call<ArrayList<DataResponse>> searchProductName(@Query("page_number") int page, @Query("item_count") int items, @Query("id") int id, @Query("search_word") String name);
+    Call<ArrayList<DataResponse>> searchProductName(@Query("id") int id, @Query("search_word") String name);
 
     @GET("/searchCentreName")
-    Call<ArrayList<CentreListResponse>> searchCentreName(@Query("page_number") int page, @Query("item_count") int items, @Query("search_word") String name);
+    Call<ArrayList<CentreListResponse>> searchCentreName(@Query("search_word") String name);
 
     @FormUrlEncoded
     @POST("/registerUser")
@@ -71,21 +74,4 @@ public interface RestApiInterface {
 
     @DELETE("/deleteProduct")
     Call<JsonElement> deleteProduct(@Query("product_id") int id, @Query("name") String name);
-
-
-
-//    @FormUrlEncoded
-//    @POST("/post")
-//    Call<Student> postData(@Field("roll") int roll, @Field("name") String name, @Field("image") String image);
-//
-//    @FormUrlEncoded
-//    @PUT("/put")
-//    Call<Student> putData(@Field("id") int id, @Field("roll") int roll, @Field("name") String name, @Field("image") String image);
-//
-//    @FormUrlEncoded
-//    @PATCH("patch")
-//    Call<Student> patchData(@Field("roll") int roll, @Field("value") String value, @Field("key") int key);
-//
-//    @DELETE("delete")
-//    Call<void> deleteUser(@Query("id") int id);
 }

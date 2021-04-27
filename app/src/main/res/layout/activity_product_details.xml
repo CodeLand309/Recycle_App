@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00B6FF"
+    android:background="@color/customSkyBlue"
     android:fillViewport="true"
     android:orientation="vertical"
     tools:context=".SubActivity.ProductDetails">
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="clip_vertical"
-        android:background="#00B6FF">
+        android:background="@color/customSkyBlue">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,7 @@
             android:layout_marginTop="36dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="46dp"
-            android:background="#00B6FF"
+            android:background="@color/customSkyBlue"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.3"
@@ -74,14 +74,14 @@
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:text="@string/ProductNameLabel"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/customWhite"
                     android:textSize="20sp" />
 
                 <View
                     android:id="@+id/divider"
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF" />
+                    android:background="@color/customWhite" />
 
                 <TextView
                     android:id="@+id/product_name"
@@ -90,7 +90,7 @@
                     android:text="@string/ProductNameValue"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/customWhite"
                     android:textSize="20sp" />
             </TableRow>
 
@@ -106,14 +106,14 @@
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:text="@string/PriceLabel"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/customWhite"
                     android:textSize="20sp" />
 
                 <View
                     android:id="@+id/divider2"
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF" />
+                    android:background="@color/customWhite" />
 
                 <TextView
                     android:id="@+id/price"
@@ -122,7 +122,7 @@
                     android:autoSizeTextType="uniform"
                     android:text="@string/ProductNameValue"
                     android:gravity="center"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/customWhite"
                     android:textSize="20sp" />
             </TableRow>
 
@@ -139,14 +139,14 @@
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:text="@string/UploadDateLabel"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/customWhite"
                     android:textSize="20sp" />
 
                 <View
                     android:id="@+id/divider3"
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF" />
+                    android:background="@color/customWhite" />
 
                 <TextView
                     android:id="@+id/date"
@@ -155,7 +155,7 @@
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:text="@string/UploadDateValue"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/customWhite"
                     android:textSize="20sp" />
             </TableRow>
 
@@ -171,14 +171,14 @@
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:text="@string/YearsOfUsageLabel"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/customWhite"
                     android:textSize="20sp" />
 
                 <View
                     android:id="@+id/divider5"
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF" />
+                    android:background="@color/customWhite" />
 
                 <TextView
                     android:id="@+id/years"
@@ -187,7 +187,7 @@
                     android:autoSizeTextType="uniform"
                     android:text="@string/YearsOfUsageValue"
                     android:gravity="center"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/customWhite"
                     android:textSize="20sp" />
             </TableRow>
 
@@ -204,14 +204,14 @@
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:text="@string/SellerLabel"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/customWhite"
                     android:textSize="20sp" />
 
                 <View
                     android:id="@+id/divider4"
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF" />
+                    android:background="@color/customWhite" />
 
                 <TextView
                     android:id="@+id/seller"
@@ -220,7 +220,7 @@
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:text="@string/SellerValue"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/customWhite"
                     android:textSize="20sp" />
             </TableRow>
 
@@ -242,12 +242,12 @@
             app:layout_constraintWidth_percent="0.7">
 
             <Button
-                android:id="@+id/buy"
+                android:id="@+id/chat"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="#0910A1"
-                android:text="@string/BuyButton"
-                android:textColor="#FFFFFF"
+                android:background="@color/customDarkBlue"
+                android:text="@string/ChatButton"
+                android:textColor="@color/customWhite"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/space"
                 app:layout_constraintStart_toStartOf="parent"
@@ -260,7 +260,7 @@
                 android:layout_marginEnd="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/contact"
-                app:layout_constraintStart_toEndOf="@+id/buy"
+                app:layout_constraintStart_toEndOf="@+id/chat"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintWidth_percent="0.08" />
@@ -269,9 +269,9 @@
                 android:id="@+id/contact"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="#0910A1"
+                android:background="@color/customDarkBlue"
                 android:text="@string/ContactButton"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/customWhite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.937"
                 app:layout_constraintStart_toEndOf="@+id/space"
@@ -286,10 +286,10 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="67dp"
-            android:background="#FFFFFF"
+            android:background="@color/customWhite"
             android:gravity="center"
             android:paddingVertical="3dp"
-            android:textColor="#000000"
+            android:textColor="@color/customBlack"
             android:text="@string/ProductDescriptionValue"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -30,11 +30,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-///**
-// * A simple {@link Fragment} subclass.
-// * Use the {@link SearchFragment_DisposeCentre#newInstance} factory method to
-// * create an instance of this fragment.
-// */
 public class SearchFragment_DisposeCentre extends Fragment {
 
     private RestApiInterface restApiInterface;
@@ -45,38 +40,14 @@ public class SearchFragment_DisposeCentre extends Fragment {
     private ProgressBar progressBar;
     private ArrayList<DisposeCentre> centres;
 
-    private int page_number = 1;
-    private int item_count = 8;
-
-    //Variables for Pagination
-    private boolean isLoading = true;
     private String image, centre_name, address, phone;
     private int centre_id;
-    private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total=0;
-    private int view_threshold= 10;
 
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
 
     public SearchFragment_DisposeCentre() {
         // Required empty public constructor
     }
 
-//    /**
-//     * Use this factory method to create a new instance of
-//     * this fragment using the provided parameters.
-//     *
-//     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
-//     * @return A new instance of fragment SearchFragment_DisposeCentre.
-//     */
-//    // TODO: Rename and change types and number of parameters
     public static SearchFragment_DisposeCentre newInstance() {
         SearchFragment_DisposeCentre fragment = new SearchFragment_DisposeCentre();
         return fragment;
@@ -85,10 +56,6 @@ public class SearchFragment_DisposeCentre extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     @Override
@@ -111,22 +78,26 @@ public class SearchFragment_DisposeCentre extends Fragment {
         restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
         progressBar.setVisibility(View.VISIBLE);
-        Call<ArrayList<CentreListResponse>> call = restApiInterface.searchCentreName(page_number, item_count, search_word);
+        Call<ArrayList<CentreListResponse>> call = restApiInterface.searchCentreName(search_word);
         call.enqueue(new Callback<ArrayList<CentreListResponse>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<CentreListResponse>> call, @NonNull Response<ArrayList<CentreListResponse>> response) {
-                centres = response.body().get(1).getCentres();
-                mAdapter = new DisposeAdapter(centres, getContext());
-                Log.d("TAG", "Reached Here3");
-                mRecyclerView.setAdapter(mAdapter);
-                Log.d("Tag", String.valueOf(response.body()));
-                progressBar.setVisibility(View.GONE);
-                mAdapter.setOnItemClickListener(new DisposeAdapter.OnCentreClickListener() {
-                    @Override
-                    public void onCentreCLick(int position) {
-                        changeActivity(position, centres);
-                    }
-                });
+                if(response.body().get(0).getStatus().equals("found")){
+                    centres = response.body().get(1).getCentres();
+                    mAdapter = new DisposeAdapter(centres, getContext());
+                    Log.d("TAG", "Reached Here3");
+                    mRecyclerView.setAdapter(mAdapter);
+                    Log.d("Tag", String.valueOf(response.body()));
+                    progressBar.setVisibility(View.GONE);
+                    mAdapter.setOnItemClickListener(new DisposeAdapter.OnCentreClickListener() {
+                        @Override
+                        public void onCentreCLick(int position) {
+                            changeActivity(position, centres);
+                        }
+                    });
+                }else{
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NotFoundFragment()).commit();
+                }
             }
             @Override
             public void onFailure(Call<ArrayList<CentreListResponse>> call, Throwable t) {
@@ -134,31 +105,6 @@ public class SearchFragment_DisposeCentre extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
             }
         });
-
-//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                visibleItemCount = mLayoutManager.getChildCount();
-//                totalItemCount = mLayoutManager.getItemCount();
-//                pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
-//
-//                if(dy>0){
-//                    if(isLoading){
-//                        if(totalItemCount>previous_total){
-//                            isLoading = false;
-//                            previous_total = totalItemCount;
-//                        }
-//                    }
-//                    if(!isLoading && (totalItemCount-visibleItemCount) <= (pastVisibleItems + view_threshold)){
-//                        page_number++;
-//                        performPagination(search_word);
-//                        isLoading = true;
-//                    }
-//                }
-//            }
-//        });
-
         return view;
     }
 
@@ -184,34 +130,4 @@ public class SearchFragment_DisposeCentre extends Fragment {
         i.putExtra("Centre", jsonData.toString());
         startActivity(i);
     }
-
-//    private void performPagination(String search_word){
-//        progressBar.setVisibility(View.VISIBLE);
-//        Call<ArrayList<CentreListResponse>> call = restApiInterface.searchCentreName(page_number, item_count, search_word);
-//        call.enqueue(new Callback<ArrayList<CentreListResponse>>() {
-//            @Override
-//            public void onResponse(@NonNull Call<ArrayList<CentreListResponse>> call, @NonNull Response<ArrayList<CentreListResponse>> response) {
-//
-//                if(response.body().get(0).getStatus().equals("ok")){
-//                    centres = response.body().get(1).getCentres();
-//                    mAdapter.addCentre(centres);
-//                    mAdapter.setOnItemClickListener(new DisposeAdapter.OnCentreClickListener() {
-//                        @Override
-//                        public void onCentreCLick(int position) {
-//                            changeActivity(position, centres);
-//                        }
-//                    });
-//                }
-//                else{
-//                    //Toast.makeText(ReadActivity.this, "No more Data", Toast.LENGTH_SHORT).show();
-//                }
-//                progressBar.setVisibility(View.GONE);
-//            }
-//            @Override
-//            public void onFailure(Call<ArrayList<CentreListResponse>> call, Throwable t) {
-//                Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
-//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
-//            }
-//        });
-//    }
 }

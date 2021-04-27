@@ -1,5 +1,6 @@
 package com.example.recycle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,12 +24,17 @@ import com.example.recycle.MainUI.MainActivity;
 import com.example.recycle.MainUI.User;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -44,6 +50,10 @@ public class RegisterActivity extends AppCompatActivity {
     private CircleImageView profile;
     private static final int PICK_IMAGE = 777;
     private FirebaseUser user;
+
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+
     private int Age=0, key=0, flag=0;
     private String Name, Phone, Address, Gender, Profile;
     private SharedPreferences sp;
@@ -112,7 +122,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(key!=0) {
-                    Phone = getIntent().getStringExtra("Phone Number");
+                    SharedPreferences sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
+                    Phone = sp.getString("Phone Number","");
 //                    Phone = "9895054781";
                     Name = name.getText().toString();
                     Address = address.getText().toString();
@@ -133,7 +144,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     return;
                                 }
                                 User user = response.body();
-                                sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sp.edit();
                                 editor.putString("Name", user.getUserName());
                                 editor.putInt("User ID", user.getUserID());
@@ -144,10 +154,32 @@ public class RegisterActivity extends AppCompatActivity {
                                 editor.putInt("Age", user.getAge());
                                 editor.putInt("Log in Status", 2);
                                 editor.apply();
-                                Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(RegisterActivity.this, MainActivity.class);
-                                startActivity(i);
-                                finish();
+
+                                HashMap<String,Object> chatUser =new HashMap<>();
+                                chatUser.put("Name", Name);
+                                chatUser.put("Phone", Phone);
+                                chatUser.put("Image", user.getImage());
+                                chatUser.put("ID", user.getUserID());
+                                database = FirebaseDatabase.getInstance();
+                                myRef = database.getReference("Users").child(Phone);
+
+                                myRef.setValue(chatUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                            Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                                            i.putExtra("Fragment", 1);
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                    }
+                                });
+
+//                                Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+//                                Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+//                                startActivity(i);
+//                                finish();
                             }
 
                             @Override

@@ -7,7 +7,8 @@
         <Preference
             android:icon="@drawable/ic_round_person_24"
             android:key="change_pro_key"
-            android:title="@string/ChangeProfilePreference">
+            android:title="@string/ChangeProfilePreference"
+            android:summary="@string/ChangeProfilePreference">
         </Preference>
 
         <Preference
@@ -23,29 +24,29 @@
         <Preference
             android:icon="@drawable/ic_round_history_24"
             android:key="history_key"
-            android:title="@string/HistoryPreference">
-        </Preference>
+            android:title="@string/HistoryPreference"/>
         <Preference
             android:icon="@drawable/ic_round_contact_support_24"
             android:key="help_key"
-            android:title="@string/HelpAndSupportPreference">
-            <intent
-                android:id="@+id/help_intent"
-                android:action="android.intent.action.VIEW"
-                android:data="https://www.google.com/" />
-        </Preference>
+            android:title="@string/HelpAndSupportPreference"/>
         <Preference
             android:icon="@drawable/ic_round_report_problem_24"
             android:key="report_key"
             android:title="@string/ReportIssuePreference" />
-        <!--    <Preference>-->
+
         <Preference
             android:icon="@drawable/ic_round_info_24"
             android:key="about_key"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="@string/AboutPreference" />
-        <!--    </Preference>-->
+            android:title="@string/AboutPreference" >
+
+            <intent
+                android:id="@+id/about_intent"
+                android:targetClass="com.example.recycle.SubActivity.AboutActivity"
+                android:targetPackage="com.example.recycle" />
+        </Preference>
+
         <Preference
             android:icon="@drawable/ic_round_delete_forever_24"
             android:key="delete_key"

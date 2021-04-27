@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#0055FF"
+    android:background="@color/customBlue"
     tools:context=".OTP_Activity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,10 +21,10 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="138dp"
             android:autoSizeTextType="uniform"
-            android:background="#0055FF"
-            android:outlineSpotShadowColor="#0055FF"
+            android:background="@color/customBlue"
+            android:outlineSpotShadowColor="@color/customBlue"
             android:text="@string/ResendButton"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/customWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/verify"
             app:layout_constraintHeight_percent="0.03"
@@ -38,7 +38,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:autoSizeTextType="uniform"
-            android:background="#FFAAAA"
+            android:background="@color/customStrongSkinColour"
             android:paddingVertical="12dp"
             android:text="@string/VerifyButton"
             app:layout_constraintBottom_toTopOf="@+id/resend"
@@ -85,7 +85,7 @@
                 android:layout_weight="4"
                 android:autoSizeTextType="uniform"
                 android:text="@string/WaitingTextView"
-                android:textColor="#CCCCCC"
+                android:textColor="@color/customLightGrey"
                 android:visibility="invisible" />
 
             <Space
@@ -99,7 +99,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2.5"
                 android:autoSizeTextType="uniform"
-                android:textColor="#CCCCCC"
+                android:textColor="@color/customLightGrey"
                 android:visibility="invisible" />
 
         </LinearLayout>
@@ -122,12 +122,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/customWhite"
                 android:importantForAutofill="no"
                 android:gravity="center_horizontal"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/customWhite" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -139,12 +139,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/customWhite"
                 android:importantForAutofill="no"
                 android:gravity="center_horizontal"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/customWhite" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -156,12 +156,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/customWhite"
                 android:importantForAutofill="no"
                 android:gravity="center_horizontal"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/customWhite"
                 app:layout_constraintStart_toEndOf="@+id/text2" />
 
             <Space
@@ -174,12 +174,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/customWhite"
                 android:importantForAutofill="no"
                 android:gravity="center_horizontal"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/customWhite" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -191,12 +191,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/customWhite"
                 android:importantForAutofill="no"
                 android:gravity="center_horizontal"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/customWhite" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -208,12 +208,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/customWhite"
                 android:importantForAutofill="no"
                 android:gravity="center_horizontal"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/customWhite" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

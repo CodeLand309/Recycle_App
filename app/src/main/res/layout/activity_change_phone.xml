@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#0055FF"
+    android:background="@color/customBlue"
     tools:context=".SignUPActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +36,7 @@
                 android:layout_weight="4"
                 android:autoSizeTextType="uniform"
                 android:text="@string/WaitingTextView"
-                android:textColor="#CCCCCC"
+                android:textColor="@color/customLightGrey"
                 android:visibility="invisible" />
 
             <Space
@@ -50,7 +50,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2.5"
                 android:autoSizeTextType="uniform"
-                android:textColor="#CCCCCC"
+                android:textColor="@color/customLightGrey"
                 android:visibility="invisible" />
         </LinearLayout>
 
@@ -64,7 +64,7 @@
             android:layout_marginBottom="30dp"
             android:autoSizeTextType="uniform"
             android:autofillHints="Phone Number"
-            android:background="#FFFFFF"
+            android:background="@color/customWhite"
             android:gravity="center_vertical"
             android:hint="@string/NewPhoneNumberEditText"
             android:inputType="phone"
@@ -98,7 +98,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:autoSizeTextType="uniform"
-                android:background="#FFAAAA"
+                android:background="@color/customStrongSkinColour"
                 android:paddingVertical="10dp"
                 android:text="@string/SendOTPButton" />
 
@@ -113,7 +113,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:autoSizeTextType="uniform"
-                android:background="#FFAAAA"
+                android:background="@color/customStrongSkinColour"
                 android:paddingVertical="10dp"
                 android:text="@string/VerifyAgainButton" />
         </LinearLayout>
@@ -136,12 +136,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/customWhite"
                 android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/customWhite" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -153,12 +153,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/customWhite"
                 android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/customWhite" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -170,12 +170,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/customWhite"
                 android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/customWhite"
                 app:layout_constraintStart_toEndOf="@+id/text2" />
 
             <Space
@@ -188,12 +188,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/customWhite"
                 android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/customWhite" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -205,12 +205,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/customWhite"
                 android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/customWhite" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -222,12 +222,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/customWhite"
                 android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/customWhite" />
         </LinearLayout>
 
         <Button
@@ -238,10 +238,10 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="180dp"
             android:autoSizeTextType="uniform"
-            android:background="#0055FF"
-            android:outlineSpotShadowColor="#0055FF"
+            android:background="@color/customBlue"
+            android:outlineSpotShadowColor="@color/customBlue"
             android:text="@string/ResendAgainButton"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/customWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/button_layout"
             app:layout_constraintHeight_percent="0.03"

@@ -14,10 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SubActivity.ChangePhoneActivity"></activity>
+        <activity android:name=".SubActivity.AboutActivity"></activity>
+        <activity android:name=".ServerErrorActivity" />
+        <activity android:name=".SubActivity.EmptyActivity" />
+        <activity
+            android:name=".MainUI.ChatActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.recycle.MainUI.MainActivity" />
+        </activity>
+        <activity android:name=".SubActivity.ChangePhoneActivity" />
         <activity android:name=".SubActivity.MyProductDetails" />
         <activity android:name=".SubActivity.ContactActivity" />
-        <activity android:name=".SubActivity.PurchaseActivity" />
         <activity android:name=".SubActivity.ProductDetails" />
         <activity
             android:name=".LaunchActivity"
@@ -28,7 +37,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SubActivity.CentreList" />
         <activity android:name=".SubActivity.UploadProduct" />
         <activity android:name=".SubActivity.EditProduct" />
         <activity android:name=".SubActivity.DisposeCenterDetails" />
@@ -44,6 +52,23 @@
         <activity
             android:name=".SignUPActivity"
             android:screenOrientation="portrait" />
+
+        <service
+            android:name=".MainUI.Notifications.MyFirebaseIdService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".MainUI.Notifications.MyFirebaseMessaging"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -23,6 +23,7 @@ import com.example.recycle.MainUI.MainActivity;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.ServerErrorActivity;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
@@ -110,12 +111,16 @@ public class ChangeProfile extends AppCompatActivity {
                             editor.putInt("Age", age);
                             editor.putString("Address", address);
                             editor.commit();
+                            Intent i = new Intent(ChangeProfile.this, MainActivity.class);
+                            startActivity(i);
+                            finish();
                         }
 
                         @Override
                         public void onFailure(Call<JsonElement> call, Throwable t) {
                             Result = t.getMessage();
-                            Toast.makeText(ChangeProfile.this, Result, Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(ChangeProfile.this, ServerErrorActivity.class);
+                            startActivity(i);
                         }
                     });
                 }
@@ -161,10 +166,6 @@ public class ChangeProfile extends AppCompatActivity {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,100, byteArrayOutputStream);
         byte[] imgByte = byteArrayOutputStream.toByteArray();
-
-//                byte[] imageInByte = stream.toByteArray();
-//                long lengthbmp = imageInByte.length;
-
         return Base64.encodeToString(imgByte, Base64.DEFAULT);
     }
 }

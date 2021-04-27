@@ -14,7 +14,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#00B6FF"
+            android:background="@color/customSkyBlue"
             android:layout_alignParentTop="true"
             android:layout_above="@+id/progressBar"
             android:padding="5dp"

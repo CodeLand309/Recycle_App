@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="5dp"
     android:layout_marginHorizontal="5dp"
+    android:backgroundTint="@color/customSkinWhite"
     app:cardCornerRadius="4dp">
 
     <LinearLayout
@@ -21,7 +22,7 @@
             android:layout_gravity="start"
             android:layout_marginVertical="7dp"
             android:text="@string/DisposeCentreName"
-            android:textColor="@android:color/black"
+            android:textColor="@color/customBlack"
             android:textSize="20sp"
             android:textStyle="bold" />
 

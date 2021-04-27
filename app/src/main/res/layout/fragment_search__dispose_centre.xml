@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/progressBar"
         android:layout_alignParentTop="true"
-        android:background="#00B6FF"
+        android:background="@color/customSkyBlue"
         android:padding="5dp"
         android:scrollbars="vertical">
 

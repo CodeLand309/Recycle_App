@@ -2,6 +2,7 @@ package com.example.recycle.SubActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.example.recycle.MainUI.MainActivity;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.ServerErrorActivity;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
@@ -82,9 +84,6 @@ public class MyProductDetails extends AppCompatActivity {
         Mark_Sold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent purchase = new Intent(ProductDetails.this, PurchaseActivity.class);
-//                purchase.putExtra("Product ID", product_id);
-//                startActivity(purchase);
 
                 restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
@@ -94,13 +93,12 @@ public class MyProductDetails extends AppCompatActivity {
                     public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                         if (!response.isSuccessful()) {
                             Result = "Code: " + response.code();
-                            Toast.makeText(MyProductDetails.this, Result, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MyProductDetails.this, "There was some Error", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         JsonObject jsonObject = response.body().getAsJsonObject();
                         String content = jsonObject.get("Status").getAsString();
                         String status = jsonObject.get("Product Status").getAsString();
-                        Toast.makeText(MyProductDetails.this, content, Toast.LENGTH_SHORT).show();
                         if(status.equals("In Transaction"))
                             Status.setText("In Transaction");
                         else if(status.equals("Unsold"))
@@ -110,7 +108,8 @@ public class MyProductDetails extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<JsonElement> call, Throwable t) {
                         Result = t.getMessage();
-                        Toast.makeText(MyProductDetails.this, Result, Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(MyProductDetails.this, ServerErrorActivity.class);
+                        startActivity(i);
                     }
                 });
             }
@@ -118,9 +117,6 @@ public class MyProductDetails extends AppCompatActivity {
         Mark_Received.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent contact = new Intent(ProductDetails.this, ContactActivity.class);
-//                contact.putExtra("User ID", user_id);
-//                startActivity(contact);
 
                 restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
@@ -135,7 +131,6 @@ public class MyProductDetails extends AppCompatActivity {
                         }
                         JsonObject jsonObject = response.body().getAsJsonObject();
                         String content = jsonObject.get("Status").getAsString();
-                        Toast.makeText(MyProductDetails.this, content, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

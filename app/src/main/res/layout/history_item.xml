@@ -5,14 +5,14 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="5dp"
     android:layout_marginVertical="5dp"
-    app:cardBackgroundColor="#2C2C2C"
+    app:cardBackgroundColor="@color/yellowishWhite"
     app:cardCornerRadius="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="4dp"
-        android:background="#2C2C2C">
+        android:background="@color/yellowishWhite">
 
         <TextView
             android:id="@+id/textView"
@@ -22,7 +22,7 @@
             android:layout_marginVertical="8dp"
             android:layout_marginStart="2dp"
             android:text="@string/MyProductName"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/customBlack"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -34,7 +34,7 @@
             android:layout_marginVertical="12dp"
             android:layout_marginEnd="2dp"
             android:text="@string/ProductDate"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/customBlack"
             android:textSize="20sp" />
     </RelativeLayout>
 

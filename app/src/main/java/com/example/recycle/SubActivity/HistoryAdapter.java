@@ -75,11 +75,4 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
             return mHistoryList.size();
         return 0;
     }
-
-    public void addProduct(List<HistoryItem> products){
-        for(HistoryItem item : products){
-            mHistoryList.add(item);
-        }
-        notifyDataSetChanged();
-    }
 }

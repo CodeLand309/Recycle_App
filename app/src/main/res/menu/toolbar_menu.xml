@@ -8,10 +8,10 @@
         android:title="search"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
-    <item
-        android:id="@+id/notification"
-        android:icon="@drawable/ic_round_notifications_24"
-        android:title="notification"
-        app:showAsAction="always"/>
+<!--    <item-->
+<!--        android:id="@+id/notification"-->
+<!--        android:icon="@drawable/ic_round_notifications_24"-->
+<!--        android:title="notification"-->
+<!--        app:showAsAction="always"/>-->
 
 </menu>

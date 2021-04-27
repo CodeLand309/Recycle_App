@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
 
     private String user_name, product_name, description, image, date;
     private int page_number = 1, user_id, product_id, price, year;
-    private int item_count = 6;
+    private int item_count = 8;
 
     private SharedPreferences sp;
     //Variables for Pagination
@@ -82,7 +82,13 @@ public class HomeFragment extends Fragment {
         restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
         progressBar.setVisibility(View.VISIBLE);
-        Call<ArrayList<DataResponse>> call = restApiInterface.getProductData(page_number, item_count, user_id);
+        Call<ArrayList<DataResponse>> call;
+        if(sp.contains("User ID") && sp.getInt("Log in Status",0) == 2) {
+            call = restApiInterface.getProductData(page_number, item_count, user_id);
+        }
+        else{
+            call = restApiInterface.getProductDataNoID(page_number, item_count);
+        }
         call.enqueue(new Callback<ArrayList<DataResponse>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<DataResponse>> call, @NonNull Response<ArrayList<DataResponse>> response) {
@@ -129,34 +135,10 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
-//        ArrayList<ExampleItem> exampleList = new ArrayList<>();
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_home_24, "Line 1", "Line 2"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_chat_24, "Line 3", "Line 4"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_add_circle_24, "Line 5", "Line 6"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_dispose_24, "Line 7", "Line 8"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_settings_24, "Line 9", "Line 10"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_home_24, "Line 11", "Line 12"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_chat_24, "Line 13", "Line 14"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_add_circle_24, "Line 15", "Line 16"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_dispose_24, "Line 17", "Line 18"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_settings_24, "Line 19", "Line 20"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_home_24, "Line 21", "Line 22"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_chat_24, "Line 23", "Line 24"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_add_circle_24, "Line 25", "Line 26"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_dispose_24, "Line 27", "Line 28"));
-//        exampleList.add(new ExampleItem(R.drawable.ic_round_settings_24, "Line 29", "Line 30"));
-
-//        mRecyclerView.setHasFixedSize(true);
-//        mLayoutManager = new GridLayoutManager(getContext(), 2);
-//        mAdapter = new ProductsAdapter(exampleList);
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//        mRecyclerView.setAdapter(mAdapter);
         return view;
     }
 
     private void changeActivity(int position, ArrayList<ProductsItem> products) {
-        Toast.makeText(getContext(), "Clicked on a Item", Toast.LENGTH_SHORT).show();
         image = products.get(position).getImage();
         product_name = products.get(position).getProductName();
         product_id = products.get(position).getProductID();
@@ -187,12 +169,17 @@ public class HomeFragment extends Fragment {
     }
 
     private void performPagination(){
+        sp = getContext().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
         progressBar.setVisibility(View.VISIBLE);
-        Call<ArrayList<DataResponse>> call = restApiInterface.getProductData(page_number, item_count, user_id);
+        Call<ArrayList<DataResponse>> call;
+        if(sp.contains("User ID") && sp.getInt("Log in Status",0) == 2) {
+            call = restApiInterface.getProductData(page_number, item_count, user_id);
+        }else{
+            call = restApiInterface.getProductDataNoID(page_number, item_count);
+        }
         call.enqueue(new Callback<ArrayList<DataResponse>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<DataResponse>> call, @NonNull Response<ArrayList<DataResponse>> response) {
-
                 if(response.body().get(0).getStatus().equals("ok")){
                     products = response.body().get(1).getItems();
                     mAdapter.addProduct(products);
@@ -210,7 +197,7 @@ public class HomeFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<ArrayList<DataResponse>> call, Throwable t) {
-                Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
             }
         });
     }

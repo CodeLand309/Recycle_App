@@ -36,12 +36,6 @@ public class DisposeCenterDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dispose_centre_details);
 
-//        list = findViewById(R.id.list);
-//        Intent i = getIntent();
-//        String temp[] = i.getStringArrayExtra("listViewClickValues");
-//        ArrayAdapter<String> adapter2= new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, temp);
-//        list.setAdapter(adapter2);
-
         CentreImage = findViewById(R.id.centre_image);
         Call = findViewById(R.id.call);
         CentreName = findViewById(R.id.centre_name);

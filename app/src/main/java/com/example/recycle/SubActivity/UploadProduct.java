@@ -89,22 +89,23 @@ public class UploadProduct extends AppCompatActivity {
                     call.enqueue(new Callback<JsonElement>() {
                         @Override
                         public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-//                            if (!response.isSuccessful()) {
-//                                Result = "Code: " + response.code();
-//                                Toast.makeText(UploadProduct.this, Result, Toast.LENGTH_SHORT).show();
-//                                return;
-//                            }
+                            if (!response.isSuccessful()) {
+                                Result = "Code: " + response.code();
+                                Toast.makeText(UploadProduct.this, "There was Some Error", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                             JsonObject jsonObject = response.body().getAsJsonObject();
                             String content = jsonObject.get("status").getAsString();
                             Toast.makeText(UploadProduct.this, content, Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(UploadProduct.this, MainActivity.class);
                             startActivity(i);
+                            finish();
                         }
 
                         @Override
                         public void onFailure(Call<JsonElement> call, Throwable t) {
                             Result = t.getMessage();
-                            Toast.makeText(UploadProduct.this, Result, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UploadProduct.this, "Could Not Upload Product", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -152,10 +153,6 @@ public class UploadProduct extends AppCompatActivity {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,100, byteArrayOutputStream);
         byte[] imgByte = byteArrayOutputStream.toByteArray();
-
-//                byte[] imageInByte = stream.toByteArray();
-//                long lengthbmp = imageInByte.length;
-
         return Base64.encodeToString(imgByte, Base64.DEFAULT);
     }
 }

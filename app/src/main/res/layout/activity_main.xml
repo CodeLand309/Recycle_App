@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#00B6FF"
+    android:backgroundTint="@color/customSkyBlue"
     tools:context=".MainUI.MainActivity">
 
     <include
@@ -23,9 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#002BB6"
+        android:background="@color/colorPrimaryDark"
         app:itemIconTint="@xml/icon_colours"
-        app:itemRippleColor="#FFFFFF"
+        app:itemRippleColor="@color/customWhite"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_navigation" />
 

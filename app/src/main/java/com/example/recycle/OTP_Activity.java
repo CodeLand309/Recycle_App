@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.PersistableBundle;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,18 +44,6 @@ public class OTP_Activity extends AppCompatActivity {
     private static long mTimeLeftInMillis = 120000;
     TextView countTime,wait;
 
-//    @Override
-//    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-//        super.onSaveInstanceState(outState, outPersistentState);
-//        outState.putString("phone", phone);
-//        outState.putString("verificationCode", verificationCode);
-//        outState.putString("otp", otp);
-//        outState.putLong("TimeLeft", mTimeLeftInMillis);
-//        outState.putInt("minutes", minutes);
-//        outState.putInt("seconds", seconds);
-//        outState.putString("timeLeftFormatted", timeLeftFormatted);
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,19 +59,122 @@ public class OTP_Activity extends AppCompatActivity {
         e5 = findViewById(R.id.text5);
         e6 = findViewById(R.id.text6);
 
-//        if(savedInstanceState!=null) {
-//            savedInstanceState.getString("phone");
-//            savedInstanceState.getString("verificationCode");
-//            savedInstanceState.getString("otp");
-//            savedInstanceState.getString("timeLeftFormatted");
-//            savedInstanceState.getLong("TimeLeft");
-//            savedInstanceState.getInt("minutes");
-//            savedInstanceState.getInt("seconds");
-//            String temp = savedInstanceState.getString("timeLeftFormatted");
-//            wait.setVisibility(View.VISIBLE);
-//            countTime.setVisibility(View.VISIBLE);
-//            countTime.setText(temp);
-//        }
+        e1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length() == 1)
+                    e2.requestFocus();
+            }
+        });
+
+        e2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length() == 1)
+                    e3.requestFocus();
+                else if(editable.toString().length() == 0)
+                    e1.requestFocus();
+            }
+        });
+
+        e3.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length() == 1)
+                    e4.requestFocus();
+                else if(editable.toString().length() == 0)
+                    e2.requestFocus();
+            }
+        });
+
+        e4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length() == 1)
+                    e5.requestFocus();
+                else if(editable.toString().length() == 0)
+                    e3.requestFocus();
+            }
+        });
+
+        e5.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length() == 1)
+                    e6.requestFocus();
+                else if(editable.toString().length() == 0)
+                    e4.requestFocus();
+            }
+        });
+
+        e6.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length() == 0)
+                    e5.requestFocus();
+            }
+        });
+
         Intent otp_intent = getIntent();
         phone = otp_intent.getStringExtra("Phone Number");
         StartFirebaseLogin();
@@ -90,16 +182,6 @@ public class OTP_Activity extends AppCompatActivity {
         resend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                /*PhoneAuthOptions options = PhoneAuthOptions.newBuilder(auth)
-                        .setPhoneNumber("+91"+phone)
-                        .setTimeout(60L, TimeUnit.SECONDS)
-                        .setActivity(OTP_Activity.this)
-                        .setCallbacks(mCallback)
-                        .build();
-                PhoneAuthProvider.verifyPhoneNumber(options);
-                */
-                //Toast.makeText(OTP_Activity.this, "hello", Toast.LENGTH_SHORT).show();
                 phone = "+91 " + phone;
                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
                         phone,                     // Phone number to verify
@@ -115,21 +197,13 @@ public class OTP_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 c1 = e1.getText().toString();
-//                if(c1.length()==1)
-//                    e2.requestFocus();
                 c2 = e2.getText().toString();
-//                if(c2.length()==1)
-//                    e3.requestFocus();
                 c3 = e3.getText().toString();
-//                if(c3.length()==1)
-//                    e4.requestFocus();
                 c4 = e4.getText().toString();
-//                if(c4.length()==1)
-//                    e5.requestFocus();
                 c5 = e5.getText().toString();
-//                if(c5.length()==1)
-//                    e6.requestFocus();
                 c6 = e6.getText().toString();
+                if(c1=="" || c2=="" || c3=="" || c4=="" || c5=="" || c6=="")
+                    Toast.makeText(OTP_Activity.this, "Enter All Fields", Toast.LENGTH_SHORT).show();
                 otp = c1+c2+c3+c4+c5+c6;
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCode, otp);
                 SigninWithPhone(credential);
@@ -228,7 +302,6 @@ public class OTP_Activity extends AppCompatActivity {
                                 editor.putInt("Log in Status", 1);
                                 editor.apply();
                                 FirebaseUser user = task.getResult().getUser();
-                                register.putExtra("Phone Number", phone);
                                 startActivity(register);
                                 finish();
                             }

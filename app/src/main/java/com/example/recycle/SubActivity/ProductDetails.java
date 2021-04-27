@@ -1,5 +1,6 @@
 package com.example.recycle.SubActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,21 +10,33 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.recycle.MainUI.ChatActivity;
+import com.example.recycle.MainUI.User;
 import com.example.recycle.R;
+import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.ServerErrorActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ProductDetails extends AppCompatActivity {
 
 
     private String Product, user_id, product_id, user_name, product_name, description, image, price, year, date, url = RestClient.BASE_URL + "product_image/";
-    Button Contact, Buy;
+    String name, phone;
+    Button Contact, Chat;
     TextView Description, ProductName, Price, Year, Seller, Date;
     ImageView ProductImage;
+    RestApiInterface restApiInterface;
+
     private JSONObject data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +44,7 @@ public class ProductDetails extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
         ProductImage = findViewById(R.id.product_image);
         Contact = findViewById(R.id.contact);
-        Buy = findViewById(R.id.buy);
+        Chat = findViewById(R.id.chat);
         ProductName = findViewById(R.id.product_name);
         Price = findViewById(R.id.price);
         Year = findViewById(R.id.years);
@@ -67,12 +80,29 @@ public class ProductDetails extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Buy.setOnClickListener(new View.OnClickListener() {
+        Chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent purchase = new Intent(ProductDetails.this, PurchaseActivity.class);
-                purchase.putExtra("Product ID", product_id);
-                startActivity(purchase);
+
+                restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
+
+                Call<User> call = restApiInterface.getUserData(Integer.parseInt(user_id));
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                        User user = response.body();
+                        name = user.getUserName();
+                        phone = user.getPhone();
+
+                        Intent purchase = new Intent(ProductDetails.this, ChatActivity.class);
+                        purchase.putExtra("Phone", phone);
+                        startActivity(purchase);
+                    }
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast.makeText(ProductDetails.this, "Cannot Access Server", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
         Contact.setOnClickListener(new View.OnClickListener() {

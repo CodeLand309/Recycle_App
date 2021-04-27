@@ -18,44 +18,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> /*implements Filterable*/ {
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
     private ArrayList<ProductsItem> mProductList;
     private Context mContext;
     public OnItemClickListener mListener;
     String url = RestClient.BASE_URL + "product_image/";
-//    private ArrayList<ProductsItem> productListFull;
-//
-//    @Override
-//    public Filter getFilter() {
-//        return productFilter;
-//    }
-//
-//    private Filter productFilter = new Filter() {
-//        @Override
-//        protected FilterResults performFiltering(CharSequence charSequence) {
-//            ArrayList<ProductsItem> filteredList = new ArrayList<>();
-//            if (charSequence == null || charSequence.length() == 0) {
-//                filteredList.addAll(productListFull);
-//            } else {
-//                String filterPattern = charSequence.toString().toLowerCase().trim();
-//                for (ProductsItem item : productListFull) {
-//                    if (item.getProductName().toLowerCase().contains(filterPattern)) {
-//                        filteredList.add(item);
-//                    }
-//                }
-//            }
-//            FilterResults results = new FilterResults();
-//            results.values = filteredList;
-//            return results;
-//        }
-//
-//        @Override
-//        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-//            mProductList.clear();
-//            mProductList.addAll((ArrayList) filterResults.values);
-//            notifyDataSetChanged();
-//        }
-//    };
 
     public interface OnItemClickListener{
         void onItemCLick(int position);
@@ -92,7 +59,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public ProductsAdapter(ArrayList<ProductsItem> exampleList, Context context) {
         mProductList = exampleList;
         mContext = context;
-//        productListFull = new ArrayList<>(exampleList);
     }
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

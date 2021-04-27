@@ -33,6 +33,17 @@ public class User {
         mPhone = phone;
         mAge = age;
     }
+
+    public User(){
+    }
+
+    public User(String user_image, String phone, int userID, String name) {
+        mUserImage = user_image;
+        mUserName = name;
+        mUserID = userID;
+        mPhone = phone;
+    }
+
     public String getImage() {
         return mUserImage;
     }

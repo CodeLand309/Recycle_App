@@ -73,8 +73,27 @@
     <string name="NoInternetImageDescription">No Internet Image</string>
     <!-- Connection Fragment End -->
 
+    <!-- NotFound Fragment Start -->
+    <string name="NoSearchResult">Empty Search Result</string>
+    <string name="NoSearchResultImageDescription">Empty Search Result Image</string>
+    <!-- NotFound Fragment End -->
+
+    <!-- NotFound Activity Start -->
+    <string name="EmptyResult">You have not Sold Anything Until Now</string>
+    <string name="EmptyResultImageDescription">Empty Result Image</string>
+    <!-- NotFound Activity End -->
+
+    <!-- Server Error Start -->
+    <string name="ServerError">Server Not Responding</string>
+    <string name="ServerErrorImageDescription">Server Error Image</string>
+    <!-- Server Error End -->
+
+    <!-- Chat Activity Start -->
+    <string name="MessageHint">Type a message</string>
+    <!-- Chat Activity End -->
+
     <!-- Product Details Activity Start -->
-    <string name="BuyButton">Buy</string>
+    <string name="ChatButton">Chat</string>
     <string name="ContactButton">Contact Seller</string>
 
     <string name="ProductNameLabel">Product</string>
@@ -89,12 +108,7 @@
     <string name="YearsOfUsageValue">Product Used in Years</string>
     <string name="SellerValue">Seller Name</string>
     <string name="ProductDescriptionValue">Product Description</string>
-
     <!-- Product Details Activity End -->
-
-    <!-- Purchase Activity Start -->
-
-    <!-- Purchase Activity End -->
 
     <!-- Contact Activity Start -->
     <string name="SellerProfileDescription">Seller Profile</string>
@@ -125,7 +139,7 @@
     <!-- Upload Product Activity Start -->
     <string name="UploadImageButton">Upload Image</string>
     <string name="SaveButton">Save</string>
-    <string name="CancelButton">Cancel</string>
+    <string name="CancelButton">Home</string>
 
     <string name="EnterProductNameHint">Enter Product Name</string>
     <string name="EnterPriceHint">Enter Price</string>
@@ -152,7 +166,7 @@
     <!-- Change Profile Activity -->
     <string name="UploadNewProfileButton">Upload Image</string>
     <string name="SaveNewProfileButton">Save</string>
-    <string name="CancelProfileButton">Cancel</string>
+    <string name="CancelProfileButton">Home</string>
 
 
     <string name="OldNameValue">My Name</string>
@@ -170,6 +184,33 @@
     <string name="ResendAgainButton">Resend OTP</string>
     <!-- Change Phone Screen End -->
 
+
+    <!-- About Activity Start-->
+    <string name="Overview">Overview</string>
+    <string name="AboutString1">Consumerism has resulted in unnecessary purchases.
+        This lack of responsibility from consumers side has resulted in man made waste to skyrocket.
+        Most of the products we purchase can be recycled while
+        other products cannot be recycled with existing technology or parts of the
+        product cannot be recycled. So it is important to ensure that these products
+        at the end of their lifecycle do not reach landfills. Another issue is
+        that many of the items that end up in landfill or waste collection centre are
+        still usable. At the same time there are many people who require the same
+        product but cannot afford it.
+    </string>
+
+    <string name="AboutString2">So it would be better if the consumers have an
+        option to sell their products to others who require the same product. This is
+        not a new concept. Traditionally we used to sell useful items to our friends
+        or relatives when we no longer used it. So we just decided to make an application
+        that would solve the issue. Also the application shows a list of recycling centres,
+        waste collection centres. Users can communicate with each other about the price and
+        how the product would be transferred.</string>
+
+    <string name="AboutString3">Remember we do not provide delivery services. So it is the user responsibility to ensure the payments
+        and the delivery of the product. If there are any issues you can report to us and we will
+        get back to you.</string>
+    <!-- About Activity End-->
+
     <!-- Bottom Navigation Bar Menu Start -->
     <string name="HomeOption">Home</string>
     <string name="ChatOption">Chat</string>
@@ -181,8 +222,6 @@
     <!-- Options Menu Start -->
     <string name="EditOption">Edit</string>
     <string name="DeleteOption">Delete</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Options Menu End -->
 
 

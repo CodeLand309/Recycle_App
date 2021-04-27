@@ -98,31 +98,6 @@ public class SellFragment extends Fragment {
         user_id = sp.getInt("User ID",0);
         Log.d("TAG", String.valueOf(user_id));
 
-      // View view = inflater.inflate(R.layout.fragment_home, container, false);
-//        ArrayList<SellItem> sellList = new ArrayList<>();
-//        sellList.add(new SellItem(R.drawable.ic_round_home_24, "Line 1", "Line 2"));
-//        sellList.add(new SellItem(R.drawable.ic_round_chat_24, "Line 3", "Line 4"));
-//        sellList.add(new SellItem(R.drawable.ic_round_add_circle_24, "Line 5", "Line 6"));
-//        sellList.add(new SellItem(R.drawable.ic_round_dispose_24, "Line 7", "Line 8"));
-//        sellList.add(new SellItem(R.drawable.ic_round_settings_24, "Line 9", "Line 10"));
-//        sellList.add(new SellItem(R.drawable.ic_round_home_24, "Line 11", "Line 12"));
-//        sellList.add(new SellItem(R.drawable.ic_round_chat_24, "Line 13", "Line 14"));
-//        sellList.add(new SellItem(R.drawable.ic_round_add_circle_24, "Line 15", "Line 16"));
-//        sellList.add(new SellItem(R.drawable.ic_round_dispose_24, "Line 17", "Line 18"));
-//        sellList.add(new SellItem(R.drawable.ic_round_settings_24, "Line 19", "Line 20"));
-//        sellList.add(new SellItem(R.drawable.ic_round_home_24, "Line 21", "Line 22"));
-//        sellList.add(new SellItem(R.drawable.ic_round_chat_24, "Line 23", "Line 24"));
-//        sellList.add(new SellItem(R.drawable.ic_round_add_circle_24, "Line 25", "Line 26"));
-//        sellList.add(new SellItem(R.drawable.ic_round_dispose_24, "Line 27", "Line 28"));
-//        sellList.add(new SellItem(R.drawable.ic_round_settings_24, "Line 29", "Line 30"));
-//
-//        mRecyclerView = view.findViewById(R.id.recyclerView);
-//        mRecyclerView.setHasFixedSize(true);
-//        mLayoutManager = new LinearLayoutManager(getContext());
-//        mAdapter = new SellAdapter(sellList);
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//        mRecyclerView.setAdapter(mAdapter);
-
         restApiInterface = getRest();
 
         progressBar.setVisibility(View.VISIBLE);
@@ -148,7 +123,6 @@ public class SellFragment extends Fragment {
 
                     @Override
                     public void onOptionsCLick(int position, Button options) {
-                        Toast.makeText(getContext(), "Clicked on Options", Toast.LENGTH_SHORT).show();
                         dropDownMenu = new PopupMenu(getContext(), options);
                         dropDownMenu.getMenuInflater().inflate(R.menu.options, dropDownMenu.getMenu());
                         dropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -275,7 +249,6 @@ public class SellFragment extends Fragment {
 
     private void DeleteData(int product_id, String product_name) {
         restApiInterface = getRest();
-        Toast.makeText(getContext(), "Hello", Toast.LENGTH_SHORT).show();
         Call<JsonElement> call = restApiInterface.deleteProduct(product_id, product_name);
         call.enqueue(new Callback<JsonElement>() {
             @Override

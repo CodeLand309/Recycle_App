@@ -46,9 +46,9 @@ import retrofit2.Response;
 
 public class  SettingsFragment extends PreferenceFragmentCompat {
 
-    private Preference report, profile, history, delete, logout, change_phone;
+    private Preference report, profile, history, help, delete, logout, change_phone;
     private RestApiInterface restApiInterface;
-    private String name, phone, product_id, Result;
+    private String name, phone, Result;
     private int id;
 
     @Override
@@ -67,14 +67,13 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
         delete = findPreference("delete_key");
         logout = findPreference("log_out_key");
         history = findPreference("history_key");
+        help = findPreference("help_key");
         change_phone = findPreference("change_phone_key");
         SharedPreferences sp = getContext().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
         id=sp.getInt("User ID", 0);
         name=sp.getString("Name", "");
         phone=sp.getString("Phone Number", "");
         SharedPreferences.Editor editor = sp.edit();
-//        editor.putString("Name", "Kanna");
-//        editor.commit();
         profile.setTitle(name);
 
         profile.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -134,19 +133,29 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
-        report.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
+        help.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
             public boolean onPreferenceClick(Preference preference) {
-//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.envyandroid.com"));
-//                startActivity(intent);
-//                return false;
-
                 Intent i = new Intent(Intent.ACTION_SEND);
                 //i.setType("text/plain"); //use this line for testing in the emulator
                 i.setType("message/rfc822"); // use from live device
-                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"test@gmail.com"});
-                i.putExtra(Intent.EXTRA_SUBJECT, "subject goes here");
-                i.putExtra(Intent.EXTRA_TEXT, "body goes here");
+                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"CodeLand309@gmail.com"});
+                i.putExtra(Intent.EXTRA_SUBJECT, "Subject Goes here (Give a Title)");
+                i.putExtra(Intent.EXTRA_TEXT, "Body Goes Here (Enter your doubts here)");
+                startActivity(Intent.createChooser(i, "Select email application."));
+                return false;
+            }
+        });
+
+        report.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            public boolean onPreferenceClick(Preference preference) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                //i.setType("text/plain"); //use this line for testing in the emulator
+                i.setType("message/rfc822"); // use from live device
+                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"CodeLand309@gmail.com"});
+                i.putExtra(Intent.EXTRA_SUBJECT, "Subject Goes here (Give a Title)");
+                i.putExtra(Intent.EXTRA_TEXT, "Body Goes Here (Type the problem)");
                 startActivity(Intent.createChooser(i, "Select email application."));
                 return false;
             }
@@ -161,19 +170,6 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-        //                Intent intent = new Intent(getContext(), SignUPActivity.class);
-        //                startActivity(intent);
-        //                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        //                firebase.auth().currentUser.unlink(firebase.auth.PhoneAuthProvider.PROVIDER_ID);
-
-        //                if (user != null) {
-        //                    user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
-        //                        @Override
-        //                        public void onComplete(@NonNull Task<Void> task) {
-        //                            user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-        //                                @Override
-        //                                public void onComplete(@NonNull Task<Void> task) {
-        //                                    if (task.isSuccessful()) {
                         if(isNetworkAvailable()) {
                             FirebaseAuth.getInstance().getCurrentUser().unlink(PhoneAuthProvider.PROVIDER_ID);
                             restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
@@ -203,12 +199,6 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                                     Intent i = new Intent(getContext(), SignUPActivity.class);
                                     startActivity(i);
                                     getActivity().finish();
-                                    //                                    }
-                                    //                                }
-                                    //                            });
-                                    //                        }
-                                    //                    });
-                                    //                }
                                 }
 
                                 @Override
@@ -234,26 +224,6 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                 alert.show();
 
                 return false;
-                    // Prompt the user to re-provide their sign-in credentials
-//                if (user != null) {
-//                    user.reauthenticate(credential)
-//                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    user.delete()
-//                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                @Override
-//                                                public void onComplete(@NonNull Task<Void> task) {
-//                                                    if (task.isSuccessful()) {
-//                                                        Log.d("TAG", "User account deleted.");
-//                                                        startActivity(new Intent(DeleteUser.this, StartActivity.class));
-//                                                        Toast.makeText(DeleteUser.this, "Deleted User Successfully,", Toast.LENGTH_LONG).show();
-//                                                    }
-//                                                }
-//                                            });
-//                                }
-//                            });
-//                }
             }
         });
         logout.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -267,12 +237,6 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(isNetworkAvailable()) {
                             FirebaseAuth.getInstance().signOut();
-                            //                editor.putString("Name", "");
-                            //                editor.putInt("User ID", 0);
-                            //                editor.putString("Address", "");
-                            //                editor.putString("Gender", "");
-                            //                editor.putInt("Age", 0);
-                            //                editor.putString("Image", "");
                             editor.remove("Phone Number");
                             editor.putInt("Log in Status", 1);
                             editor.apply();

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home"
+    android:background="@color/customSkyBlue"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainUI.HomeFragment">
@@ -14,7 +15,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#00B6FF"
+            android:background="@color/customSkyBlue"
             android:layout_alignParentTop="true"
             android:layout_above="@+id/progressBar"
             android:padding="5dp"

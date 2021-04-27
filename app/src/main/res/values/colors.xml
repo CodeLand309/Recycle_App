@@ -3,4 +3,22 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="customWhite">#FFFFFF</color>
+    <color name="customBlack">#000000</color>
+    <color name="customGrey">#666666</color>
+    <color name="customLightGrey">#CCCCCC</color>
+    <color name="customDarkGrey">#333333</color>
+
+    <color name="customStrongSkinColour">#FFAAAA</color>
+    <color name="customSkinColour">#F8F8D0</color>
+    <color name="customSkinWhite">#F8F8F0</color>
+    <color name="yellowishWhite">#F8F8EF</color>
+
+    <color name="customYellow">#FFF000</color>
+    <color name="customSkyBlue">#00B6FF</color>
+    <color name="customBlue">#0055FF</color>
+    <color name="customDarkBlue">#0910A1</color>
+    <color name="customDarkGreen">#007781</color>
+    <color name="customRed">#F12323</color>
 </resources>

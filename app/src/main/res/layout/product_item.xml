@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/ProductName"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/customWhite"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="4dp"
                 android:text="@string/Price"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/customWhite"
                 android:textSize="15sp" />
         </LinearLayout>
 

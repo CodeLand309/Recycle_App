@@ -13,7 +13,7 @@ import com.example.recycle.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DisposeAdapter extends RecyclerView.Adapter<DisposeAdapter.DisposeViewHolder> /*implements Filterable*/ {
+public class DisposeAdapter extends RecyclerView.Adapter<DisposeAdapter.DisposeViewHolder> {
     private ArrayList<DisposeCentre> mDisposeList;
     private Context mContext;
     public OnCentreClickListener mListener;
@@ -50,7 +50,6 @@ public class DisposeAdapter extends RecyclerView.Adapter<DisposeAdapter.DisposeV
     public DisposeAdapter(ArrayList<DisposeCentre> disposeList, Context context) {
         mDisposeList = disposeList;
         mContext = context;
-//        exampleListFull = new ArrayList<>(exampleList);
     }
 
 
@@ -68,8 +67,6 @@ public class DisposeAdapter extends RecyclerView.Adapter<DisposeAdapter.DisposeV
          //   holder.mImageView.setImageResource(currentCenter.getImageResource());
             holder.mTextView1.setText(currentCentre.getCentreName());
          //   holder.mTextView2.setText(currentCenter.getText2());
-
-
     }
 
     @Override

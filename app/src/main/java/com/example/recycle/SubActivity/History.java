@@ -1,5 +1,6 @@
 package com.example.recycle.SubActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,10 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.recycle.MainUI.ConnectionFragment;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.ServerErrorActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,82 +42,56 @@ public class History extends AppCompatActivity {
     private ArrayList<HistoryItem> products;
 
     private String user_name, product_name, description, image, date;
-    private int page_number = 1, user_id, product_id, price, year, status;
-    private int item_count = 6;
+    private int user_id, product_id, price, year, status;
 
     private SharedPreferences sp;
-    //Variables for Pagination
-    private boolean isLoading = true;
-    private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total=0;
-    private int view_threshold= 10;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        SharedPreferences sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
+        user_id = sp.getInt("User ID", 0);
         progressBar = findViewById(R.id.progressBar);
         mRecyclerView = findViewById(R.id.history_container);
         Log.d("TAG", "Reached Here1");
         mAdapter = new HistoryAdapter(products, History.this);
-        mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(History.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         Log.d("TAG", "Reached Here2");
-//        sp = getContext().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
-//        user_id = sp.getInt("User ID",0);
-//        Log.d("TAG", String.valueOf(user_id));
-
 
         restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
         progressBar.setVisibility(View.VISIBLE);
-        Call<ArrayList<HistoryResponse>> call = restApiInterface.getHistory(page_number, item_count, user_id);
+        Call<ArrayList<HistoryResponse>> call = restApiInterface.getHistory(user_id);
         call.enqueue(new Callback<ArrayList<HistoryResponse>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<HistoryResponse>> call, @NonNull Response<ArrayList<HistoryResponse>> response) {
-                products = response.body().get(1).getItems();
-                mAdapter = new HistoryAdapter(products, History.this);
-                Log.d("TAG", "Reached Here3");
-                mRecyclerView.setAdapter(mAdapter);
-                Log.d("Tag", String.valueOf(response.body()));
-                Toast.makeText(History.this, "First Page Loading", Toast.LENGTH_SHORT).show();
-                progressBar.setVisibility(View.GONE);
-                mAdapter.setOnItemClickListener(new HistoryAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemCLick(int position) {
-                        changeActivity(position, products);
-                    }
-                });
+                if(response.body().get(0).getStatus().equals("found")) {
+                    products = response.body().get(1).getItems();
+                    mAdapter = new HistoryAdapter(products, History.this);
+                    Log.d("TAG", "Reached Here3");
+                    mRecyclerView.setAdapter(mAdapter);
+                    Log.d("Tag", String.valueOf(response.body()));
+                    progressBar.setVisibility(View.GONE);
+                    mAdapter.setOnItemClickListener(new HistoryAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemCLick(int position) {
+                            changeActivity(position, products);
+                        }
+                    });
+                }else{
+                    Intent i = new Intent(History.this, EmptyActivity.class);
+                    startActivity(i);
+                }
             }
             @Override
             public void onFailure(Call<ArrayList<HistoryResponse>> call, Throwable t) {
+                Intent i = new Intent(History.this, ServerErrorActivity.class);
+                startActivity(i);
                 Toast.makeText(History.this, "Cannot Access Server", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                visibleItemCount = mLayoutManager.getChildCount();
-                totalItemCount = mLayoutManager.getItemCount();
-                pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
-
-                if(dy>0){
-                    if(isLoading){
-                        if(totalItemCount>previous_total){
-                            isLoading = false;
-                            previous_total = totalItemCount;
-                        }
-                    }
-                    if(!isLoading && (totalItemCount-visibleItemCount) <= (pastVisibleItems + view_threshold)){
-                        page_number++;
-                        performPagination();
-                        isLoading = true;
-                    }
-                }
             }
         });
     }
@@ -152,34 +127,5 @@ public class History extends AppCompatActivity {
         Intent i = new Intent(History.this, MyProductDetails.class);
         i.putExtra("Product", jsonData.toString());
         startActivity(i);
-    }
-
-    private void performPagination(){
-        progressBar.setVisibility(View.VISIBLE);
-        Call<ArrayList<HistoryResponse>> call = restApiInterface.getHistory(page_number, item_count, user_id);
-        call.enqueue(new Callback<ArrayList<HistoryResponse>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<HistoryResponse>> call, @NonNull Response<ArrayList<HistoryResponse>> response) {
-
-                if(response.body().get(0).getStatus().equals("ok")){
-                    products = response.body().get(1).getItems();
-                    mAdapter.addProduct(products);
-                    mAdapter.setOnItemClickListener(new HistoryAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemCLick(int position) {
-                            changeActivity(position, products);
-                        }
-                    });
-                }
-                else{
-                    //Toast.makeText(ReadActivity.this, "No more Data", Toast.LENGTH_SHORT).show();
-                }
-                progressBar.setVisibility(View.GONE);
-            }
-            @Override
-            public void onFailure(Call<ArrayList<HistoryResponse>> call, Throwable t) {
-                Toast.makeText(History.this, "Cannot Access Server", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

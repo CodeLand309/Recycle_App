@@ -8,12 +8,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recycle.MainUI.Chat;
+import com.example.recycle.MainUI.ChatUsers;
 import com.example.recycle.MainUI.MainActivity;
 import com.example.recycle.OTP_Activity;
 import com.example.recycle.R;
@@ -29,9 +33,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +54,7 @@ public class ChangePhoneActivity extends AppCompatActivity {
     Button Verify, SendOTP, Resend;
     EditText Phone, t1,t2,t3,t4,t5,t6;
 
-    private String phone, result, otp, o1,o2,o3,o4,o5,o6;
+    private String old_phone, phone, result, otp, o1,o2,o3,o4,o5,o6;
     private RestApiInterface restApiInterface;
 
     FirebaseAuth auth;
@@ -56,11 +66,11 @@ public class ChangePhoneActivity extends AppCompatActivity {
     private static long mTimeLeftInMillis = 120000;
     TextView countTime,wait;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_phone);
+
         Verify = findViewById(R.id.verify_again);
         SendOTP = findViewById(R.id.new_otp);
         Resend = findViewById(R.id.resend_again);
@@ -75,6 +85,122 @@ public class ChangePhoneActivity extends AppCompatActivity {
         t4 = findViewById(R.id.txt4);
         t5 = findViewById(R.id.txt5);
         t6 = findViewById(R.id.txt6);
+
+        t1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length() == 1)
+                    t2.requestFocus();
+            }
+        });
+
+        t2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length() == 1)
+                    t3.requestFocus();
+                else if(editable.toString().length() == 0)
+                    t1.requestFocus();
+            }
+        });
+
+        t3.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length() == 1)
+                    t4.requestFocus();
+                else if(editable.toString().length() == 0)
+                    t2.requestFocus();
+            }
+        });
+
+        t4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length() == 1)
+                    t5.requestFocus();
+                else if(editable.toString().length() == 0)
+                    t3.requestFocus();
+            }
+        });
+
+        t5.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length() == 1)
+                    t6.requestFocus();
+                else if(editable.toString().length() == 0)
+                    t4.requestFocus();
+            }
+        });
+
+        t6.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length() == 0)
+                    t5.requestFocus();
+            }
+        });
 
         SendOTP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,15 +220,6 @@ public class ChangePhoneActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                /*PhoneAuthOptions options = PhoneAuthOptions.newBuilder(auth)
-                        .setPhoneNumber("+91"+phone)
-                        .setTimeout(60L, TimeUnit.SECONDS)
-                        .setActivity(OTP_Activity.this)
-                        .setCallbacks(mCallback)
-                        .build();
-                PhoneAuthProvider.verifyPhoneNumber(options);
-                */
-                //Toast.makeText(OTP_Activity.this, "hello", Toast.LENGTH_SHORT).show();
                 phone = "+91 " + phone;
                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
                         phone,                     // Phone number to verify
@@ -119,21 +236,13 @@ public class ChangePhoneActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 o1 = t1.getText().toString();
-//                if(c1.length()==1)
-//                    e2.requestFocus();
                 o2 = t2.getText().toString();
-//                if(c2.length()==1)
-//                    e3.requestFocus();
                 o3 = t3.getText().toString();
-//                if(c3.length()==1)
-//                    e4.requestFocus();
                 o4 = t4.getText().toString();
-//                if(c4.length()==1)
-//                    e5.requestFocus();
                 o5 = t5.getText().toString();
-//                if(c5.length()==1)
-//                    e6.requestFocus();
                 o6 = t6.getText().toString();
+                if(o1=="" || o2=="" || o3=="" || o4=="" || o5=="" || o6=="")
+                    Toast.makeText(ChangePhoneActivity.this, "Enter All Fields", Toast.LENGTH_SHORT).show();
                 otp = o1+o2+o3+o4+o5+o6;
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCode, otp);
                 SigninWithNewPhone(credential);
@@ -215,7 +324,6 @@ public class ChangePhoneActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     SharedPreferences sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
-                    Intent register = new Intent(ChangePhoneActivity.this, MainActivity.class);
                     SharedPreferences.Editor editor = sp.edit();
                     int user_id = sp.getInt("User ID", 0);
                     editor.putString("Phone Number", phone);
@@ -230,58 +338,51 @@ public class ChangePhoneActivity extends AppCompatActivity {
                         public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                             if (!response.isSuccessful()) {
                                 result = "Code: " + response.code();
-                                Toast.makeText(ChangePhoneActivity.this, result, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChangePhoneActivity.this, "There was some Error", Toast.LENGTH_SHORT).show();
                                 return;
                             }
+
                             JsonObject jsonObject = response.body().getAsJsonObject();
                             String status = jsonObject.get("status").getAsString();
                             Toast.makeText(ChangePhoneActivity.this, status, Toast.LENGTH_SHORT).show();
+
+                            old_phone = sp.getString("Phone Number","");
+                            String name = sp.getString("Name", "");
+                            int id = sp.getInt("User ID", 0);
+
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+                            reference.child(old_phone).removeValue();
+
+                            HashMap<String,Object> chatUser = new HashMap<>();
+                            chatUser.put("Name", name);
+                            chatUser.put("Phone", phone);
+                            chatUser.put("Image", "image");
+                            chatUser.put("ID", id);
+
+                            reference.child(phone).setValue(chatUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Intent register = new Intent(ChangePhoneActivity.this, MainActivity.class);
+                                        startActivity(register);
+                                        finish();
+                                    }
+                                }
+                            });
+
+
                         }
 
                         @Override
                         public void onFailure(Call<JsonElement> call, Throwable t) {
                             result = t.getMessage();
-                            Toast.makeText(ChangePhoneActivity.this, result, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChangePhoneActivity.this, "There was Some Error", Toast.LENGTH_SHORT).show();
                         }
                     });
-                    startActivity(register);
-                    finish();
                 } else {
                     Toast.makeText(ChangePhoneActivity.this,"Incorrect OTP",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-//        auth.signInWithCredential(credential)
-//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            SharedPreferences sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
-//                            if(sp.contains("User ID")){
-//                                Intent register = new Intent(ChangePhoneActivity.this, MainActivity.class);
-//                                FirebaseUser user = task.getResult().getUser();
-//                                SharedPreferences.Editor editor = sp.edit();
-//                                editor.putString("Phone Number", phone);
-//                                editor.putInt("Log in Status", 2);
-//                                editor.apply();
-//                                startActivity(register);
-//                                finish();
-//                            }
-//                            else {
-//                                Intent register = new Intent(ChangePhoneActivity.this, RegisterActivity.class);
-//                                SharedPreferences.Editor editor = sp.edit();
-//                                editor.putString("Phone Number", phone);
-//                                editor.putInt("Log in Status", 1);
-//                                editor.apply();
-//                                FirebaseUser user = task.getResult().getUser();
-//                                register.putExtra("Phone Number", phone);
-//                                startActivity(register);
-//                                finish();
-//                            }
-//                        } else {
-//                            Toast.makeText(ChangePhoneActivity.this,"Incorrect OTP",Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
     }
 }
