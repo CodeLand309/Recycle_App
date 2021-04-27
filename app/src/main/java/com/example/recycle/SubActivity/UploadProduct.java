@@ -94,6 +94,7 @@ public class UploadProduct extends AppCompatActivity {
                                 Toast.makeText(UploadProduct.this, "There was Some Error", Toast.LENGTH_SHORT).show();
                                 return;
                             }
+                            Toast.makeText(UploadProduct.this, "Product Uploaded Successfully", Toast.LENGTH_SHORT).show();
                             JsonObject jsonObject = response.body().getAsJsonObject();
                             String content = jsonObject.get("status").getAsString();
                             Toast.makeText(UploadProduct.this, content, Toast.LENGTH_SHORT).show();
