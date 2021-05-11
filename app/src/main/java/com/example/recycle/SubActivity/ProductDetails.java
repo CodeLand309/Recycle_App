@@ -12,12 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.recycle.MainUI.ChatActivity;
-import com.example.recycle.MainUI.User;
+import com.example.recycle.Model.User;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
-import com.example.recycle.ServerErrorActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;

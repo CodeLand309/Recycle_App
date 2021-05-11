@@ -6,20 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.recycle.LaunchActivity;
-import com.example.recycle.MainUI.User;
+import com.example.recycle.Model.User;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;

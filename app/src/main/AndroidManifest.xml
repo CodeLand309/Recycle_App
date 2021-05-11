@@ -15,21 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SubActivity.AboutActivity"></activity>
-        <activity android:name=".ServerErrorActivity" />
+        <activity android:name=".Activities.ServerErrorActivity" />
         <activity android:name=".SubActivity.EmptyActivity" />
         <activity
-            android:name=".MainUI.ChatActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".SubActivity.ChatActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.recycle.MainUI.MainActivity" />
+                android:value="com.example.recycle.Activities.MainActivity" />
         </activity>
         <activity android:name=".SubActivity.ChangePhoneActivity" />
         <activity android:name=".SubActivity.MyProductDetails" />
         <activity android:name=".SubActivity.ContactActivity" />
         <activity android:name=".SubActivity.ProductDetails" />
         <activity
-            android:name=".LaunchActivity"
+            android:name=".Activities.LaunchActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,19 +43,19 @@
         <activity android:name=".SubActivity.DisposeCenterDetails" />
         <activity android:name=".SubActivity.ChangeProfile" />
         <activity android:name=".SubActivity.History" />
-        <activity android:name=".MainUI.MainActivity" />
+        <activity android:name=".Activities.MainActivity" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activities.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".OTP_Activity"
+            android:name=".Activities.OTP_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SignUPActivity"
+            android:name=".Activities.SignUPActivity"
             android:screenOrientation="portrait" />
 
         <service
-            android:name=".MainUI.Notifications.MyFirebaseIdService"
+            android:name=".Notifications.MyFirebaseIdService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -62,7 +63,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".MainUI.Notifications.MyFirebaseMessaging"
+            android:name=".Notifications.MyFirebaseMessaging"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

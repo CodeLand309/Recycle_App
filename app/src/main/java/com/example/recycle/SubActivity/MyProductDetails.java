@@ -11,11 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.recycle.MainUI.MainActivity;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
-import com.example.recycle.ServerErrorActivity;
+import com.example.recycle.Activities.ServerErrorActivity;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;

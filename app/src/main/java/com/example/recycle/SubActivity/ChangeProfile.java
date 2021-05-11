@@ -3,6 +3,7 @@ package com.example.recycle.SubActivity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,15 +20,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.recycle.MainUI.MainActivity;
+import com.example.recycle.Activities.MainActivity;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
-import com.example.recycle.ServerErrorActivity;
+import com.example.recycle.Activities.ServerErrorActivity;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.PicassoProvider;
 
 import org.json.JSONObject;
 
@@ -87,6 +87,11 @@ public class ChangeProfile extends AppCompatActivity {
             public void onClick(View view) {
                 age = Integer.parseInt(Age.getText().toString());
                 address = Address.getText().toString();
+                ProgressDialog progressDialog = new ProgressDialog(ChangeProfile.this);
+                progressDialog.setMessage("Updating Profile");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setCancelable(false);
+                progressDialog.show();
                 if(flag==2)
                     image = imageToString();
                 if(!(address.equals("")) && age!=0 && flag!=0){
@@ -98,15 +103,18 @@ public class ChangeProfile extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                             if (!response.isSuccessful()) {
+                                progressDialog.dismiss();
                                 Result = "Code: " + response.code();
                                 Toast.makeText(ChangeProfile.this, Result, Toast.LENGTH_SHORT).show();
                                 return;
                             }
+                            progressDialog.dismiss();
+                            Toast.makeText(ChangeProfile.this, "Profile Changed Successfully", Toast.LENGTH_SHORT).show();
                             JsonObject jsonObject = response.body().getAsJsonObject();
                             String status = jsonObject.get("status").getAsString();
                             int new_age = jsonObject.get("Age").getAsInt();
                             String new_address = jsonObject.get("Address").getAsString();
-                            Toast.makeText(ChangeProfile.this, status, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ChangeProfile.this, status, Toast.LENGTH_SHORT).show();
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putInt("Age", age);
                             editor.putString("Address", address);
@@ -118,6 +126,7 @@ public class ChangeProfile extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<JsonElement> call, Throwable t) {
+                            progressDialog.dismiss();
                             Result = t.getMessage();
                             Intent i = new Intent(ChangeProfile.this, ServerErrorActivity.class);
                             startActivity(i);
@@ -125,6 +134,7 @@ public class ChangeProfile extends AppCompatActivity {
                     });
                 }
                 else{
+                    progressDialog.dismiss();
                     Toast.makeText(ChangeProfile.this, "Enter All Fields", Toast.LENGTH_SHORT).show();
                 }
             }

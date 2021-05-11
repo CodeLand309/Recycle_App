@@ -3,6 +3,7 @@ package com.example.recycle.SubActivity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,11 +19,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.recycle.MainUI.MainActivity;
-import com.example.recycle.MainUI.SellFragment;
-import com.example.recycle.MainUI.User;
+import com.example.recycle.Activities.MainActivity;
+import com.example.recycle.Activities.RegisterActivity;
 import com.example.recycle.R;
-import com.example.recycle.RegisterActivity;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
 import com.google.gson.JsonElement;
@@ -74,15 +73,16 @@ public class UploadProduct extends AppCompatActivity {
                 sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
                 name = sp.getString("Name", "");
                 user_id = sp.getInt("User ID", 0);
-                Log.d("Name: ", product);
-                Log.d("Description: ", description);
-                Log.d("Year", year+"");
-                Log.d("Price: ", price+"");
-                Log.d("DATE: ", date);
-                if(flag==1)
-                    image = imageToString();
-                if(!(product.equals("")) && !(description.equals("")) && !(date.equals("")) && year!=0 && price!=0 && flag!=0){
 
+                ProgressDialog progressDialog = new ProgressDialog(UploadProduct.this);
+                progressDialog.setMessage("Uploading Data");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+
+                if(!(product.equals("")) && !(description.equals("")) && !(date.equals("")) && year>=0 && price!=0 && flag==1){
+
+                    image = imageToString();
                     restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
                     Call<JsonElement> call = restApiInterface.addProduct(product, description, year, price, date, image, name, user_id);
@@ -90,14 +90,16 @@ public class UploadProduct extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                             if (!response.isSuccessful()) {
+                                progressDialog.dismiss();
                                 Result = "Code: " + response.code();
                                 Toast.makeText(UploadProduct.this, "There was Some Error", Toast.LENGTH_SHORT).show();
                                 return;
                             }
+                            progressDialog.dismiss();
                             Toast.makeText(UploadProduct.this, "Product Uploaded Successfully", Toast.LENGTH_SHORT).show();
                             JsonObject jsonObject = response.body().getAsJsonObject();
                             String content = jsonObject.get("status").getAsString();
-                            Toast.makeText(UploadProduct.this, content, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(UploadProduct.this, content, Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(UploadProduct.this, MainActivity.class);
                             startActivity(i);
                             finish();
@@ -105,12 +107,14 @@ public class UploadProduct extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<JsonElement> call, Throwable t) {
+                            progressDialog.dismiss();
                             Result = t.getMessage();
                             Toast.makeText(UploadProduct.this, "Could Not Upload Product", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
                 else{
+                    progressDialog.dismiss();
                     Toast.makeText(UploadProduct.this, "Enter All Fields", Toast.LENGTH_SHORT).show();
                 }
             }

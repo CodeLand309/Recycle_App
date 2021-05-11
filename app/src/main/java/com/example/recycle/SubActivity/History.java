@@ -15,10 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recycle.Adapters.HistoryAdapter;
+import com.example.recycle.Model.HistoryItem;
+import com.example.recycle.Model.HistoryResponse;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
-import com.example.recycle.ServerErrorActivity;
+import com.example.recycle.Activities.ServerErrorActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
     android:background="@color/customBlue"
+    app:titleTextColor="@color/customWhite"
     android:id="@+id/toolbar"
     app:title="Recycle"
     app:titleMarginStart="20dp" />

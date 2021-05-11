@@ -1,6 +1,6 @@
 package com.example.recycle.SubActivity;
 
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -18,9 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.recycle.LaunchActivity;
-import com.example.recycle.MainUI.MainActivity;
-import com.example.recycle.MainUI.SellFragment;
+import com.example.recycle.Activities.MainActivity;
 import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
@@ -33,8 +31,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -103,9 +99,15 @@ public class EditProduct extends AppCompatActivity {
                 Log.d("Description: ", description);
                 Log.d("Year", year+"");
                 Log.d("Price: ", price+"");
-                if(flag==2)
+                ProgressDialog progressDialog = new ProgressDialog(EditProduct.this);
+                progressDialog.setMessage("Updating Data");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                if(flag==2) {
                     image = imageToString();
-                if(!(product.equals("")) && !(description.equals("")) && year!=0 && price!=0 && flag!=0){
+                }
+                if(!(product.equals("")) && !(description.equals("")) && year>=0 && price!=0 && flag!=0){
 
                     restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
@@ -114,10 +116,12 @@ public class EditProduct extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                             if (!response.isSuccessful()) {
+                                progressDialog.dismiss();
                                 Result = "Code: " + response.code();
                                 Toast.makeText(EditProduct.this, "There was some Error", Toast.LENGTH_SHORT).show();
                                 return;
                             }
+                            progressDialog.dismiss();
                             JsonObject jsonObject = response.body().getAsJsonObject();
                             String content = jsonObject.get("status").getAsString();
                             Intent i = new Intent(EditProduct.this, MainActivity.class);
@@ -127,12 +131,14 @@ public class EditProduct extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<JsonElement> call, Throwable t) {
+                            progressDialog.dismiss();
                             Result = t.getMessage();
                             Toast.makeText(EditProduct.this, "Could Not Update Details", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
                 else{
+                    progressDialog.dismiss();
                     Toast.makeText(EditProduct.this, "Enter All Fields", Toast.LENGTH_SHORT).show();
                 }
             }

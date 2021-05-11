@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/customBlue"
     android:fillViewport="true"
-    tools:context=".LaunchActivity">
+    tools:context=".Activities.LaunchActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

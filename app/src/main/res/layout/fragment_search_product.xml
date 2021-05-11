@@ -4,7 +4,7 @@
     android:id="@+id/search_product"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainUI.SearchFragment_Product">
+    tools:context=".Fragments.SearchFragment_Product">
 
     <RelativeLayout
         android:layout_width="match_parent"

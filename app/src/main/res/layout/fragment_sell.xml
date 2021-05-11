@@ -6,7 +6,7 @@
     android:id="@+id/sell"
     android:background="@color/customSkyBlue"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainUI.SellFragment">
+    tools:context=".Fragments.SellFragment">
 
     <FrameLayout
         android:layout_width="match_parent"

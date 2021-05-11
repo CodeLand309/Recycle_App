@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.recycle.MainUI.MainActivity;
+import com.example.recycle.Activities.MainActivity;
 import com.example.recycle.R;
 
 public class EmptyActivity extends AppCompatActivity {

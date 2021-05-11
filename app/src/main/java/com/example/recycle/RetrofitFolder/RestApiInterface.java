@@ -1,13 +1,12 @@
 package com.example.recycle.RetrofitFolder;
 
-import com.example.recycle.MainUI.CentreListResponse;
-import com.example.recycle.MainUI.DataResponse;
-import com.example.recycle.MainUI.User;
-import com.example.recycle.SubActivity.HistoryResponse;
+import com.example.recycle.Model.CentreListResponse;
+import com.example.recycle.Model.DataResponse;
+import com.example.recycle.Model.User;
+import com.example.recycle.Model.HistoryResponse;
 import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
