@@ -51,8 +51,7 @@ public class SearchFragment_DisposeCentre extends Fragment {
     }
 
     public static SearchFragment_DisposeCentre newInstance() {
-        SearchFragment_DisposeCentre fragment = new SearchFragment_DisposeCentre();
-        return fragment;
+        return new SearchFragment_DisposeCentre();
     }
 
     @Override
@@ -65,18 +64,18 @@ public class SearchFragment_DisposeCentre extends Fragment {
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_dispose, container, false);
 
+        setRetainInstance(true);
+
         Bundle bundle = getArguments();
         String search_word = bundle.getString("Search Word");
 
         progressBar = view.findViewById(R.id.progressBar);
         mRecyclerView = view.findViewById(R.id.recyclerView);
-        Log.d("TAG", "Reached Here1");
         mAdapter = new DisposeAdapter(centres, getContext());
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        Log.d("TAG", "Reached Here2");
         restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
         progressBar.setVisibility(View.VISIBLE);
@@ -87,9 +86,7 @@ public class SearchFragment_DisposeCentre extends Fragment {
                 if(response.body().get(0).getStatus().equals("found")){
                     centres = response.body().get(1).getCentres();
                     mAdapter = new DisposeAdapter(centres, getContext());
-                    Log.d("TAG", "Reached Here3");
                     mRecyclerView.setAdapter(mAdapter);
-                    Log.d("Tag", String.valueOf(response.body()));
                     progressBar.setVisibility(View.GONE);
                     mAdapter.setOnItemClickListener(new DisposeAdapter.OnCentreClickListener() {
                         @Override
@@ -116,7 +113,6 @@ public class SearchFragment_DisposeCentre extends Fragment {
         centre_id = centres.get(position).getCentreID();
         address = centres.get(position).getCentreAddress();
         phone = centres.get(position).getCentrePhone();
-        Log.d("Item", "changeActivity: ");
         JSONObject jsonData = new JSONObject();
         try {
             jsonData.put("Centre ID", centre_id);

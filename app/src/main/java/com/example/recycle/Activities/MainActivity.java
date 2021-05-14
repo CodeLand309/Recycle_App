@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.example.recycle.Fragments.ChatFragment;
 import com.example.recycle.Fragments.ConnectionFragment;
 import com.example.recycle.Fragments.DisposeFragment;
 import com.example.recycle.Fragments.HomeFragment;
+import com.example.recycle.Fragments.NotFoundFragment;
 import com.example.recycle.Fragments.SearchFragment_DisposeCentre;
 import com.example.recycle.Fragments.SearchFragment_Product;
 import com.example.recycle.Fragments.SellFragment;
@@ -53,6 +55,40 @@ public class MainActivity extends AppCompatActivity {
         } else {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String fragment_name;
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        fragment_name = String.valueOf(fragment);
+        outState.putString("Fragment Name", fragment_name);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String fragment_name = savedInstanceState.getString("Fragment Name");
+        if(fragment_name.startsWith("HomeFragment") || fragment_name.startsWith("SearchFragment_Product"))
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        else if(fragment_name.startsWith("ChatFragment"))
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChatFragment()).commit();
+        else if(fragment_name.startsWith("SellFragment"))
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SellFragment()).commit();
+        else if(fragment_name.startsWith("DisposeFragment") || fragment_name.startsWith("SearchFragment_DisposeCentre"))
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DisposeFragment()).commit();
+        else if(fragment_name.startsWith("SettingsFragment"))
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
+        else if(fragment_name.startsWith("ConnectionFragment")) {
+            if (!isNetworkAvailable()) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
+            } else {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
+            }
+        }
+        else
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NotFoundFragment()).commit();
     }
 
     private boolean isNetworkAvailable() {

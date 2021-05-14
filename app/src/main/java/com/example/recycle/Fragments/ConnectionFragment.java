@@ -19,7 +19,7 @@ public class ConnectionFragment extends Fragment {
 
     private TextView text;
     private ImageView image;
-    private int flag=0;
+    private static int flag=0;
 
     public ConnectionFragment(int flag){
         this.flag = flag;
@@ -36,6 +36,7 @@ public class ConnectionFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_connection, container, false);
 
+        setRetainInstance(true);
         setHasOptionsMenu(true);
 
         image=view.findViewById(R.id.imageView4);

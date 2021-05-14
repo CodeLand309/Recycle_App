@@ -13,3 +13,5 @@
 /captures
 .externalNativeBuild
 .cxx
+/app/src/main/java/com/example/recycle/PrivateKeys.java
+/app/src/main/java/com/example/recycle/RetrofitFolder/APIService.java

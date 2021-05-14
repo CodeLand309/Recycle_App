@@ -47,7 +47,7 @@ public class ChangePhoneActivity extends AppCompatActivity {
     private String old_phone, phone, result, otp, o1,o2,o3,o4,o5,o6;
     private RestApiInterface restApiInterface;
 
-    FirebaseAuth auth;
+    private FirebaseAuth auth;
 
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallback;
     private String verificationCode;
@@ -218,7 +218,6 @@ public class ChangePhoneActivity extends AppCompatActivity {
                         ChangePhoneActivity.this,        // Activity (for callback binding)
                         mCallback,
                         mResendToken);
-                Toast.makeText(ChangePhoneActivity.this, "yes", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -231,7 +230,7 @@ public class ChangePhoneActivity extends AppCompatActivity {
                 o4 = t4.getText().toString();
                 o5 = t5.getText().toString();
                 o6 = t6.getText().toString();
-                if(o1=="" || o2=="" || o3=="" || o4=="" || o5=="" || o6=="")
+                if(o1.equals("") || o2.equals("") || o3.equals("") || o4.equals("") || o5.equals("") || o6.equals(""))
                     Toast.makeText(ChangePhoneActivity.this, "Enter All Fields", Toast.LENGTH_SHORT).show();
                 otp = o1+o2+o3+o4+o5+o6;
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCode, otp);
@@ -257,7 +256,7 @@ public class ChangePhoneActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                Toast.makeText(ChangePhoneActivity.this,"verification completed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangePhoneActivity.this,"Verification Completed",Toast.LENGTH_SHORT).show();
                 wait.setVisibility(View.VISIBLE);
                 countTime.setVisibility(View.VISIBLE);
                 new CountDownTimer(120000,1000) {
@@ -275,7 +274,7 @@ public class ChangePhoneActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
-                Toast.makeText(ChangePhoneActivity.this,"verification failed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangePhoneActivity.this,"Verification Failed",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -283,7 +282,7 @@ public class ChangePhoneActivity extends AppCompatActivity {
                 super.onCodeSent(s, forceResendingToken);
                 verificationCode = s;
                 mResendToken = forceResendingToken;
-                Toast.makeText(ChangePhoneActivity.this,"Code sent", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangePhoneActivity.this,"OTP has been Sent from Server", Toast.LENGTH_SHORT).show();
                 wait.setVisibility(View.VISIBLE);
                 countTime.setVisibility(View.VISIBLE);
                 new CountDownTimer(mTimeLeftInMillis,1000) {

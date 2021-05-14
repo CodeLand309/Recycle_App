@@ -67,16 +67,13 @@ public class HomeFragment extends Fragment {
 
         progressBar = view.findViewById(R.id.progressBar);
         mRecyclerView = view.findViewById(R.id.recyclerView);
-        Log.d("TAG", "Reached Here1");
         mAdapter = new ProductsAdapter(products, getContext());
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(getContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        Log.d("TAG", "Reached Here2");
         sp = getContext().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
         user_id = sp.getInt("User ID",0);
-        Log.d("TAG", String.valueOf(user_id));
 
 
         restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
@@ -94,9 +91,7 @@ public class HomeFragment extends Fragment {
             public void onResponse(@NonNull Call<ArrayList<DataResponse>> call, @NonNull Response<ArrayList<DataResponse>> response) {
                 products = response.body().get(1).getItems();
                 mAdapter = new ProductsAdapter(products, getContext());
-                Log.d("TAG", "Reached Here3");
                 mRecyclerView.setAdapter(mAdapter);
-                Log.d("Tag", String.valueOf(response.body()));
                 progressBar.setVisibility(View.GONE);
                 mAdapter.setOnItemClickListener(new ProductsAdapter.OnItemClickListener() {
                     @Override
@@ -148,7 +143,6 @@ public class HomeFragment extends Fragment {
         price = products.get(position).getPrice();
         year = products.get(position).getYears();
         date = products.get(position).getDate();
-        Log.d("Item", "changeActivity: ");
         JSONObject jsonData = new JSONObject();
         try {
             jsonData.put("User ID", user_id);
@@ -197,6 +191,7 @@ public class HomeFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<ArrayList<DataResponse>> call, Throwable t) {
+                Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
             }
         });

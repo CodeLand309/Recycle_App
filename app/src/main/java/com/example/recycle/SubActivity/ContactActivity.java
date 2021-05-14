@@ -31,7 +31,7 @@ public class ContactActivity extends AppCompatActivity {
     private User user;
     private TextView Name, Phone, Address;
     private Button Dial;
-    String url = RestClient.BASE_URL + "user_image/";
+    private String url = RestClient.BASE_URL + "user_image/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -76,9 +76,8 @@ public class ChangeProfile extends AppCompatActivity {
 
         Name.setText(name);
         Phone.setText(phone);
-        Age.setText(age+"");
-        Address.setText(address+"");
-        Log.d("Image", image);
+        Age.setText(String.valueOf(age));
+        Address.setText(String.valueOf(address));
 
         Picasso.get().load(url).placeholder(R.drawable.profile).fit().into(Image);
         flag=1;

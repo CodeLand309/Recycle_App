@@ -55,8 +55,7 @@ public class SearchFragment_Product extends Fragment {
     }
 
     public static SearchFragment_Product newInstance() {
-        SearchFragment_Product fragment = new SearchFragment_Product();
-        return fragment;
+        return new SearchFragment_Product();
     }
 
     @Override
@@ -68,21 +67,19 @@ public class SearchFragment_Product extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_product, container, false);
 
+        setRetainInstance(true);
         Bundle bundle = getArguments();
         String search_word = bundle.getString("Search Word");
 
         progressBar = view.findViewById(R.id.progressBar);
         mRecyclerView = view.findViewById(R.id.recyclerView);
-        Log.d("TAG", "Reached Here1");
         mAdapter = new ProductsAdapter(products, getContext());
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(getContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        Log.d("TAG", "Reached Here2");
         sp = getContext().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
         user_id = sp.getInt("User ID",0);
-        Log.d("TAG", String.valueOf(user_id));
 
         restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
@@ -94,9 +91,7 @@ public class SearchFragment_Product extends Fragment {
                 if(response.body().get(0).getStatus().equals("found")) {
                     products = response.body().get(1).getItems();
                     mAdapter = new ProductsAdapter(products, getContext());
-                    Log.d("TAG", "Reached Here3");
                     mRecyclerView.setAdapter(mAdapter);
-                    Log.d("Tag", String.valueOf(response.body()));
                     progressBar.setVisibility(View.GONE);
                     mAdapter.setOnItemClickListener(new ProductsAdapter.OnItemClickListener() {
                         @Override
@@ -127,7 +122,6 @@ public class SearchFragment_Product extends Fragment {
         price = products.get(position).getPrice();
         year = products.get(position).getYears();
         date = products.get(position).getDate();
-        Log.d("Item", "changeActivity: ");
         JSONObject jsonData = new JSONObject();
         try {
             jsonData.put("User ID", user_id);

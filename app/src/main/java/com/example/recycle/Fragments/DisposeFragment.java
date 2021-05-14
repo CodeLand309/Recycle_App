@@ -69,13 +69,11 @@ public class DisposeFragment extends Fragment {
 
         progressBar = view.findViewById(R.id.progressBar);
         mRecyclerView = view.findViewById(R.id.recyclerView);
-        Log.d("TAG", "Reached Here1");
         mAdapter = new DisposeAdapter(centres, getContext());
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        Log.d("TAG", "Reached Here2");
         restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
         progressBar.setVisibility(View.VISIBLE);
@@ -85,9 +83,7 @@ public class DisposeFragment extends Fragment {
             public void onResponse(@NonNull Call<ArrayList<CentreListResponse>> call, @NonNull Response<ArrayList<CentreListResponse>> response) {
                 centres = response.body().get(1).getCentres();
                 mAdapter = new DisposeAdapter(centres, getContext());
-                Log.d("TAG", "Reached Here3");
                 mRecyclerView.setAdapter(mAdapter);
-                Log.d("Tag", String.valueOf(response.body()));
                 progressBar.setVisibility(View.GONE);
                 mAdapter.setOnItemClickListener(new DisposeAdapter.OnCentreClickListener() {
                     @Override
@@ -137,7 +133,6 @@ public class DisposeFragment extends Fragment {
         centre_id = centres.get(position).getCentreID();
         address = centres.get(position).getCentreAddress();
         phone = centres.get(position).getCentrePhone();
-        Log.d("Item", "changeActivity: ");
         JSONObject jsonData = new JSONObject();
         try {
             jsonData.put("Centre ID", centre_id);

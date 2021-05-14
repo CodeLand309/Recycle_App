@@ -29,11 +29,11 @@ public class ProductDetails extends AppCompatActivity {
 
 
     private String Product, user_id, product_id, user_name, product_name, description, image, price, year, date, url = RestClient.BASE_URL + "product_image/";
-    String name, phone;
+    private String name, phone;
     Button Contact, Chat;
     TextView Description, ProductName, Price, Year, Seller, Date;
     ImageView ProductImage;
-    RestApiInterface restApiInterface;
+    private RestApiInterface restApiInterface;
 
     private JSONObject data;
     @Override
@@ -61,7 +61,6 @@ public class ProductDetails extends AppCompatActivity {
             year = data.get("Years").toString();
             image = data.get("Image").toString();
             date = data.get("Date").toString();
-            Log.d("Image", image);
 
             price = "₹" + price;
             ProductName.setText(product_name);
@@ -72,7 +71,6 @@ public class ProductDetails extends AppCompatActivity {
             Description.setText(description);
 
             url = url + image;
-            Log.d("Image URL", url);
             Picasso.get().load(url).fit().centerInside().placeholder(R.drawable.ic_round_image_24).into(ProductImage);
             url = RestClient.BASE_URL + "product_image/";
         } catch (JSONException e) {

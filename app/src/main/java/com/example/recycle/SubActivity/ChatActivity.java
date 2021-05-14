@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -57,18 +56,18 @@ public class ChatActivity extends AppCompatActivity {
     private TextView user_name;
 
     private EditText type_message;
-    FirebaseAuth firebaseAuth;
-    FirebaseUser fUser;
-    DatabaseReference reference;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser fUser;
+    private DatabaseReference reference;
 
-    MessageAdapter messageAdapter;
-    ArrayList<Chat> mChat;
+    private MessageAdapter messageAdapter;
+    private ArrayList<Chat> mChat;
 
-    ValueEventListener seenListener;
+    private ValueEventListener seenListener;
 
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
-    APIService apiService;
+    private APIService apiService;
     boolean notify=false;
 
     @Override
@@ -76,7 +75,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        Intent i = getIntent();;
+        Intent i = getIntent();
         phone = i.getStringExtra("Phone");
 //        ActionBar toolbar = getSupportActionBar();
 //        toolbar.setTitle(name);
@@ -268,8 +267,6 @@ public class ChatActivity extends AppCompatActivity {
                 mChat.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Chat chat = dataSnapshot.getValue(Chat.class);
-                    Log.d("my_phone", my_phone);
-                    Log.d("other_phone", rec_phone);
                     if(chat.getReceiver().equals(my_phone) && chat.getSender().equals(rec_phone) ||
                             chat.getReceiver().equals(rec_phone) && chat.getSender().equals(my_phone)){
                         mChat.add(chat);

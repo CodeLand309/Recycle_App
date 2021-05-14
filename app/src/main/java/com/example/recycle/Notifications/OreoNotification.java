@@ -35,6 +35,7 @@ public class OreoNotification extends ContextWrapper {
         NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
         channel.enableLights(false);
         channel.enableVibration(true);
+        channel.setDescription("Notifications of Recent Messages send by other users");
         channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
 
         getManager().createNotificationChannel(channel);

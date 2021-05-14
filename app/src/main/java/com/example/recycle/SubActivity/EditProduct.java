@@ -73,15 +73,13 @@ public class EditProduct extends AppCompatActivity {
             price = Integer.parseInt(data.get("Price").toString());
             year = Integer.parseInt(data.get("Years").toString());
             image = data.get("Image").toString();
-            Log.d("Image", image);
 
             Product.setText(product);
-            Price.setText(price + "");
-            Year.setText(year + "");
+            Price.setText(String.valueOf(price));
+            Year.setText(String.valueOf(year));
             Description.setText(description);
 
             url = url + image;
-            Log.d("Image URL", url);
             Picasso.get().load(url).fit().placeholder(R.drawable.profile).into(Image);
             flag=1;
         } catch (JSONException e) {
@@ -95,10 +93,7 @@ public class EditProduct extends AppCompatActivity {
                 description = Description.getText().toString();
                 year = Integer.parseInt(Year.getText().toString());
                 price = Integer.parseInt(Price.getText().toString());
-                Log.d("Name: ", product);
-                Log.d("Description: ", description);
-                Log.d("Year", year+"");
-                Log.d("Price: ", price+"");
+
                 ProgressDialog progressDialog = new ProgressDialog(EditProduct.this);
                 progressDialog.setMessage("Updating Data");
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -124,6 +119,7 @@ public class EditProduct extends AppCompatActivity {
                             progressDialog.dismiss();
                             JsonObject jsonObject = response.body().getAsJsonObject();
                             String content = jsonObject.get("status").getAsString();
+                            Toast.makeText(EditProduct.this, "Details Updated Successfully", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(EditProduct.this, MainActivity.class);
                             startActivity(i);
                             finish();

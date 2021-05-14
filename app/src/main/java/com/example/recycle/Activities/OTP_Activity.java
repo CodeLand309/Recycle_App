@@ -39,7 +39,7 @@ public class OTP_Activity extends AppCompatActivity {
 
     EditText e1, e2, e3, e4, e5, e6;
     Button verify, resend;
-    String  phone, otp, c1,c2,c3,c4,c5,c6;
+    private String  phone, otp, c1,c2,c3,c4,c5,c6;
     private static long mTimeLeftInMillis = 120000;
     TextView countTime,wait;
 

@@ -156,9 +156,6 @@ public class SellFragment extends Fragment {
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 product_id = products.get(position).getProductID();
                                                 product_name = products.get(position).getProductName();
-                                                Log.d("Product ID", product_id+"");
-                                                Log.d("Product Name", product_name);
-                                                Toast.makeText(getContext(), product_name, Toast.LENGTH_SHORT).show();
                                                 if(isNetworkAvailable()) {
                                                     DeleteData(product_id, product_name);
                                                 }else{
@@ -293,18 +290,6 @@ public class SellFragment extends Fragment {
         date = products.get(position).getDate();
         status = products.get(position).getStatus();
 
-        Log.d("image", image);
-        Log.d("Product", product_name);
-        Log.d("Product ID", product_id+"");
-        Log.d("User ID", user_id+"");
-//        Log.d("User Name", user_name);
-        Log.d("Description", description);
-        Log.d("Price", price+"");
-        Log.d("Year", year+"");
-        Log.d("Date", date);
-
-
-        Log.d("Item", "changeActivity: ");
         JSONObject jsonData = new JSONObject();
         try {
 //            jsonData.put("Name", user_name);
@@ -326,7 +311,7 @@ public class SellFragment extends Fragment {
     }
     private void performPagination(){
         progressBar.setVisibility(View.VISIBLE);
-        Call<ArrayList<DataResponse>> call = restApiInterface.getProductData(page_number, item_count, user_id);
+        Call<ArrayList<DataResponse>> call = restApiInterface.getUserProducts(page_number, item_count, user_id);
         call.enqueue(new Callback<ArrayList<DataResponse>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<DataResponse>> call, @NonNull Response<ArrayList<DataResponse>> response) {
@@ -359,9 +344,11 @@ public class SellFragment extends Fragment {
                                             description = products.get(position).getDescription();
                                             price = products.get(position).getPrice();
                                             year = products.get(position).getYears();
-
-                                            Toast.makeText(getContext(), product_name, Toast.LENGTH_SHORT).show();
-                                            EditData(product_id, product_name, image, user_id, description, price, year);
+                                            if(isNetworkAvailable()) {
+                                                EditData(product_id, product_name, image, user_id, description, price, year);
+                                            }else{
+                                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
+                                            }
                                             return true;
                                         case R.id.delete_item:
                                             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -372,8 +359,11 @@ public class SellFragment extends Fragment {
                                                 public void onClick(DialogInterface dialogInterface, int i) {
                                                     product_id = products.get(position).getProductID();
                                                     product_name = products.get(position).getProductName();
-                                                    Toast.makeText(getContext(), product_name, Toast.LENGTH_SHORT).show();
-                                                    DeleteData(product_id, product_name);
+                                                    if(isNetworkAvailable()) {
+                                                        DeleteData(product_id, product_name);
+                                                    }else{
+                                                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
+                                                    }
                                                 }
                                             });
                                             builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {

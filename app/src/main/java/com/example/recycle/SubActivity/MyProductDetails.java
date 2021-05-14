@@ -61,7 +61,6 @@ public class MyProductDetails extends AppCompatActivity {
             image = data.get("Image").toString();
             date = data.get("Date").toString();
             status = data.get("Status").toString();
-            Log.d("Image", image);
 
             ProductName.setText(product_name);
             Price.setText(price);
@@ -74,7 +73,6 @@ public class MyProductDetails extends AppCompatActivity {
             else if(status.equals("0"))
                 Status.setText("Unsold");
             url = url + image;
-            Log.d("Image URL", url);
             Picasso.get().load(url).fit().centerInside().placeholder(R.drawable.ic_round_image_24).into(ProductImage);
             url = RestClient.BASE_URL + "product_image/";
         } catch (JSONException e) {

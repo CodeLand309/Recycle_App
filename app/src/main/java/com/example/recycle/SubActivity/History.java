@@ -58,12 +58,10 @@ public class History extends AppCompatActivity {
         user_id = sp.getInt("User ID", 0);
         progressBar = findViewById(R.id.progressBar);
         mRecyclerView = findViewById(R.id.history_container);
-        Log.d("TAG", "Reached Here1");
         mAdapter = new HistoryAdapter(products, History.this);
         mLayoutManager = new LinearLayoutManager(History.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        Log.d("TAG", "Reached Here2");
 
         restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
@@ -75,9 +73,7 @@ public class History extends AppCompatActivity {
                 if(response.body().get(0).getStatus().equals("found")) {
                     products = response.body().get(1).getItems();
                     mAdapter = new HistoryAdapter(products, History.this);
-                    Log.d("TAG", "Reached Here3");
                     mRecyclerView.setAdapter(mAdapter);
-                    Log.d("Tag", String.valueOf(response.body()));
                     progressBar.setVisibility(View.GONE);
                     mAdapter.setOnItemClickListener(new HistoryAdapter.OnItemClickListener() {
                         @Override
@@ -111,7 +107,6 @@ public class History extends AppCompatActivity {
         year = products.get(position).getYears();
         date = products.get(position).getDate();
         status = products.get(position).getStatus();
-        Log.d("Item", "changeActivity: ");
         JSONObject jsonData = new JSONObject();
         try {
             jsonData.put("User ID", user_id);

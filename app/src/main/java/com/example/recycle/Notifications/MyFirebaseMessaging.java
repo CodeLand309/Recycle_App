@@ -6,11 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -20,23 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.example.recycle.R;
-import com.example.recycle.RetrofitFolder.RestApiInterface;
-import com.example.recycle.RetrofitFolder.RestClient;
 import com.example.recycle.SubActivity.ChatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
-import java.util.ArrayList;
-
-import static java.security.AccessController.getContext;
 
 public class MyFirebaseMessaging extends FirebaseMessagingService {
 
-    private String Phone_Number;
     static final int NOTIFICATION_ID = 101;
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
@@ -50,8 +36,8 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        Phone_Number = (firebaseUser.getPhoneNumber()).substring(3);
-        if(firebaseUser != null && send.equals(Phone_Number)){
+        String phone_Number = (firebaseUser.getPhoneNumber()).substring(3);
+        if(firebaseUser != null && send.equals(phone_Number)){
             if(!currentUser.equals(user)) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     sendOreoNotification(remoteMessage);
@@ -107,7 +93,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle(title)
                 .setContentText(body)
-                .setPriority(Notification.PRIORITY_MAX)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setShowWhen(true)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(body).setBigContentTitle(title))
                 .setAutoCancel(true)

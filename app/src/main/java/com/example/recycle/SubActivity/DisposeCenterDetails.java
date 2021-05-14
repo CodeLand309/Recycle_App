@@ -44,14 +44,12 @@ public class DisposeCenterDetails extends AppCompatActivity {
             centre_address = data.get("Address").toString();
             phone = data.get("Phone").toString();
             image = data.get("Image").toString();
-            Log.d("Image", image);
 
             CentreName.setText(centre_name);
             CentreAddress.setText(centre_address);
             Phone.setText(phone);
 
             url = url + image;
-            Log.d("Image URL", url);
             Picasso.get().load(url).fit().centerInside().placeholder(R.drawable.ic_round_image_24).into(CentreImage);
             url = RestClient.BASE_URL + "dispose_image/";
         } catch (JSONException e) {

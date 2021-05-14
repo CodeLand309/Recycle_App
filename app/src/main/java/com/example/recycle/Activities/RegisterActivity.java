@@ -57,9 +57,9 @@ public class RegisterActivity extends AppCompatActivity {
     private int Age=0, key=0, flag=0;
     private String Name, Phone, Address, Gender, Profile;
     private SharedPreferences sp;
-    Uri imageURI;
-    Bitmap bitmap;
-    String Result;
+    private Uri imageURI;
+    private Bitmap bitmap;
+    private String Result;
 
     private RestApiInterface restApiInterface;
 
