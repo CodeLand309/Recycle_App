@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,9 @@ import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
 import com.example.recycle.SubActivity.DisposeCenterDetails;
+import com.example.recycle.SubActivity.InfoActivity;
+import com.example.recycle.SubActivity.InfoActivity_Electronic;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +43,7 @@ public class SearchFragment_DisposeCentre extends Fragment {
 
     private ProgressBar progressBar;
     private ArrayList<DisposeCentre> centres;
+    private FloatingActionButton Fab;
 
     private String image, centre_name, address, phone;
     private int centre_id;
@@ -64,6 +67,7 @@ public class SearchFragment_DisposeCentre extends Fragment {
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_dispose, container, false);
 
+        Fab = view.findViewById(R.id.information);
         setRetainInstance(true);
 
         Bundle bundle = getArguments();
@@ -104,6 +108,15 @@ public class SearchFragment_DisposeCentre extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
             }
         });
+
+        Fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), InfoActivity.class);
+                startActivity(i);
+            }
+        });
+
         return view;
     }
 

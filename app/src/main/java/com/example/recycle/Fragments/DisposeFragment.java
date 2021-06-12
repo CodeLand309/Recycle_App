@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,9 @@ import com.example.recycle.R;
 import com.example.recycle.RetrofitFolder.RestApiInterface;
 import com.example.recycle.RetrofitFolder.RestClient;
 import com.example.recycle.SubActivity.DisposeCenterDetails;
+import com.example.recycle.SubActivity.InfoActivity;
+import com.example.recycle.SubActivity.InfoActivity_Electronic;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +43,7 @@ public class DisposeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private DisposeAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
+    private FloatingActionButton Fab;
 
     private ProgressBar progressBar;
     private ArrayList<DisposeCentre> centres;
@@ -61,6 +64,8 @@ public class DisposeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view= inflater.inflate(R.layout.fragment_dispose, container, false);
+
+        Fab = view.findViewById(R.id.information);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Current Fragment", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -96,6 +101,14 @@ public class DisposeFragment extends Fragment {
             public void onFailure(Call<ArrayList<CentreListResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
+            }
+        });
+
+        Fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), InfoActivity.class);
+                startActivity(i);
             }
         });
 

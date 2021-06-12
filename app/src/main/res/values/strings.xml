@@ -50,8 +50,9 @@
     <!-- Sell Fragment End -->
 
     <!-- Dispose Fragment Start -->
-    <!-- Dispose Center Card View -->
-    <string name="DisposeCentreName">Dispose Centre Name</string>
+    <string name="MoreInfoFAB">More Info</string>
+        <!-- Dispose Center Card View -->
+        <string name="DisposeCentreName">Dispose Centre Name</string>
     <!-- Dispose Fragment End -->
 
     <!-- Settings Preference Fragment Start -->
@@ -210,6 +211,71 @@
         and the delivery of the product. If there are any issues you can report to us and we will
         get back to you.</string>
     <!-- About Activity End-->
+
+    <!-- Info Activity Start -->
+    <string name="LearnAboutWaste">Learn About Waste</string>
+    <string name="EwasteButton">More about E-waste</string>
+    <string name="PlasticButton">More about Plastic</string>
+    <string name="MoreAboutWasteButton">Types of Waste in Detail</string>
+    <string name="WasteType">Waste is classified into two types:
+        Biodegradable and Non-biodegradable waste.
+        Biodegradable wastes are the wastes that come from our kitchen and it includes
+        food remains, garden waste, etc. Biodegradable waste is also known as moist
+        waste.This can be composted to obtain manure. Biodegradable wastes decompose
+        themselves over a period of time depending on the material. Non-biodegradable wastes
+        are the wastes which include old newspapers, broken glass pieces, plastics, etc.
+        Non-biodegradable waste is known as dry waste. Dry wastes can be recycled
+        and can be reused. Non-biodegradable wastes do not decompose by themselves
+        and hence are major pollutants.</string>
+    <string name="RecyclingHeading">Recycling of Wastes</string>
+    <string name="RecyclingContent">Recycling of waste product is very important as 
+        this process helps in processing waste or used products into useful or new products.
+        Recycling helps in controlling air, water, and land pollution. It also uses less energy.
+        There are a number of items that can be recycled like paper, plastic, glass, 
+        etc. Recycling helps in conserving natural resources and also helps in conserving
+        energy. Recycling helps in protecting the environment as it helps in reducing
+        air, water, and soil pollution.</string>
+    <!-- Info Activity End -->
+
+    <!-- Plastic Activity Start -->
+    <string name="PlasticHeading">Plastic</string>
+    <string name="TypesofPlastic">Types of Plastic</string>
+    <string name="PET">PET (Polyethylene Terephthalate)</string>
+    <string name="PETImage">PET Image</string>
+    <string name="HDPE">HDPE (High Density Polyethylene)</string>
+    <string name="HDPEImage">HDPE Image</string>
+    <string name="PVC">PVC(Polyvinyl Chloride)</string>
+    <string name="PVCImage">PVC Image</string>
+    <string name="LDPE">LDPE (Low-Density Polyethylene)</string>
+    <string name="LDPEImage">LDPE Image</string>
+    <string name="Polypropylene">PP (Polypropylene)</string>
+    <string name="PolypropyleneImage">Polypropylene Image</string>
+    <string name="Polystyrene">PS (Polystyrene)</string>
+    <string name="PolystyreneImage">Polystyrene Image</string>
+    <string name="Miscellaneous">Miscellaneous</string>
+    <string name="MiscellaneousPlastic">SPI code 7 is used for all plastics not part
+        of the other 6 types. Despite their inclusion in popular items such as
+        sunglasses, computer casing, nylon, compact discs and baby bottles, these
+        plastics contain the toxic chemical bisphenol A or BPA. Not only are they
+        dangerous, but these types of plastics are also extremely hard to recycle
+        as they don’t break down easily.</string>
+    <!-- Plastic Activity End -->
+
+    <!-- Electronics Activity Start -->
+    <string name="EwasteHeading">E-waste</string>
+    <string name="EwasteContent">Electronic waste (e-waste) typically includes
+        discarded computer monitors, motherboards, mobile phones and chargers,
+        compact discs, headphones, television sets, air conditioners and refrigerators.
+        According to the Global E-Waste Monitor 2017, India generates about 2
+        million tonnes (MT) of e-waste annually and ranks fifth among e-waste
+        producing countries, after the US, China, Japan and Germany. In 2016-17,
+        India treated only 0.036 MT of its e-waste. About 95 per cent of India’s
+        e-waste is recycled in the informal sector and in a crude manner. A
+        report on e-waste presented by the United Nations (UN) in World Economic
+        Forum on January 24, 2019 points out that the waste stream reached
+        48.5 MT in 2018 and the figure is expected to double if nothing changes.
+    </string>
+    <!-- Electronic Activity End -->
 
     <!-- Bottom Navigation Bar Menu Start -->
     <string name="HomeOption">Home</string>
