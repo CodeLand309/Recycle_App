@@ -72,11 +72,13 @@
     <!-- Connection Fragment Start -->
     <string name="NoInternetConnection">No Internet Connection</string>
     <string name="NoInternetImageDescription">No Internet Image</string>
+    <string name="NoInternetAction">Check you internet connection and Try again</string>
     <!-- Connection Fragment End -->
 
     <!-- NotFound Fragment Start -->
     <string name="NoSearchResult">Empty Search Result</string>
     <string name="NoSearchResultImageDescription">Empty Search Result Image</string>
+    <string name="NoSearchHint">Oops! we did not find what you asked for</string>
     <!-- NotFound Fragment End -->
 
     <!-- NotFound Activity Start -->
@@ -87,6 +89,7 @@
     <!-- Server Error Start -->
     <string name="ServerError">Server Not Responding</string>
     <string name="ServerErrorImageDescription">Server Error Image</string>
+    <string name="ServerErrorHint">Looks like the server is down, Try after sometime</string>
     <!-- Server Error End -->
 
     <!-- Chat Activity Start -->

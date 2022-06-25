@@ -28,16 +28,5 @@
             android:layout_gravity="bottom|center"
             android:visibility="gone" />
 
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/information"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:clickable="true"
-            android:src="@drawable/ic_round_help_24" />
-
     </FrameLayout>
 </RelativeLayout>

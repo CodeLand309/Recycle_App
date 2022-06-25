@@ -40,4 +40,13 @@ public class DisposeCentre {
     public int getCentreID(){
         return mCentreID;
     }
+
+    public boolean equals(DisposeCentre centre){
+        if(centre == null)
+            return false;
+        return (centre.getCentreName().equals(this.getCentreName()) ||
+                centre.getCentreAddress().equals(this.getCentreAddress()) ||
+                centre.getCentrePhone().equals(this.getCentrePhone())) ||
+                centre.getCentreImage().equals(this.getCentreImage());
+    }
 }

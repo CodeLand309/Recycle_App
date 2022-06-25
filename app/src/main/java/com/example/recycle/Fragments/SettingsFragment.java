@@ -4,21 +4,22 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.example.recycle.Activities.MainActivity;
 import com.example.recycle.R;
-import com.example.recycle.RetrofitFolder.RestApiInterface;
-import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.Network.RestApiInterface;
+import com.example.recycle.Network.RestClient;
 import com.example.recycle.Activities.SignUPActivity;
 import com.example.recycle.SubActivity.ChangePhoneActivity;
 import com.example.recycle.SubActivity.ChangeProfile;
@@ -68,12 +69,13 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
         profile.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                if(isNetworkAvailable()){
-                    Intent i = new Intent(getContext(), ChangeProfile.class);
+                if(((MainActivity)getActivity()).isNetworkAvailable()){
+                    Intent i = new Intent(getActivity(), ChangeProfile.class);
                     startActivity(i);
                 }
                 else{
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
+                    ((MainActivity) getActivity()).showHideErrorMessages(0);
+                    //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
                 }
                 return false;
             }
@@ -88,11 +90,12 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(isNetworkAvailable()) {
-                            Intent intent = new Intent(getContext(), ChangePhoneActivity.class);
+                        if(((MainActivity)getActivity()).isNetworkAvailable()) {
+                            Intent intent = new Intent(getActivity(), ChangePhoneActivity.class);
                             startActivity(intent);
                         }else{
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
+                            ((MainActivity) getActivity()).showHideErrorMessages(0);
+                            //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
                         }
                     }
                 });
@@ -112,11 +115,12 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
         history.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                if(isNetworkAvailable()){
-                    Intent i = new Intent(getContext(), History.class);
+                if(((MainActivity)getActivity()).isNetworkAvailable()){
+                    Intent i = new Intent(getActivity(), History.class);
                     startActivity(i);
                 }else{
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
+                    ((MainActivity) getActivity()).showHideErrorMessages(0);
+                    //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
                 }
                 return false;
             }
@@ -159,7 +163,7 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(isNetworkAvailable()) {
+                        if(((MainActivity)getActivity()).isNetworkAvailable()) {
                             FirebaseAuth.getInstance().getCurrentUser().unlink(PhoneAuthProvider.PROVIDER_ID);
                             restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
@@ -194,12 +198,14 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                                 public void onFailure(Call<JsonElement> call, Throwable t) {
                                     Result = t.getMessage();
                                     Toast.makeText(getContext(), Result, Toast.LENGTH_SHORT).show();
-                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
+                                    ((MainActivity) getActivity()).showHideErrorMessages(1);
+                                    //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
                                 }
                             });
                         }
                         else{
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
+                            ((MainActivity) getActivity()).showHideErrorMessages(0);
+                            //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
                         }
                     }
                 });
@@ -224,7 +230,7 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(isNetworkAvailable()) {
+                        if(((MainActivity)getActivity()).isNetworkAvailable()) {
                             FirebaseAuth.getInstance().signOut();
                             editor.remove("Phone Number");
                             editor.putInt("Log in Status", 1);
@@ -234,7 +240,8 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                             getActivity().finish();
                         }
                         else{
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
+                            ((MainActivity) getActivity()).showHideErrorMessages(0);
+                            //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
                         }
                     }
                 });
@@ -251,10 +258,16 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
             }
         });
     }
-    public boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+//    public boolean isNetworkAvailable() {
+//        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+//        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+//    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        view.setBackgroundColor(getResources().getColor(R.color.customWhite));
     }
 }
 

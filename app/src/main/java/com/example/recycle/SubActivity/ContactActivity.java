@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.example.recycle.Model.User;
 import com.example.recycle.R;
-import com.example.recycle.RetrofitFolder.RestApiInterface;
-import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.Network.RestApiInterface;
+import com.example.recycle.Network.RestClient;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;

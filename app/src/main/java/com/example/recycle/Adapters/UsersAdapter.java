@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recycle.Model.Chat;
 import com.example.recycle.Model.ChatUsers;
 import com.example.recycle.R;
-import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.Network.RestClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

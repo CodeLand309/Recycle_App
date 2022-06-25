@@ -3,7 +3,6 @@ package com.example.recycle.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,27 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.recycle.Adapters.DisposeAdapter;
-import com.example.recycle.Model.CentreListResponse;
 import com.example.recycle.Model.DisposeCentre;
 import com.example.recycle.R;
-import com.example.recycle.RetrofitFolder.RestApiInterface;
-import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.Network.RestApiInterface;
+import com.example.recycle.Network.RestClient;
 import com.example.recycle.SubActivity.DisposeCenterDetails;
 import com.example.recycle.SubActivity.InfoActivity;
-import com.example.recycle.SubActivity.InfoActivity_Electronic;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SearchFragment_DisposeCentre extends Fragment {
 
@@ -75,7 +67,7 @@ public class SearchFragment_DisposeCentre extends Fragment {
 
         progressBar = view.findViewById(R.id.progressBar);
         mRecyclerView = view.findViewById(R.id.recyclerView);
-        mAdapter = new DisposeAdapter(centres, getContext());
+       // mAdapter = new DisposeAdapter(centres, getContext());
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -83,31 +75,31 @@ public class SearchFragment_DisposeCentre extends Fragment {
         restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
         progressBar.setVisibility(View.VISIBLE);
-        Call<ArrayList<CentreListResponse>> call = restApiInterface.searchCentreName(search_word);
-        call.enqueue(new Callback<ArrayList<CentreListResponse>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<CentreListResponse>> call, @NonNull Response<ArrayList<CentreListResponse>> response) {
-                if(response.body().get(0).getStatus().equals("found")){
-                    centres = response.body().get(1).getCentres();
-                    mAdapter = new DisposeAdapter(centres, getContext());
-                    mRecyclerView.setAdapter(mAdapter);
-                    progressBar.setVisibility(View.GONE);
-                    mAdapter.setOnItemClickListener(new DisposeAdapter.OnCentreClickListener() {
-                        @Override
-                        public void onCentreCLick(int position) {
-                            changeActivity(position, centres);
-                        }
-                    });
-                }else{
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NotFoundFragment()).commit();
-                }
-            }
-            @Override
-            public void onFailure(Call<ArrayList<CentreListResponse>> call, Throwable t) {
-                Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
-            }
-        });
+//        Call<ArrayList<CentreListResponse>> call = restApiInterface.searchCentreName(search_word);
+//        call.enqueue(new Callback<ArrayList<CentreListResponse>>() {
+//            @Override
+//            public void onResponse(@NonNull Call<ArrayList<CentreListResponse>> call, @NonNull Response<ArrayList<CentreListResponse>> response) {
+//                if(response.body().get(0).getStatus().equals("found")){
+//                    centres = response.body().get(1).getCentres();
+//                    mAdapter = new DisposeAdapter(centres, getContext());
+//                    mRecyclerView.setAdapter(mAdapter);
+//                    progressBar.setVisibility(View.GONE);
+//                    mAdapter.setOnItemClickListener(new DisposeAdapter.OnCentreClickListener() {
+//                        @Override
+//                        public void onCentreCLick(int position) {
+//                            changeActivity(position, centres);
+//                        }
+//                    });
+//                }else{
+//                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NotFoundFragment()).commit();
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<ArrayList<CentreListResponse>> call, Throwable t) {
+//                Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
+//            }
+//        });
 
         Fab.setOnClickListener(new View.OnClickListener() {
             @Override

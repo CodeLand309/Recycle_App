@@ -1,4 +1,6 @@
-package com.example.recycle.RetrofitFolder;
+package com.example.recycle.Network;
+
+import androidx.lifecycle.LiveData;
 
 import com.example.recycle.Model.CentreListResponse;
 import com.example.recycle.Model.DataResponse;
@@ -9,24 +11,29 @@ import com.google.gson.JsonElement;
 import java.util.ArrayList;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface RestApiInterface {
 
+    @GET("/getProducts")
+    Call<ArrayList<DataResponse>> getProducts(@Query("page_number") int page, @Query("item_count") int items, @Header("type") String type, @Header("id") Integer id, @Header("search") String search);
+
     @GET("/getProductData")
-    Call<ArrayList<DataResponse>> getProductData(@Query("page_number") int page, @Query("item_count") int items, @Query("id") int id);
+    Call<ArrayList<DataResponse>> getProductData(@Query("page_number") int page, @Query("item_count") int items, @Header("id") int id);
 
     @GET("/getProductDataNoID")
     Call<ArrayList<DataResponse>> getProductDataNoID(@Query("page_number") int page, @Query("item_count") int items);
 
     @GET("/getCentreData")
-    Call<ArrayList<CentreListResponse>> getCentreData(@Query("page_number") int page, @Query("item_count") int items);
+    Call<ArrayList<CentreListResponse>> getCentreData(@Query("page_number") int page, @Query("item_count") int items, @Query("search") String search);
 
     @GET("/getHistory")
     Call<ArrayList<HistoryResponse>> getHistory(@Query("id") int id);

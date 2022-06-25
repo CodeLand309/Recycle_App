@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,8 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.recycle.R;
-import com.example.recycle.RetrofitFolder.RestApiInterface;
-import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.Network.RestApiInterface;
+import com.example.recycle.Network.RestClient;
 import com.example.recycle.Activities.ServerErrorActivity;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

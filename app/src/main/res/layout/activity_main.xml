@@ -4,20 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/customSkyBlue"
+    android:background="@color/customSkyBlue"
     android:id="@+id/activity_main"
+    android:gravity="center"
     tools:context=".Activities.MainActivity">
 
     <include
-        layout="@layout/toolbar"
-        android:id="@+id/toolbar" />
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
-    <FrameLayout
+<!--    <FrameLayout-->
+<!--        android:id="@+id/fragment_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@+id/toolbar"-->
+<!--        android:layout_above="@+id/bottom_navigation"/>-->
+
+
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation"
         android:layout_below="@+id/toolbar"
-        android:layout_above="@+id/bottom_navigation"/>
+        android:backgroundTint="@color/customSkyBlue"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_main_activity" />
+
+
+    <RelativeLayout
+        android:id="@+id/conn_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerInParent="true"
+        android:backgroundTint="@color/customSkyBlue"
+        android:gravity="center"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/error_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/NoInternetImageDescription"
+            app:srcCompat="@drawable/no_connection" />
+
+        <TextView
+            android:id="@+id/no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/error_image"
+            android:layout_centerInParent="true"
+            android:autoSizeTextType="uniform"
+            android:text="@string/NoInternetConnection"
+            android:textColor="@color/customWhite"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/error_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/no"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:ems="12"
+            android:gravity="center"
+            android:text="@string/NoInternetAction"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/customBlack" />
+
+    </RelativeLayout>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -29,5 +90,15 @@
         app:itemRippleColor="@color/customWhite"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_navigation" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@id/bottom_navigation"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center|bottom"
+        android:visibility="invisible" />
 
 </RelativeLayout>

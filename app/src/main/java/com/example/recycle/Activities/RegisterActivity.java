@@ -23,8 +23,8 @@ import android.widget.Toast;
 
 import com.example.recycle.Model.User;
 import com.example.recycle.R;
-import com.example.recycle.RetrofitFolder.RestApiInterface;
-import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.Network.RestApiInterface;
+import com.example.recycle.Network.RestClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;

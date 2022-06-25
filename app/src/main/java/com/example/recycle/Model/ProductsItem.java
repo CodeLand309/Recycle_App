@@ -75,4 +75,18 @@ public class ProductsItem {
     public String getDate() {
         return mDate;
     }
+
+    public boolean equals(ProductsItem product){
+        if(product==null)
+            return false;
+        return  (product.getProductName().equals(this.getProductName()) ||
+                product.getImage().equals(this.getImage()) ||
+                product.getDescription().equals(this.getDescription()) ||
+                product.getUserName().equals(this.getUserName()) ||
+                product.getUserID() == this.getUserID() ||
+                product.getPrice() == this.getPrice() ||
+                product.getDate().equals(this.getDate()) ||
+                product.getYears() == this.getYears() ||
+                product.getStatus() == this.getStatus());
+    }
 }

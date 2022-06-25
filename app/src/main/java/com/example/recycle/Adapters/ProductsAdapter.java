@@ -7,18 +7,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.paging.PagedList;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recycle.Model.ProductsItem;
 import com.example.recycle.R;
-import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.Network.RestClient;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
-    private ArrayList<ProductsItem> mProductList;
+public class ProductsAdapter extends PagedListAdapter<ProductsItem, ProductsAdapter.ProductViewHolder> {
+    private PagedList<ProductsItem> mProductList;
     private Context mContext;
     public OnItemClickListener mListener;
     String url = RestClient.BASE_URL + "product_image/";
@@ -55,10 +59,33 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             });
         }
     }
-    public ProductsAdapter(ArrayList<ProductsItem> exampleList, Context context) {
-        mProductList = exampleList;
+    public ProductsAdapter(Context context) {
+        super(DIFF_CALLBACK);
+        //mProductList = exampleList;
         mContext = context;
     }
+
+    private static DiffUtil.ItemCallback<ProductsItem> DIFF_CALLBACK = new DiffUtil.ItemCallback<ProductsItem>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull ProductsItem oldItem, @NonNull ProductsItem newItem) {
+            return oldItem.getProductID() == newItem.getProductID();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull ProductsItem oldItem, @NonNull ProductsItem newItem) {
+            return oldItem.equals(newItem);
+//            return  (oldItem.getProductName().equals(newItem.getProductName()) ||
+//                    oldItem.getImage().equals(newItem.getImage()) ||
+//                    oldItem.getDescription().equals(newItem.getDescription()) ||
+//                    oldItem.getUserName().equals(newItem.getUserName()) ||
+//                    oldItem.getUserID() == newItem.getUserID() ||
+//                    oldItem.getPrice() == newItem.getPrice() ||
+//                    oldItem.getDate().equals(newItem.getDate()) ||
+//                    oldItem.getYears() == newItem.getYears() ||
+//                    oldItem.getStatus() == newItem.getStatus());
+        }
+    };
+
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
@@ -67,25 +94,27 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     }
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-        ProductsItem currentItem = mProductList.get(position);
+        //ProductsItem currentItem = mProductList.get(position);
+        ProductsItem currentItem = getItem(position);
 //        holder.mImageView.setImageResource(currentItem.getImage());
         holder.mTextView1.setText(currentItem.getProductName());
         holder.mTextView2.setText("₹" + Integer.toString(currentItem.getPrice()));
+        holder.mTextView1.setSelected(true);
         url = url + currentItem.getImage();
         Picasso.get().load(url).fit().centerInside().placeholder(R.drawable.ic_round_image_24).into(holder.mImageView);
         url = RestClient.BASE_URL + "product_image/";
     }
-    @Override
-    public int getItemCount() {
-        if(mProductList!=null)
-            return mProductList.size();
-        return 0;
-    }
+//    @Override
+//    public int getItemCount() {
+//        if(mProductList!=null)
+//            return mProductList.size();
+//        return 0;
+//    }
 
-    public void addProduct(List<ProductsItem> products){
-        for(ProductsItem item : products){
-            mProductList.add(item);
-        }
-        notifyDataSetChanged();
-    }
+//    public void addProduct(List<ProductsItem> products){
+//        for(ProductsItem item : products){
+//            mProductList.add(item);
+//        }
+//        notifyDataSetChanged();
+//    }
 }

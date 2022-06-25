@@ -22,6 +22,7 @@ import com.example.recycle.SubActivity.ChatActivity;
 import com.example.recycle.Model.ChatUsers;
 import com.example.recycle.Notifications.Token;
 import com.example.recycle.R;
+import com.example.recycle.databinding.FragmentChatBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +40,7 @@ public class ChatFragment extends Fragment {
     private String phone, name, image, Phone_Number;
     private int id;
 
+    private FragmentChatBinding fragmentChatBinding = null;
     private RecyclerView mRecyclerView;
     private UsersAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
@@ -46,17 +48,19 @@ public class ChatFragment extends Fragment {
     private FirebaseUser firebaseUser;
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
 //        menu.clear();
-        super.onCreateOptionsMenu(menu, inflater);
+        super.onPrepareOptionsMenu(menu);
         menu.removeItem(R.id.search);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chat, container, false);
-        mRecyclerView = view.findViewById(R.id.recyclerView);
+
+        FragmentChatBinding fragmentChatBinding = FragmentChatBinding.inflate(inflater, container, false);
+        FragmentChatBinding binding = fragmentChatBinding;
+        mRecyclerView = binding.recyclerView;
 
         setHasOptionsMenu(true);
 
@@ -71,7 +75,7 @@ public class ChatFragment extends Fragment {
         readUsers();
 
         updateToken(FirebaseInstanceId.getInstance().getToken());
-        return view;
+        return binding.getRoot();
     }
     private void updateToken(String token){
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -119,5 +123,17 @@ public class ChatFragment extends Fragment {
                 Toast.makeText(getContext(), "Could Not Load Data", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+//    @Override
+//    public boolean isNetworkAvailable() {
+//        return false;
+//    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        fragmentChatBinding = null;
     }
 }

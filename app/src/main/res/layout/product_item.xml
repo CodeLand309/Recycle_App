@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:contentDescription="@string/ProductImageDescription"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
@@ -34,6 +34,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/ProductName"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:scrollHorizontally="true"
                 android:textColor="@color/customWhite"
                 android:textSize="20sp"
                 android:textStyle="bold" />

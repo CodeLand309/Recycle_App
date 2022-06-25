@@ -1,4 +1,4 @@
-package com.example.recycle.RetrofitFolder;
+package com.example.recycle.Network;
 
 import com.example.recycle.Notifications.MyResponse;
 import com.example.recycle.Notifications.Sender;

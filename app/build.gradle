@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.1"
+    compileSdkVersion 31
+    buildToolsVersion '32.0.0'
 
     defaultConfig {
         applicationId "com.example.recycle"
         minSdkVersion 26
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -26,6 +26,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 
@@ -40,6 +43,21 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
+//    def lifecycle_version = "2.4.1"
+//
+//    // ViewModel
+//    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+//    // LiveData
+//    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+
+    def paging_version = "3.1.1"
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    implementation "androidx.paging:paging-guava:$paging_version"
+
+    //RxJava
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
 
     // define any required OkHttp artifacts without version
@@ -52,6 +70,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-storage'
 
+    implementation 'android.arch.lifecycle:reactivestreams:1.1.1'
+
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
 
@@ -60,6 +80,8 @@ dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.4.2'
+    implementation 'androidx.navigation:navigation-ui:2.4.2'
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

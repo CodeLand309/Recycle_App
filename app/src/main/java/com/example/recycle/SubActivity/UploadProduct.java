@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,10 +19,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.recycle.Activities.MainActivity;
-import com.example.recycle.Activities.RegisterActivity;
 import com.example.recycle.R;
-import com.example.recycle.RetrofitFolder.RestApiInterface;
-import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.Network.RestApiInterface;
+import com.example.recycle.Network.RestClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 

@@ -5,34 +5,26 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.recycle.Adapters.ProductsAdapter;
-import com.example.recycle.Model.DataResponse;
 import com.example.recycle.Model.ProductsItem;
 import com.example.recycle.R;
-import com.example.recycle.RetrofitFolder.RestApiInterface;
-import com.example.recycle.RetrofitFolder.RestClient;
+import com.example.recycle.Network.RestApiInterface;
+import com.example.recycle.Network.RestClient;
 import com.example.recycle.SubActivity.ProductDetails;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class SearchFragment_Product extends Fragment {
@@ -73,7 +65,7 @@ public class SearchFragment_Product extends Fragment {
 
         progressBar = view.findViewById(R.id.progressBar);
         mRecyclerView = view.findViewById(R.id.recyclerView);
-        mAdapter = new ProductsAdapter(products, getContext());
+        //mAdapter = new ProductsAdapter(products, getContext());
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(getContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -84,31 +76,31 @@ public class SearchFragment_Product extends Fragment {
         restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
         progressBar.setVisibility(View.VISIBLE);
-        Call<ArrayList<DataResponse>> call = restApiInterface.searchProductName(user_id, search_word);
-        call.enqueue(new Callback<ArrayList<DataResponse>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<DataResponse>> call, @NonNull Response<ArrayList<DataResponse>> response) {
-                if(response.body().get(0).getStatus().equals("found")) {
-                    products = response.body().get(1).getItems();
-                    mAdapter = new ProductsAdapter(products, getContext());
-                    mRecyclerView.setAdapter(mAdapter);
-                    progressBar.setVisibility(View.GONE);
-                    mAdapter.setOnItemClickListener(new ProductsAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemCLick(int position) {
-                            changeActivity(position, products);
-                        }
-                    });
-                }else{
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NotFoundFragment()).commit();
-                }
-            }
-            @Override
-            public void onFailure(Call<ArrayList<DataResponse>> call, Throwable t) {
-                Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
-            }
-        });
+//        Call<ArrayList<DataResponse>> call = restApiInterface.searchProductName(user_id, search_word);
+//        call.enqueue(new Callback<ArrayList<DataResponse>>() {
+//            @Override
+//            public void onResponse(@NonNull Call<ArrayList<DataResponse>> call, @NonNull Response<ArrayList<DataResponse>> response) {
+//                if(response.body().get(0).getStatus().equals("found")) {
+//                    products = response.body().get(1).getItems();
+//                    mAdapter = new ProductsAdapter(products, getContext());
+//                    mRecyclerView.setAdapter(mAdapter);
+//                    progressBar.setVisibility(View.GONE);
+//                    mAdapter.setOnItemClickListener(new ProductsAdapter.OnItemClickListener() {
+//                        @Override
+//                        public void onItemCLick(int position) {
+//                            changeActivity(position, products);
+//                        }
+//                    });
+//                }else{
+//                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NotFoundFragment()).commit();
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<ArrayList<DataResponse>> call, Throwable t) {
+//                Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(1)).commit();
+//            }
+//        });
         return view;
     }
 
