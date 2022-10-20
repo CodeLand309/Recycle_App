@@ -322,7 +322,7 @@ public class DisposeFragment extends Fragment {
                     if (integer != 2 && integer != 4 && integer != -1) {
                         hideRecyclerView();
                         ((MainActivity) getActivity()).showHideErrorMessages(integer);
-                        Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
                         ((MainActivity) getActivity()).hideProgress();
                     }
                     if(fragmentDisposeBinding.swipeRefresh.isRefreshing())

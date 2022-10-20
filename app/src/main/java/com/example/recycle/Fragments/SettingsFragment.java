@@ -24,10 +24,13 @@ import com.example.recycle.Activities.SignUPActivity;
 import com.example.recycle.SubActivity.ChangePhoneActivity;
 import com.example.recycle.SubActivity.ChangeProfile;
 import com.example.recycle.SubActivity.History;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import java.time.Duration;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,7 +77,8 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                     startActivity(i);
                 }
                 else{
-                    ((MainActivity) getActivity()).showHideErrorMessages(0);
+//                    ((MainActivity) getActivity()).showHideErrorMessages(0);
+                    showSnackbar(getString(R.string.NoInternetConnection), Snackbar.LENGTH_SHORT);
                     //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
                 }
                 return false;
@@ -94,7 +98,8 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                             Intent intent = new Intent(getActivity(), ChangePhoneActivity.class);
                             startActivity(intent);
                         }else{
-                            ((MainActivity) getActivity()).showHideErrorMessages(0);
+//                            ((MainActivity) getActivity()).showHideErrorMessages(0);
+                            showSnackbar(getString(R.string.NoInternetConnection), Snackbar.LENGTH_SHORT);
                             //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
                         }
                     }
@@ -119,7 +124,8 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                     Intent i = new Intent(getActivity(), History.class);
                     startActivity(i);
                 }else{
-                    ((MainActivity) getActivity()).showHideErrorMessages(0);
+//                    ((MainActivity) getActivity()).showHideErrorMessages(0);
+                    showSnackbar(getString(R.string.NoInternetConnection), Snackbar.LENGTH_SHORT);
                     //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
                 }
                 return false;
@@ -129,13 +135,17 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
         help.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent i = new Intent(Intent.ACTION_SEND);
-                //i.setType("text/plain"); //use this line for testing in the emulator
-                i.setType("message/rfc822"); // use from live device
-                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"CodeLand309@gmail.com"});
-                i.putExtra(Intent.EXTRA_SUBJECT, "Subject Goes here (Give a Title)");
-                i.putExtra(Intent.EXTRA_TEXT, "Body Goes Here (Enter your doubts here)");
-                startActivity(Intent.createChooser(i, "Select email application."));
+                if(((MainActivity)getActivity()).isNetworkAvailable()) {
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    //i.setType("text/plain"); //use this line for testing in the emulator
+                    i.setType("message/rfc822"); // use from live device
+                    i.putExtra(Intent.EXTRA_EMAIL, new String[]{"CodeLand309@gmail.com"});
+                    i.putExtra(Intent.EXTRA_SUBJECT, "Subject Goes here (Give a Title)");
+                    i.putExtra(Intent.EXTRA_TEXT, "Body Goes Here (Enter your doubts here)");
+                    startActivity(Intent.createChooser(i, "Select email application."));
+                }else{
+                    showSnackbar(getString(R.string.NoInternetConnection), Snackbar.LENGTH_SHORT);
+                }
                 return false;
             }
         });
@@ -143,13 +153,17 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
         report.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             public boolean onPreferenceClick(Preference preference) {
-                Intent i = new Intent(Intent.ACTION_SEND);
-                //i.setType("text/plain"); //use this line for testing in the emulator
-                i.setType("message/rfc822"); // use from live device
-                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"CodeLand309@gmail.com"});
-                i.putExtra(Intent.EXTRA_SUBJECT, "Subject Goes here (Give a Title)");
-                i.putExtra(Intent.EXTRA_TEXT, "Body Goes Here (Type the problem)");
-                startActivity(Intent.createChooser(i, "Select email application."));
+                if(((MainActivity)getActivity()).isNetworkAvailable()) {
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    //i.setType("text/plain"); //use this line for testing in the emulator
+                    i.setType("message/rfc822"); // use from live device
+                    i.putExtra(Intent.EXTRA_EMAIL, new String[]{"CodeLand309@gmail.com"});
+                    i.putExtra(Intent.EXTRA_SUBJECT, "Subject Goes here (Give a Title)");
+                    i.putExtra(Intent.EXTRA_TEXT, "Body Goes Here (Type the problem)");
+                    startActivity(Intent.createChooser(i, "Select email application."));
+                }else{
+                    showSnackbar(getString(R.string.NoInternetConnection), Snackbar.LENGTH_SHORT);
+                }
                 return false;
             }
         });
@@ -204,7 +218,8 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                             });
                         }
                         else{
-                            ((MainActivity) getActivity()).showHideErrorMessages(0);
+//                            ((MainActivity) getActivity()).showHideErrorMessages(0);
+                            showSnackbar(getString(R.string.NoInternetConnection), Snackbar.LENGTH_SHORT);
                             //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
                         }
                     }
@@ -240,7 +255,8 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
                             getActivity().finish();
                         }
                         else{
-                            ((MainActivity) getActivity()).showHideErrorMessages(0);
+//                            ((MainActivity) getActivity()).showHideErrorMessages(0);
+                            showSnackbar(getString(R.string.NoInternetConnection), Snackbar.LENGTH_SHORT);
                             //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnectionFragment(0)).commit();
                         }
                     }
@@ -258,11 +274,10 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
             }
         });
     }
-//    public boolean isNetworkAvailable() {
-//        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-//        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-//    }
+
+    public void showSnackbar(String message, int duration){
+        Snackbar.make(getView(), message, duration).show();
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

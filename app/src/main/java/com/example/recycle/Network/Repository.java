@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.recycle.Model.CentreListResponse;
 import com.example.recycle.Model.DataResponse;
+import com.example.recycle.Model.User;
 
 import java.util.ArrayList;
 
@@ -65,6 +66,11 @@ public class Repository {
 
     public Call<ArrayList<CentreListResponse>> searchCentreName(String name){
         return restApiInterface.searchCentreName(name);
+    }
+
+    //This function is not used as of now
+    public Call<User> checkUserExists(String phone){
+        return restApiInterface.checkUserExists(phone);
     }
 //
 //    public void registerUser(String name, String gender, String address, String image, String phone, int age){

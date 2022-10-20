@@ -3,12 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/drawable-v24/background_right_chat.xml" value="0.1" />
+        <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/drawable/badge.xml" value="0.1005" />
         <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/drawable/ic_round_image_24.xml" value="0.1" />
         <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/drawable/ic_round_options.xml" value="0.1" />
         <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/drawable/ic_round_settings_phone_24.xml" value="0.1" />
+        <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/drawable/table_row.xml" value="0.1" />
+        <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/layout/activity_change_phone.xml" value="1.2" />
         <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/layout/activity_chat.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/layout/activity_launch.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/layout/activity_register.xml" value="0.176" />
         <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/layout/activity_server_error.xml" value="0.1" />
         <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/layout/chat_item_right.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/dhans/AndroidStudioProjects/Recycle/app/src/main/res/layout/fragment_connection.xml" value="0.22592592592592592" />

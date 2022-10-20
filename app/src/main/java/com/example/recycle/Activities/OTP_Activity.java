@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recycle.Model.User;
+import com.example.recycle.Network.Repository;
 import com.example.recycle.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +30,10 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OTP_Activity extends AppCompatActivity {
 
@@ -42,6 +48,9 @@ public class OTP_Activity extends AppCompatActivity {
     private String  phone, otp, c1,c2,c3,c4,c5,c6;
     private static long mTimeLeftInMillis = 120000;
     TextView countTime,wait;
+
+    private Repository repository;
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,18 +238,18 @@ public class OTP_Activity extends AppCompatActivity {
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                 Toast.makeText(OTP_Activity.this,"verification completed",Toast.LENGTH_SHORT).show();
                 wait.setVisibility(View.VISIBLE);
-                countTime.setVisibility(View.VISIBLE);
-                new CountDownTimer(120000,1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        mTimeLeftInMillis = millisUntilFinished;
-                        updateCountDownText();
-                    }
-                    @Override
-                    public void onFinish() {
-                        countTime.setText("TimeOut");
-                    }
-                }.start();
+//                countTime.setVisibility(View.VISIBLE);
+//                new CountDownTimer(120000,1000) {
+//                    @Override
+//                    public void onTick(long millisUntilFinished) {
+//                        mTimeLeftInMillis = millisUntilFinished;
+//                        updateCountDownText();
+//                    }
+//                    @Override
+//                    public void onFinish() {
+//                        countTime.setText("TimeOut");
+//                    }
+//                }.start();
             }
 
             @Override
@@ -283,7 +292,7 @@ public class OTP_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            SharedPreferences sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
+                            sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
                             if(sp.contains("User ID")){
                                 Intent register = new Intent(OTP_Activity.this, MainActivity.class);
                                 FirebaseUser user = task.getResult().getUser();
@@ -295,19 +304,50 @@ public class OTP_Activity extends AppCompatActivity {
                                 finish();
                             }
                             else {
-                                Intent register = new Intent(OTP_Activity.this, RegisterActivity.class);
-                                SharedPreferences.Editor editor = sp.edit();
-                                editor.putString("Phone Number", phone);
-                                editor.putInt("Log in Status", 1);
-                                editor.apply();
-                                FirebaseUser user = task.getResult().getUser();
-                                startActivity(register);
-                                finish();
+                                checkUserExists(phone);
                             }
                         } else {
                             Toast.makeText(OTP_Activity.this,"Incorrect OTP",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+    }
+
+    //Check whether user already exists
+    private void checkUserExists(String phone) {
+        repository = Repository.getRepository();
+        repository.checkUserExists(phone).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()){
+                    User user = response.body();
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("Name", user.getUserName());
+                    editor.putInt("User ID", user.getUserID());
+                    editor.putString("Gender", user.getGender());
+                    editor.putString("Address", user.getAddress());
+                    editor.putString("Phone Number", user.getPhone());
+                    editor.putString("Image", user.getImage());
+                    editor.putInt("Age", user.getAge());
+                    editor.putInt("Log in Status", 2);
+                    editor.commit();
+                    Intent main = new Intent(OTP_Activity.this, MainActivity.class);
+                    startActivity(main);
+                }else{
+                    Intent register = new Intent(OTP_Activity.this, RegisterActivity.class);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("Phone Number", phone);
+                    editor.putInt("Log in Status", 1);
+                    editor.apply();
+                    startActivity(register);
+                }
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
     }
 }

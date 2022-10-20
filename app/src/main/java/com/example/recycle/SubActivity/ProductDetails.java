@@ -3,7 +3,9 @@ package com.example.recycle.SubActivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recycle.Activities.MainActivity;
+import com.example.recycle.Activities.SignUPActivity;
 import com.example.recycle.Model.User;
 import com.example.recycle.R;
 import com.example.recycle.Network.RestApiInterface;
@@ -33,6 +37,7 @@ public class ProductDetails extends AppCompatActivity {
     TextView Description, ProductName, Price, Year, Seller, Date;
     ImageView ProductImage;
     private RestApiInterface restApiInterface;
+    private SharedPreferences sp;
 
     private JSONObject data;
     @Override
@@ -49,6 +54,7 @@ public class ProductDetails extends AppCompatActivity {
         Description = findViewById(R.id.description);
         Date = findViewById(R.id.date);
         Product = getIntent().getStringExtra("Product");
+        sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
         try {
             data = new JSONObject(Product);
             user_id = data.get("User ID").toString();
@@ -79,35 +85,49 @@ public class ProductDetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
+                if (sp.contains("User ID")) {
+                    restApiInterface = RestClient.getRetrofit().create(RestApiInterface.class);
 
-                Call<User> call = restApiInterface.getUserData(Integer.parseInt(user_id));
-                call.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                        User user = response.body();
-                        name = user.getUserName();
-                        phone = user.getPhone();
+                    Call<User> call = restApiInterface.getUserData(Integer.parseInt(user_id));
+                    call.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                            User user = response.body();
+                            name = user.getUserName();
+                            phone = user.getPhone();
 
-                        Intent purchase = new Intent(ProductDetails.this, ChatActivity.class);
-                        purchase.putExtra("Phone", phone);
-                        startActivity(purchase);
-                    }
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(ProductDetails.this, "Cannot Access Server", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                            Intent purchase = new Intent(ProductDetails.this, ChatActivity.class);
+                            purchase.putExtra("Phone", phone);
+                            startActivity(purchase);
+                        }
+
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Toast.makeText(ProductDetails.this, "Cannot Access Server", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else{
+                    moveToSignUPActivity();
+                }
             }
         });
         Contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent contact = new Intent(ProductDetails.this, ContactActivity.class);
-                contact.putExtra("User ID", user_id);
-                startActivity(contact);
+                if(sp.contains("User ID")) {
+                    Intent contact = new Intent(ProductDetails.this, ContactActivity.class);
+                    contact.putExtra("User ID", user_id);
+                    startActivity(contact);
+                }else{
+                    moveToSignUPActivity();
+                }
             }
         });
 
+    }
+
+    private void moveToSignUPActivity(){
+        Intent i = new Intent(ProductDetails.this, SignUPActivity.class);
+        startActivity(i);
     }
 }

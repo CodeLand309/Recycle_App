@@ -13,6 +13,8 @@ import androidx.navigation.ui.NavigationUI;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -48,7 +50,8 @@ public class MainActivity extends AppCompatActivity implements CallbackInterface
 //        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 //        bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        id = getSharedPreferences("Credentials", Context.MODE_PRIVATE).getInt("User ID",0);
+        SharedPreferences sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
+        id = sp.getInt("User ID",0);
 
         BottomNavigationView bottomNav = binding.bottomNavigation;
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
@@ -65,14 +68,19 @@ public class MainActivity extends AppCompatActivity implements CallbackInterface
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-                if(navDestination.getId()==R.id.nav_settings){
-                    showHideErrorMessages(-1);
-                }
-                else{
-                    if (!isNetworkAvailable()) {
-                        showHideErrorMessages(0);
-                    }
+                if (navDestination.getId()!=R.id.nav_home && navDestination.getId()!=R.id.nav_dispose && !sp.contains("User ID")) {
+                    Intent i = new Intent(MainActivity.this, SignUPActivity.class);
+                    startActivity(i);
+                    navController.popBackStack();
+                }else {
+                    if (navDestination.getId() == R.id.nav_settings) {
+                        showHideErrorMessages(-1);
+                    } else {
+                        if (!isNetworkAvailable()) {
+                            showHideErrorMessages(0);
+                        }
 
+                    }
                 }
             }
         });

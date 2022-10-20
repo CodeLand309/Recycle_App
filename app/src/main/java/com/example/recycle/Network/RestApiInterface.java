@@ -41,6 +41,10 @@ public interface RestApiInterface {
     @GET("/getUserData")
     Call<User> getUserData(@Query("id") int id);
 
+    //New Api Request
+    @GET("/checkUserExists")
+    Call<User> checkUserExists(@Query("phone") String phone);
+
     @GET("/getUserProduct")
     Call<ArrayList<DataResponse>> getUserProducts(@Query("page_number") int page, @Query("item_count") int items, @Query("id") int id);
 

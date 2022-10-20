@@ -55,7 +55,8 @@
         <activity android:name=".SubActivity.DisposeCenterDetails" />
         <activity android:name=".SubActivity.ChangeProfile" />
         <activity android:name=".SubActivity.History" />
-        <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".Activities.MainActivity"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".Activities.RegisterActivity"
             android:screenOrientation="portrait" />
@@ -83,5 +84,12 @@
             </intent-filter>
         </service>
     </application>
+
+    <!-- This was added as youtube view was not working android 11+ version -->
+    <queries>
+        <intent>
+            <action android:name="com.google.android.youtube.api.service.START" />
+        </intent>
+    </queries>
 
 </manifest>
